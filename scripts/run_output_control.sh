@@ -12,24 +12,36 @@ DEFAULT_MODELS="phi-2"
 clear_memory() {
     echo "Clearing memory..."
     
-    # For Linux
-    if command -v sync >/dev/null 2>&1; then
-        sync
-    fi
+    # Clear GPU memory and Python objects
+    python3 -c "
+import gc
+import torch
+import sys
+
+# Force garbage collection
+gc.collect()
+
+# Clear GPU memory if available
+if torch.cuda.is_available():
+    torch.cuda.empty_cache()
+    print(f'GPU memory cleared. Available: {torch.cuda.get_device_properties(0).total_memory - torch.cuda.memory_allocated(0):,} bytes')
+else:
+    print('No GPU available')
+
+# Clear Python objects
+print(f'Python objects: {len(gc.get_objects())}')
+" 2>/dev/null || true
     
-    # Clear page cache, dentries and inodes (requires sudo)
+    # For Linux - clear page cache, dentries and inodes (requires sudo)
     if command -v sudo >/dev/null 2>&1; then
         echo "Clearing page cache..."
         sudo sh -c "echo 3 > /proc/sys/vm/drop_caches" 2>/dev/null || true
     fi
     
-    # Alternative: use Python to force garbage collection
-    python3 -c "
-import gc
-import sys
-gc.collect()
-print(f'Python memory cleared. Objects: {len(gc.get_objects())}')
-" 2>/dev/null || true
+    # For Linux
+    if command -v sync >/dev/null 2>&1; then
+        sync
+    fi
     
     echo "Memory cleared."
 }
@@ -43,15 +55,15 @@ run_model() {
     
     # Run plain variant
     echo "Running plain variant..."
-    sad run --tasks output_control --models "$model" --variants plain
+    timeout 3600 sad run --tasks output_control --models "$model" --variants plain
     if [ $? -ne 0 ]; then
         echo "ERROR: Failed to run plain variant for $model"
         return 1
     fi
     
-    # Run sp variant
+    # Run sp variant (same model, no memory clearing needed)
     echo "Running sp variant..."
-    sad run --tasks output_control --models "$model" --variants sp
+    timeout 3600 sad run --tasks output_control --models "$model" --variants sp
     if [ $? -ne 0 ]; then
         echo "ERROR: Failed to run sp variant for $model"
         return 1
