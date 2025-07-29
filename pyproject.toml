@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "sadcode"
 version = "0.1"
 dependencies = [
-    "evalugator @ file:///root/dev/evalugator",
+    "evalugator @ git+https://github.com/ogilg/evalugator.git@huggingface-provider",
     "kaleido==0.2.1",
     "plotly==5.18.0",
     "requests==2.31.0",
@@ -14,7 +14,7 @@ dependencies = [
     "seaborn==0.13.2",
     "setuptools==68.0.0",
     "tiktoken>=0.7.0",
-    "tokenizers>=0.21.4",
+    "tokenizers==0.21.4",
     "PyPDF2>=3.0.1",
     "markdown2>=2.4.13",
     "pdfkit>=1.0.0", 
@@ -25,7 +25,11 @@ dependencies = [
     "transformers==4.54.0",
     "huggingface_hub==0.34.2",
     "bitsandbytes>=0.46.1",
-    "accelerate>=1.9.0"
+    "accelerate>=1.9.0",
+    "backoff",
+    "fire",
+    "tqdm",
+    "custom_evals @ file:///root/dev/sad/custom_evals"
 ]
 
 [project.scripts]
