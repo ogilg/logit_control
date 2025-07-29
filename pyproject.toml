@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "sadcode"
 version = "0.1"
 dependencies = [
-    "evalugator @ git+https://github.com/LRudL/evalugator.git@main#egg=evalugator",
+    "evalugator @ file:///root/dev/evalugator",
     "kaleido==0.2.1",
     "plotly==5.18.0",
     "requests==2.31.0",
