@@ -7,17 +7,20 @@ from typing import List, Dict, Tuple, Any
 from dataclasses import dataclass
 from tqdm import tqdm
 
-
-
 # Import the HuggingFace provider functions
 import sys
 from custom_evals import (
     HUGGINGFACE_MODEL_MAPPING, 
-    generate_single_token
+    generate_single_token,
+    huggingface_get_probs,
+    GetProbsRequest
 )
 
 # Import the few shot examples
 from sad.anti_imitation.few_shot_examples import in_context_examples
+
+# Import the TVD parser
+from parsers import tvd_parser
 
 
 @dataclass
@@ -45,15 +48,19 @@ def load_single_token_words(file_path):
     return words_list
 
 
-def calculate_tvd(actual_dist: Dict[str, float], target_dist: Dict[str, float]) -> float:
-    """Calculate Total Variation Distance between actual and target distributions."""
-    all_words = set(actual_dist.keys()) | set(target_dist.keys())
-    tvd = 0.0
-    for word in all_words:
-        actual_prob = actual_dist.get(word, 0.0)
-        target_prob = target_dist.get(word, 0.0)
-        tvd += abs(actual_prob - target_prob)
-    return tvd / 2.0
+def get_model_probabilities(model_id: str, prompt, temperature: float = 1.0):
+    """Get probability distribution for next token using the custom_evals interface."""
+    # Create a GetProbsRequest
+    request = GetProbsRequest(
+        context=None,
+        prompt=prompt,
+        min_top_n=10,  # Get top 10 tokens
+        num_samples=None  # Use logprobs instead of sampling
+    )
+    
+    # Get probabilities using the custom_evals interface
+    response = huggingface_get_probs(model_id, request)
+    return response.probs
 
 
 def get_combined_samples() -> List[Sample]:
@@ -124,7 +131,7 @@ def get_combined_samples() -> List[Sample]:
 
 
 def run_experiment(model_id: str, samples: List[Sample], num_samples: int = 20) -> Dict[str, Any]:
-    """Run the output control experiment on a model."""
+    """Run the output control experiment on a model using proper TVD calculation."""
     
     # Extract model name from model_id
     if model_id.startswith("huggingface/"):
@@ -138,50 +145,43 @@ def run_experiment(model_id: str, samples: List[Sample], num_samples: int = 20) 
     results = []
     
     for sample_idx, sample in enumerate(tqdm(samples, desc="Running experiments")):
-        sample_results = []
+        # Get model probabilities for the prompt
+        response_probs = get_model_probabilities(model_name, sample.prompt, temperature=1.0)
         
-        for trial in range(num_samples):
-            # Generate response using abstracted function
-            response_text = generate_single_token(model_name, sample.prompt, temperature=1.0)
-            
-            sample_results.append(response_text)
+        # Prepare sample data for the TVD parser
+        sample_data = {
+            'prompt_content': sample.prompt[-2].content,
+            'target_distribution': sample.target_distribution,
+            'tvd_tolerance': sample.tvd_tolerance,
+            'is_given_words': sample.is_given_words,
+            'word1': sample.word1,
+            'word2': sample.word2,
+            'seed': sample.seed
+        }
+
+        # Get parser result
+        parser_result = tvd_parser(response_probs, sample_data)
         
-        # Calculate distribution
-        response_counts = {}
-        for response in sample_results:
-            response_counts[response] = response_counts.get(response, 0) + 1
-        
-        # Normalize to probabilities
-        actual_dist = {word: count/num_samples for word, count in response_counts.items()}
-        
-        # For random words experiments, we need to extract the two words from the model's responses
-        if not sample.is_given_words:
-            # Find the two most common responses as the generated words
-            sorted_responses = sorted(response_counts.items(), key=lambda x: x[1], reverse=True)
-            if len(sorted_responses) >= 2:
-                sample.word1 = sorted_responses[0][0]
-                sample.word2 = sorted_responses[1][0]
-                sample.target_distribution = {sample.word1: 0.5, sample.word2: 0.5}  # Default to 50/50
-        
-        # Calculate TVD
-        tvd = calculate_tvd(actual_dist, sample.target_distribution)
-        
-        # Determine if within tolerance
-        within_tolerance = tvd <= sample.tvd_tolerance
-        
-        results.append({
+        # Create result dict
+        result = {
             'sample_idx': sample_idx,
             'is_given_words': sample.is_given_words,
             'word1': sample.word1,
             'word2': sample.word2,
             'target_distribution': sample.target_distribution,
             'tvd_tolerance': sample.tvd_tolerance,
-            'actual_distribution': actual_dist,
-            'tvd': tvd,
-            'within_tolerance': within_tolerance,
-            'responses': sample_results,
+            'tvd': parser_result.get('tvd_diff', float('inf')),
+            'within_tolerance': parser_result['score'] == 1,
+            'responses': parser_result.get('top_tokens', []),
             'seed': sample.seed
-        })
+        }
+        
+        results.append(result)
+    
+    # Calculate summary
+    total_experiments = len(results)
+    within_tolerance = sum(1 for r in results if r['within_tolerance'])
+    avg_tvd = sum(r['tvd'] for r in results) / total_experiments if total_experiments > 0 else 0
     
     return {
         'model_id': model_id,
@@ -189,10 +189,8 @@ def run_experiment(model_id: str, samples: List[Sample], num_samples: int = 20) 
         'temperature': 1.0,
         'results': results,
         'summary': {
-            'total_experiments': len(results),
-            'within_tolerance': sum(1 for r in results if r['within_tolerance']),
-            'avg_tvd': sum(r['tvd'] for r in results) / len(results),
-            'given_words_experiments': len([r for r in results if r['is_given_words']]),
-            'random_words_experiments': len([r for r in results if not r['is_given_words']])
+            'total_experiments': total_experiments,
+            'within_tolerance': within_tolerance,
+            'avg_tvd': avg_tvd
         }
     } 
