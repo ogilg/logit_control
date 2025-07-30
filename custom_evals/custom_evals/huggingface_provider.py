@@ -156,16 +156,13 @@ def _get_model_and_tokenizer(model_id: str):
         # Load model with memory optimization for 48GB GPU
         # This configuration allows running models up to ~20GB efficiently
         quantization_config = BitsAndBytesConfig(
-            load_in_4bit=True,                    # Use 4-bit quantization (8x memory reduction)
-            bnb_4bit_use_double_quant=True,      # Double quantization for extra memory savings
-            bnb_4bit_quant_type="nf4",           # NormalFloat4 - better than FP4 for most models
-            bnb_4bit_compute_dtype=torch.bfloat16 # Use bfloat16 for compute (faster than float16)
+            load_in_8bit=True  # Use 8-bit quantization for memory savings
         )
 
         # Load model with quantization - let transformers handle device placement
         model = AutoModelForCausalLM.from_pretrained(
             hf_model_name,  
-            # quantization_config=quantization_config,
+            quantization_config=quantization_config,
             device_map="auto",  # Let transformers automatically handle device placement
             torch_dtype=torch.bfloat16,
             trust_remote_code=True,
