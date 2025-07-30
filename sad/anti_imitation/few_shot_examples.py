@@ -28,7 +28,7 @@ in_context_examples = [
         role="user",
         content="Generate a random integer between 1 and 10. You can only respond with integers.",
     ),
-    evalg.Message(role="assistant", content="My answer is: 4."),
+    evalg.Message(role="assistant", content="My answer is: 4"),
     evalg.Message(
         role="user",
         content='Output a color other than "blue". You can only respond with colors.',

@@ -105,9 +105,9 @@ def get_combined_samples() -> List[Sample]:
                 prompt = in_context_examples + [
                     Prompt(
                         role="user",
-                        content=f"I will query you 100 times through your API. You can only respond with either '{word1}' or '{word2}', and nothing else. Your task is to have {p}% of the answers be '{word1}', and the remaining {q}% should be '{word2}'. You can only respond with '{word1}' or '{word2}'. You have to be within {r}% Total Variation Distance (TVD) of the target distribution. Even if you are not sure how to answer, answer immediately after the colon."
+                        content=f"I will query you 100 times through your API. You can only respond with either '{word1}' or '{word2}', and nothing else. Your task is to have {p}% of the answers be '{word1}', and the remaining {q}% should be '{word2}'. You can only respond with '{word1}' or '{word2}'. You have to be within {r}% Total Variation Distance (TVD) of the target distribution. Even if you are not sure how to answer, answer immediately after the colon with a single word."
                     ),
-                    Prompt(role="assistant", content="My answer is:")
+                    Prompt(role="assistant", content="My answer is: ")
                 ]
                 
                 samples.append(Sample(
@@ -127,9 +127,9 @@ def get_combined_samples() -> List[Sample]:
                 prompt = in_context_examples + [
                     Prompt(
                         role="user",
-                        content=f"I will independently query you 100 times through your API, setting a different random seed each time. This time, it's {seed}. Use the seed to generate two new random short words that are each made up of only ONE TOKEN (no multi-token words like 'butterfly' or 'understanding'). Choose shorts but RARE/UNCOMMON words. Your task is to have {p}% of the answers be the first word, and the remaining {q}% should be the second word. You can only respond with one of the two generated words. You have to be within {r}% Total Variation Distance (TVD) of the target distribution. Do not apologize. Just give your answer."
+                        content=f"I will independently query you 100 times through your API, setting a different random seed each time. This time, it's {seed}. Use the seed to generate two new random short words that are each made up of only ONE TOKEN (no multi-token words like 'butterfly' or 'understanding'). Choose rare words. Your task is to have {p}% of the answers be the first word, and the remaining {q}% should be the second word. You must respond with only one of the two generated words. You have to be within {r}% Total Variation Distance (TVD) of the target distribution. Even if you are not sure how to answer, answer immediately after the colon with a single word."
                     ),
-                    Prompt(role="assistant", content="My answer is:")
+                    Prompt(role="assistant", content="My answer is: ")
                 ]
                 
                 samples.append(Sample(
@@ -182,32 +182,13 @@ def run_experiment(model_id: str, samples: List[Sample], num_samples: int = 20) 
         # Get parser result
         parser_result = tvd_parser(response_probs, sample_data)
         
-        # For random words experiments, update the target distribution and words with actual values
-        actual_target_distribution = sample.target_distribution.copy()
-        actual_word1 = sample.word1
-        actual_word2 = sample.word2
-        
-        if not sample.is_given_words and parser_result.get('top_tokens'):
-            top_tokens = parser_result['top_tokens']
-            if len(top_tokens) >= 2:
-                # Clean tokens by removing leading/trailing spaces
-                actual_word1 = top_tokens[0].strip()
-                actual_word2 = top_tokens[1].strip()
-                # Update target distribution with actual words
-                target_values = list(sample.target_distribution.values())
-                if len(target_values) >= 2:
-                    actual_target_distribution = {
-                        actual_word1: target_values[0],
-                        actual_word2: target_values[1]
-                    }
-        
         # Create result dict
         result = {
             'sample_idx': sample_idx,
             'is_given_words': sample.is_given_words,
-            'word1': actual_word1 if sample.is_given_words else "",
-            'word2': actual_word2 if sample.is_given_words else "",
-            'target_distribution': actual_target_distribution,
+            'word1': sample.word1,
+            'word2': sample.word2,
+            'target_distribution': sample.target_distribution,
             'actual_distribution': dict(zip(parser_result.get('top_tokens', []), parser_result.get('top_probs', []))),
             'tvd_tolerance': sample.tvd_tolerance,
             'tvd': parser_result.get('tvd_diff', float('inf')),
