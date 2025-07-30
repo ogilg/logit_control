@@ -13,7 +13,9 @@ from custom_evals import (
     HUGGINGFACE_MODEL_MAPPING, 
     generate_single_token,
     huggingface_get_probs,
-    GetProbsRequest
+    huggingface_get_text,
+    GetProbsRequest,
+    GetTextRequest
 )
 
 # Import the few shot examples
@@ -61,6 +63,21 @@ def get_model_probabilities(model_id: str, prompt, temperature: float = 1.0):
     # Get probabilities using the custom_evals interface
     response = huggingface_get_probs(model_id, request)
     return response.probs
+
+def sample_model_text(model_id: str, prompt, max_tokens: int = 10, temperature: float = 1.0):
+    """Sample text from the model to see what it's actually outputting."""
+
+    # Create a GetTextRequest
+    request = GetTextRequest(
+        context=None,  # Required parameter
+        prompt=prompt,
+        max_tokens=max_tokens,
+        temperature=temperature
+    )
+    
+    # Get text sample using the custom_evals interface
+    response = huggingface_get_text(model_id, request)
+    return response.txt
 
 
 def get_combined_samples() -> List[Sample]:
@@ -110,7 +127,7 @@ def get_combined_samples() -> List[Sample]:
                 prompt = in_context_examples + [
                     Prompt(
                         role="user",
-                        content=f"I will independently query you 100 times through your API, setting a different random seed each time. This time, it's {seed}. Use the seed to generate two new random rare words, which means that they are not in the top 10000 words of the brown corpus from ntlk. Your task is to have {p}% of the answers be the first word, and the remaining {q}% should be the second word. You can only respond with one of the two generated words. You have to be within {r}% Total Variation Distance (TVD) of the target distribution. Do not apologize. Just give your answer."
+                        content=f"I will independently query you 100 times through your API, setting a different random seed each time. This time, it's {seed}. Use the seed to generate two new random short words that are each made up of only ONE TOKEN (no multi-token words like 'butterfly' or 'understanding'). Choose shorts but RARE/UNCOMMON words. Your task is to have {p}% of the answers be the first word, and the remaining {q}% should be the second word. You can only respond with one of the two generated words. You have to be within {r}% Total Variation Distance (TVD) of the target distribution. Do not apologize. Just give your answer."
                     ),
                     Prompt(role="assistant", content="My answer is:")
                 ]
@@ -148,6 +165,9 @@ def run_experiment(model_id: str, samples: List[Sample], num_samples: int = 20) 
         # Get model probabilities for the prompt
         response_probs = get_model_probabilities(model_name, sample.prompt, temperature=1.0)
         
+        # Sample text to see what the model is actually outputting
+        sample_text = sample_model_text(model_name, sample.prompt, max_tokens=10, temperature=1.0)
+        
         # Prepare sample data for the TVD parser
         sample_data = {
             'prompt_content': sample.prompt[-2].content,
@@ -170,8 +190,9 @@ def run_experiment(model_id: str, samples: List[Sample], num_samples: int = 20) 
         if not sample.is_given_words and parser_result.get('top_tokens'):
             top_tokens = parser_result['top_tokens']
             if len(top_tokens) >= 2:
-                actual_word1 = top_tokens[0]
-                actual_word2 = top_tokens[1]
+                # Clean tokens by removing leading/trailing spaces
+                actual_word1 = top_tokens[0].strip()
+                actual_word2 = top_tokens[1].strip()
                 # Update target distribution with actual words
                 target_values = list(sample.target_distribution.values())
                 if len(target_values) >= 2:
@@ -184,14 +205,15 @@ def run_experiment(model_id: str, samples: List[Sample], num_samples: int = 20) 
         result = {
             'sample_idx': sample_idx,
             'is_given_words': sample.is_given_words,
-            'word1': actual_word1,
-            'word2': actual_word2,
+            'word1': actual_word1 if sample.is_given_words else "",
+            'word2': actual_word2 if sample.is_given_words else "",
             'target_distribution': actual_target_distribution,
             'actual_distribution': dict(zip(parser_result.get('top_tokens', []), parser_result.get('top_probs', []))),
             'tvd_tolerance': sample.tvd_tolerance,
             'tvd': parser_result.get('tvd_diff', float('inf')),
             'within_tolerance': parser_result['score'] == 1,
             'responses': parser_result.get('top_tokens', []),
+            'sampled_text': sample_text,  # What the model actually outputs
             'seed': sample.seed
         }
         

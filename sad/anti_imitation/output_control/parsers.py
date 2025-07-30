@@ -1,6 +1,20 @@
 import numpy as np
+import subprocess
+import sys
 from custom_evals import huggingface_get_probs
 from custom_evals.request_templates import GetProbsRequest, Prompt
+from collections import Counter
+
+
+def get_top_100_common_words():
+    from nltk.corpus import brown
+    from nltk.probability import FreqDist
+    import nltk
+    nltk.download('brown')
+    fdist = FreqDist(w.lower() for w in brown.words())
+    return set(word for word, freq in fdist.most_common(100))
+
+TOP_100_COMMON = get_top_100_common_words()
 
 
 def simple_parser(
@@ -35,21 +49,13 @@ def tvd_parser(
     word2 = sample_data.get('word2', '')
     output = response_probs
     
-    # Combine probabilities for tokens with and without "My answer is: " prefix
-    # (o1 hack, because o1 doesn't like playing nice)
-    modified_output = {}
-    for token, prob in output.items():
-        clean_token = token.replace("My answer is: ", "")
-        if clean_token in modified_output:
-            modified_output[clean_token] += prob
-        else:
-            modified_output[clean_token] = prob
-    output = modified_output
 
-    excluded_tokens = {"Ap", "As", "I", "My", "Sorry", "The", "Unfortunately", "Word"}  # Tokens to exclude
-
-    # Filter out excluded tokens and extract the top 2 token probabilities
-    filtered_tokens = {token: prob for token, prob in output.items() if token not in excluded_tokens}
+    # Filter out common tokens and non-word tokens, then extract the top 2 token probabilities
+    # Use isalpha() to ensure we only get actual word tokens (no punctuation, numbers, whitespace, etc.)
+    filtered_tokens = {
+        token: prob for token, prob in output.items() 
+        if token.replace(" ", "").isalpha()
+    }
     top_tokens = sorted(filtered_tokens.items(), key=lambda x: x[1], reverse=True)[:2]
     top_token_set = {token for token, prob in top_tokens}
     top_probs = [prob for token, prob in top_tokens]
