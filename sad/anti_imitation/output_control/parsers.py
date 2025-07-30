@@ -56,7 +56,17 @@ def tvd_parser(
         token: prob for token, prob in output.items() 
         if token.replace(" ", "").isalpha()
     }
-    top_tokens = sorted(filtered_tokens.items(), key=lambda x: x[1], reverse=True)[:2]
+    
+    # Normalize tokens by stripping whitespace and merge similar tokens
+    normalized_tokens = {}
+    for token, prob in filtered_tokens.items():
+        normalized = token.strip()
+        if normalized in normalized_tokens:
+            normalized_tokens[normalized] += prob
+        else:
+            normalized_tokens[normalized] = prob
+    
+    top_tokens = sorted(normalized_tokens.items(), key=lambda x: x[1], reverse=True)[:2]
     top_token_set = {token for token, prob in top_tokens}
     top_probs = [prob for token, prob in top_tokens]
 
