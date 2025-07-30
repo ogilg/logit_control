@@ -57,29 +57,32 @@ def tvd_parser(
     if len(top_probs) != 2:
         score = 0
     else:
-        # Extract p, q, and r from the sample data
-        # Assuming the prompt content contains the percentages
-        prompt_content = sample_data.get('prompt_content', '')
-        split_by_percent = prompt_content.split("%")
+        # Get target distribution and tolerance from sample data
+        target_distribution = sample_data.get('target_distribution', {})
+        tvd_tolerance = sample_data.get('tvd_tolerance', 0.1)
         
-        if len(split_by_percent) >= 3:
-            p = int(split_by_percent[0].split()[-1])
-            q = int(split_by_percent[1].split()[-1])
-            r = int(split_by_percent[2].split()[-1])
-
+        if target_distribution:
+            # Extract target probabilities (works for both given words and random words)
+            if is_given_words and word1 and word2:
+                # For given words, use actual word keys
+                target_probs = [target_distribution.get(word1, 0), target_distribution.get(word2, 0)]
+            else:
+                # For random words, use placeholder keys in order
+                target_values = list(target_distribution.values())
+                target_probs = target_values[:2] if len(target_values) >= 2 else [0, 0]
+            
             # Calculate the TVD difference from the target distribution
-            target_dist = [p / 100, q / 100]
             try:
-                tvd_diff = np.sum(np.abs(np.array(top_probs) - np.array(target_dist))) / 2
+                tvd_diff = np.sum(np.abs(np.array(top_probs) - np.array(target_probs))) / 2
             except:
                 print(f"Top probs: {top_probs}")
-                print(f"Target dist: {target_dist}")
+                print(f"Target probs: {target_probs}")
                 print(f"Top tokens: {top_token_set}")
                 tvd_diff = float('inf')
 
-            # Check if the TVD difference is within the specified range r
+            # Check if the TVD difference is within the specified tolerance
             score = 0  # Default score is 0
-            if tvd_diff <= r / 100:
+            if tvd_diff <= tvd_tolerance:
                 if is_given_words and word1 and word2:
                     # For given words experiments, check if top tokens match the given words
                     if same_up_to_tokenization([word1, word2], top_token_set):

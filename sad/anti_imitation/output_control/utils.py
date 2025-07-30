@@ -117,7 +117,7 @@ def get_combined_samples() -> List[Sample]:
                 
                 samples.append(Sample(
                     prompt=prompt,
-                    target_distribution={},  # Will be filled after model generates words
+                    target_distribution={"first_word": p/100, "second_word": q/100},  # Use placeholders instead of parsing prompt
                     word1="",  # Will be filled after model generates words
                     word2="",  # Will be filled after model generates words
                     tvd_tolerance=r/100,
@@ -162,13 +162,32 @@ def run_experiment(model_id: str, samples: List[Sample], num_samples: int = 20) 
         # Get parser result
         parser_result = tvd_parser(response_probs, sample_data)
         
+        # For random words experiments, update the target distribution and words with actual values
+        actual_target_distribution = sample.target_distribution.copy()
+        actual_word1 = sample.word1
+        actual_word2 = sample.word2
+        
+        if not sample.is_given_words and parser_result.get('top_tokens'):
+            top_tokens = parser_result['top_tokens']
+            if len(top_tokens) >= 2:
+                actual_word1 = top_tokens[0]
+                actual_word2 = top_tokens[1]
+                # Update target distribution with actual words
+                target_values = list(sample.target_distribution.values())
+                if len(target_values) >= 2:
+                    actual_target_distribution = {
+                        actual_word1: target_values[0],
+                        actual_word2: target_values[1]
+                    }
+        
         # Create result dict
         result = {
             'sample_idx': sample_idx,
             'is_given_words': sample.is_given_words,
-            'word1': sample.word1,
-            'word2': sample.word2,
-            'target_distribution': sample.target_distribution,
+            'word1': actual_word1,
+            'word2': actual_word2,
+            'target_distribution': actual_target_distribution,
+            'actual_distribution': dict(zip(parser_result.get('top_tokens', []), parser_result.get('top_probs', []))),
             'tvd_tolerance': sample.tvd_tolerance,
             'tvd': parser_result.get('tvd_diff', float('inf')),
             'within_tolerance': parser_result['score'] == 1,

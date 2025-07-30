@@ -44,8 +44,8 @@ HUGGINGFACE_MODEL_MAPPING = {
     "qwen1.5-14b-chat": "Qwen/Qwen1.5-14B-Chat",
 
     # Mistral
-    "mistral-7b": "mistralai/Mistral-7B-v0.1",
-    "mistral-7b-instruct": "mistralai/Mistral-7B-Instruct-v0.2",
+    "mistral-7b": "mistralai/Mistral-7B-v0.3",
+    "mistral-7b-instruct": "mistralai/Mistral-7B-Instruct-v0.3",
     "mixtral-8x7b": "mistralai/Mixtral-8x7B-v0.1",
     "mixtral-8x7b-instruct": "mistralai/Mixtral-8x7B-Instruct-v0.1",
     "mistral-small": "mistralai/Mistral-small",
