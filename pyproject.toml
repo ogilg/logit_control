@@ -29,7 +29,7 @@ dependencies = [
     "backoff",
     "fire",
     "tqdm",
-    "custom_evals @ file:///root/dev/sad/custom_evals"
+    "custom_evals @ file:///root/dev/sad/custom_evals_pkg"
 ]
 
 [project.scripts]
