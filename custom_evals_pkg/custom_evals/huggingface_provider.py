@@ -5,11 +5,8 @@ Supports DeepSeek, Qwen, Mistral, and Llama models.
 Uses local GPU models for both text generation and probability extraction.
 """
 
-from collections import Counter
-import queue
 import backoff
 from typing import Dict, Any
-import time
 import torch
 import torch.nn.functional as F
 from torch import no_grad, softmax, topk

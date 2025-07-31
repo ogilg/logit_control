@@ -10,12 +10,24 @@ import json
 import csv
 import pandas as pd
 from datetime import datetime
-from utils import get_combined_samples, run_experiment
+from utils import get_combined_samples, get_model_probabilities, sample_model_text
+from custom_evals import (
+    HUGGINGFACE_MODEL_MAPPING, 
+    huggingface_get_probs,
+    huggingface_get_text,
+    GetProbsRequest,
+    GetTextRequest,
+    Message
+)
+from data_models import Sample
+from parsers import tvd_parser
+from tqdm import tqdm
 import math
 import torch
 import gc
 import shutil
-import os
+from typing import List, Dict, Any
+
 
 def round_floats(obj):
     """Recursively round floats to 3 decimal places in nested dictionaries and lists."""
@@ -224,6 +236,79 @@ def update_simple_metrics_csv(model_id, results):
     # Save updated CSV
     df.to_csv(csv_file, index=False)
     print(f"Simple metrics saved to {csv_file}")
+
+
+def run_experiment(model_id: str, samples: List[Sample], num_examples: int = 10) -> Dict[str, Any]:
+    """Run the output control experiment on a model using proper TVD calculation."""
+    
+    # Extract model name from model_id
+    if model_id.startswith("huggingface/"):
+        model_name = model_id.split("/")[1]
+    else:
+        model_name = model_id
+    
+    if model_name not in HUGGINGFACE_MODEL_MAPPING:
+        raise ValueError(f"Model {model_id} not supported by HuggingFace provider")
+    
+    results = []
+    
+    for sample_idx, sample in enumerate(tqdm(samples, desc="Running experiments")):
+        # Get model probabilities for the prompt
+        response_probs = get_model_probabilities(model_name, sample.prompt, temperature=1.0)
+        
+        # Sample text to see what the model is actually outputting
+        sample_text = sample_model_text(model_name, sample.prompt, max_tokens=10, temperature=1.0)
+        
+        # Prepare sample data for the TVD parser
+        sample_data = {
+            'prompt_content': sample.prompt[-2].content,  # Get content from the Message object
+            'target_distribution': sample.target_distribution,
+            'tvd_tolerance': sample.tvd_tolerance,
+            'is_given_words': sample.is_given_words,
+            'word1': sample.word1,
+            'word2': sample.word2,
+            'seed': sample.seed
+        }
+
+        # Get parser result
+        parser_result = tvd_parser(response_probs, sample_data)
+        
+        # Create result dict
+        result = {
+            'sample_idx': sample_idx,
+            'is_given_words': sample.is_given_words,
+            'word1': sample.word1,
+            'word2': sample.word2,
+            'target_distribution': sample.target_distribution,
+            'actual_distribution': dict(zip(parser_result.get('top_tokens', []), parser_result.get('top_probs', []))),
+            'tvd_tolerance': sample.tvd_tolerance,
+            'tvd': parser_result.get('tvd_diff', float('inf')),
+            'within_tolerance': parser_result['score'] == 1,
+            'responses': parser_result.get('top_tokens', []),
+            'sampled_text': sample_text,  # What the model actually outputs
+            'seed': sample.seed,
+            'case_type': sample.case_type
+        }
+        
+        results.append(result)
+    
+    # Calculate summary
+    total_experiments = len(results)
+    within_tolerance = sum(1 for r in results if r['within_tolerance'])
+    avg_tvd = sum(r['tvd'] for r in results) / total_experiments if total_experiments > 0 else 0
+    
+    return {
+        'model_id': model_id,
+        'num_samples': num_examples,
+        'temperature': 1.0,
+        'results': results,
+        'summary': {
+            'total_experiments': total_experiments,
+            'within_tolerance': within_tolerance,
+            'avg_tvd': avg_tvd
+        }
+    }
+
 
 def run_experiment_for_model(model_id, num_examples):
     """Run experiment for a single model and return results."""
