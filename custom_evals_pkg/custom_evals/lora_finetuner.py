@@ -13,7 +13,7 @@ from transformers import (AutoModelForCausalLM, AutoTokenizer,
                           DataCollatorForLanguageModeling, Trainer,
                           TrainingArguments)
 
-from ..custom_evals.huggingface_provider import HUGGINGFACE_MODEL_MAPPING
+from .huggingface_provider import HUGGINGFACE_MODEL_MAPPING
 from .lora_config import LoRAConfig
 from .loss_functions import CustomLossFunction, TVDLoss
 
