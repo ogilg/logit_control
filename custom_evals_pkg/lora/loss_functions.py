@@ -5,9 +5,10 @@ This module contains loss functions designed for distribution matching tasks,
 with support for both given words and random words scenarios.
 """
 
+from typing import Any, Dict, List, Optional
+
 import torch
 import torch.nn.functional as F
-from typing import Dict, Any, List, Optional
 
 
 class CustomLossFunction:

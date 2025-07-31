@@ -5,7 +5,8 @@ This module contains data structures used throughout the custom-evals package.
 """
 
 from dataclasses import dataclass
-from typing import List, Dict, Optional
+from typing import Dict, List, Optional
+
 from .request_templates import Prompt
 
 

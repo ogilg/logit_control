@@ -5,20 +5,19 @@ Supports DeepSeek, Qwen, Mistral, and Llama models.
 Uses local GPU models for both text generation and probability extraction.
 """
 
+from typing import Any, Dict
+
 import backoff
-from typing import Dict, Any
 import torch
 import torch.nn.functional as F
 from torch import no_grad, softmax, topk
-from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
+from transformers import (AutoModelForCausalLM, AutoTokenizer,
+                          BitsAndBytesConfig)
 
-from .request_templates import (
-    GetTextRequest,
-    GetTextResponse,
-    GetProbsRequest,
-    GetProbsResponse,
-    Prompt,
-)
+from .request_templates import (GetProbsRequest, GetProbsResponse,
+                                GetTextRequest, GetTextResponse, Prompt)
+
+
 def on_backoff(details):
     print(f"Repeating failed request (attempt {details['tries']}). Reason: {details['exception']}")
     

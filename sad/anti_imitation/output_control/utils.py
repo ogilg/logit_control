@@ -1,27 +1,20 @@
-import os
 import json
+import os
 import random
-from typing import List, Dict, Any
-from tqdm import tqdm
-
-# Import the HuggingFace provider functions
-from custom_evals import (
-    HUGGINGFACE_MODEL_MAPPING, 
-    huggingface_get_probs,
-    huggingface_get_text,
-    GetProbsRequest,
-    GetTextRequest,
-    Message
-)
+from typing import Any, Dict, List
 
 # Import Sample from custom_evals
-from custom_evals import Sample
-
-# Import the few shot examples
-from sad.anti_imitation.few_shot_examples import in_context_examples, few_shot_random_examples
-
+# Import the HuggingFace provider functions
+from custom_evals import (HUGGINGFACE_MODEL_MAPPING, GetProbsRequest,
+                          GetTextRequest, Message, Sample,
+                          huggingface_get_probs, huggingface_get_text)
 # Import the TVD parser
 from parsers import tvd_parser
+from tqdm import tqdm
+
+# Import the few shot examples
+from sad.anti_imitation.few_shot_examples import (few_shot_random_examples,
+                                                  in_context_examples)
 
 
 def load_single_token_words(file_path):

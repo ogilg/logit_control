@@ -7,14 +7,10 @@ using the custom-evals LoRA functionality.
 """
 
 import os
-from typing import List, Dict
-from custom_evals import (
-    LoRAFineTuner,
-    Sample,
-    Message,
-    TVDLoss,
-    KLDivergenceLoss
-)
+from typing import Dict, List
+
+from custom_evals import (KLDivergenceLoss, LoRAFineTuner, Message, Sample,
+                          TVDLoss)
 
 
 def create_training_samples() -> List[Sample]:
@@ -124,8 +120,8 @@ def main():
     # Example 3: Custom configuration
     print("\n--- Example 3: Custom Configuration ---")
     
-    from custom_evals import LoRAConfig, KLDivergenceLoss
-    
+    from custom_evals import KLDivergenceLoss, LoRAConfig
+
     # Create custom LoRA config
     custom_config = LoRAConfig(
         r=32,  # Higher rank

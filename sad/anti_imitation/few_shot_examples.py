@@ -1,5 +1,5 @@
 # Import Message and Prompt from custom_evals
-from custom_evals import Message, Prompt
+from custom_evals import Message
 
 in_context_examples = [
     Message(

@@ -1,9 +1,10 @@
-import numpy as np
 import subprocess
 import sys
+from collections import Counter
+
+import numpy as np
 from custom_evals import huggingface_get_probs
 from custom_evals.request_templates import GetProbsRequest, Prompt
-from collections import Counter
 
 
 def same_up_to_tokenization(ideal_answers, top_token_set):

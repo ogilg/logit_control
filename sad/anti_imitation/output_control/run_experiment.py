@@ -4,29 +4,26 @@ Simple CLI script to run the output control experiment on multiple models.
 """
 
 import argparse
-import os
-import sys
-import json
 import csv
-import pandas as pd
+import gc
+import json
+import math
+import os
+import shutil
+import sys
 from datetime import datetime
-from utils import get_combined_samples, get_model_probabilities, sample_model_text
-from custom_evals import (
-    HUGGINGFACE_MODEL_MAPPING, 
-    huggingface_get_probs,
-    huggingface_get_text,
-    GetProbsRequest,
-    GetTextRequest,
-    Message
-)
+from typing import Any, Dict, List
+
+import pandas as pd
+import torch
+from custom_evals import (HUGGINGFACE_MODEL_MAPPING, GetProbsRequest,
+                          GetTextRequest, Message, huggingface_get_probs,
+                          huggingface_get_text)
 from data_models import Sample
 from parsers import tvd_parser
 from tqdm import tqdm
-import math
-import torch
-import gc
-import shutil
-from typing import List, Dict, Any
+from utils import (get_combined_samples, get_model_probabilities,
+                   sample_model_text)
 
 
 def round_floats(obj):
