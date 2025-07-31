@@ -60,6 +60,21 @@ def clear_huggingface_cache():
         except Exception as e:
             print(f"Warning: Could not clear HuggingFace cache: {e}")
 
+def get_lora_output_dir(model_name: str) -> str:
+    """Get the LoRA output directory for a model."""
+    clean_name = model_name.replace("/", "_").replace("-", "_").replace(".", "_")
+    return f"./lora_output_{clean_name}"
+
+def load_lora_adapter(model_name: str):
+    """Load LoRA adapter for a model if it exists."""
+    lora_dir = get_lora_output_dir(model_name)
+    if os.path.exists(lora_dir):
+        print(f"Loading LoRA adapter from {lora_dir}")
+        return lora_dir
+    else:
+        print(f"No LoRA adapter found at {lora_dir}")
+        return None
+
 def update_results_csv(model_id, results):
     """Update the main results CSV file (original format without TVD stats)."""
     csv_file = "evals/output_control_results.csv"
@@ -160,6 +175,9 @@ def update_simple_metrics_csv(model_id, results):
     """Update the simple metrics CSV file with basic counts and TVD stats, separated by case type."""
     csv_file = "evals/output_control_simple_metrics.csv"
     
+    # Determine if this is a fine-tuned model
+    is_fine_tuned = "_lora" in model_id
+    
     # Separate results by case type
     given_results = [r for r in results['results'] if r.get('case_type') == 'given_words']
     random_results = [r for r in results['results'] if r.get('case_type') == 'random_words']
@@ -187,6 +205,7 @@ def update_simple_metrics_csv(model_id, results):
             'model': model_id,
             'variant': 'plain',
             'case_type': case_type,
+            'fine_tuned': is_fine_tuned,
             'num_correct': correct_count,
             'num_incorrect': incorrect_count,
             'num_trials': len(case_results),
@@ -203,9 +222,9 @@ def update_simple_metrics_csv(model_id, results):
     if os.path.exists(csv_file):
         df = pd.read_csv(csv_file)
     else:
-        # Create new DataFrame with case_type column
+        # Create new DataFrame with case_type and fine_tuned columns
         df = pd.DataFrame(columns=[
-            'model', 'variant', 'case_type', 'num_correct', 'num_incorrect', 
+            'model', 'variant', 'case_type', 'fine_tuned', 'num_correct', 'num_incorrect', 
             'num_trials', 'avg_tvd', 'std_tvd'
         ])
     
@@ -232,7 +251,7 @@ def update_simple_metrics_csv(model_id, results):
     print(f"Simple metrics saved to {csv_file}")
 
 
-def run_experiment(model_id: str, samples: List[Sample], num_examples: int = 10) -> Dict[str, Any]:
+def run_experiment(model_id: str, samples: List[Sample], num_examples: int = 10, lora_adapter_path: str = None) -> Dict[str, Any]:
     """Run the output control experiment on a model using proper TVD calculation."""
     
     # Extract model name from model_id
@@ -244,14 +263,19 @@ def run_experiment(model_id: str, samples: List[Sample], num_examples: int = 10)
     if model_name not in HUGGINGFACE_MODEL_MAPPING:
         raise ValueError(f"Model {model_id} not supported by HuggingFace provider")
     
+    # If LoRA adapter is provided, modify the model_id to indicate it's fine-tuned
+    if lora_adapter_path:
+        model_id = f"{model_id}_lora"
+        print(f"Using LoRA adapter from: {lora_adapter_path}")
+    
     results = []
     
     for sample_idx, sample in enumerate(tqdm(samples, desc="Running experiments")):
         # Get model probabilities for the prompt
-        response_probs = get_model_probabilities(model_name, sample.prompt, temperature=1.0)
+        response_probs = get_model_probabilities(model_name, sample.prompt, temperature=1.0, lora_adapter_path=lora_adapter_path)
         
         # Sample text to see what the model is actually outputting
-        sample_text = sample_model_text(model_name, sample.prompt, max_tokens=10, temperature=1.0)
+        sample_text = sample_model_text(model_name, sample.prompt, max_tokens=10, temperature=1.0, lora_adapter_path=lora_adapter_path)
         
         # Prepare sample data for the TVD parser
         sample_data = {
@@ -304,14 +328,16 @@ def run_experiment(model_id: str, samples: List[Sample], num_examples: int = 10)
     }
 
 
-def run_experiment_for_model(model_id, num_examples):
+def run_experiment_for_model(model_id, num_examples, lora_adapter_path=None):
     """Run experiment for a single model and return results."""
     print(f"Running output control experiment on {model_id}")
+    if lora_adapter_path:
+        print(f"Using LoRA adapter: {lora_adapter_path}")
     print(f"Parameters: num_examples={num_examples}")
     
     # Get samples and run experiment
     samples = get_combined_samples(num_examples=num_examples)
-    results = run_experiment(model_id, samples, num_examples)
+    results = run_experiment(model_id, samples, num_examples, lora_adapter_path)
     
     # Print summary
     summary = results['summary']
@@ -339,6 +365,8 @@ def main():
                        help="Number of examples per experiment type (default: 10)")
     parser.add_argument("--save_individual", action="store_true",
                        help="Save individual model results to JSON files")
+    parser.add_argument("--lora_adapter", type=str, default=None,
+                       help="Path to LoRA adapter to use for evaluation")
     args = parser.parse_args()
 
     # Default model list - pairs of base and instruction-tuned models under 30GB
@@ -361,6 +389,8 @@ def main():
 
     print(f"Running experiments on {len(models_to_run)} models: {', '.join(models_to_run)}")
     print(f"Examples per experiment type: {args.num_examples}")
+    if args.lora_adapter:
+        print(f"Using LoRA adapter: {args.lora_adapter}")
     print("-" * 60)
 
     all_results = {}
@@ -371,7 +401,7 @@ def main():
         print(f"{'='*60}")
         
         try:
-            results = run_experiment_for_model(model_id, args.num_examples)
+            results = run_experiment_for_model(model_id, args.num_examples, args.lora_adapter)
             all_results[model_id] = results
             
             # Update results CSV files

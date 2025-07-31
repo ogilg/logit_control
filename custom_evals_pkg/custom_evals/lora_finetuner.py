@@ -236,6 +236,11 @@ class LoRAFineTuner:
             logging_steps=logging_steps,
             remove_unused_columns=False,
             dataloader_pin_memory=False,
+            # Add these lines to reduce file saving:
+            save_strategy="no",  # Don't save checkpoints during training
+            save_total_limit=None,  # No limit on saves (but we're not saving anyway)
+            metric_for_best_model=None,  # No metric for best model
+            greater_is_better=None,  # No comparison needed
             **self.lora_config.get_training_args()
         )
         

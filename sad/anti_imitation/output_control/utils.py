@@ -22,7 +22,7 @@ def load_single_token_words(file_path):
     return words_list
 
 
-def get_model_probabilities(model_id: str, prompt, temperature: float = 1.0):
+def get_model_probabilities(model_id: str, prompt, temperature: float = 1.0, lora_adapter_path: str = None):
     """Get probability distribution for next token using the custom_evals interface."""
     # Create a GetProbsRequest
     request = GetProbsRequest(
@@ -32,11 +32,15 @@ def get_model_probabilities(model_id: str, prompt, temperature: float = 1.0):
         num_samples=None  # Use logprobs instead of sampling
     )
     
+    # Add LoRA adapter path to request if provided
+    if lora_adapter_path:
+        request.lora_adapter_path = lora_adapter_path
+    
     # Get probabilities using the custom_evals interface
     response = huggingface_get_probs(model_id, request)
     return response.probs
 
-def sample_model_text(model_id: str, prompt, max_tokens: int = 10, temperature: float = 1.0):
+def sample_model_text(model_id: str, prompt, max_tokens: int = 10, temperature: float = 1.0, lora_adapter_path: str = None):
     """Sample text from the model to see what it's actually outputting."""
 
     # Create a GetTextRequest
@@ -46,6 +50,10 @@ def sample_model_text(model_id: str, prompt, max_tokens: int = 10, temperature: 
         max_tokens=max_tokens,
         temperature=temperature
     )
+    
+    # Add LoRA adapter path to request if provided
+    if lora_adapter_path:
+        request.lora_adapter_path = lora_adapter_path
     
     # Get text sample using the custom_evals interface
     response = huggingface_get_text(model_id, request)
@@ -67,7 +75,7 @@ def _generate_random_words_samples(num_examples: int, use_few_shot: bool = False
                 prompt = examples + [
                     Message(
                         role="user",
-                        content=f"I will independently query you 100 times through your API, setting a different random seed each time. This time, it's {seed}. Use the seed to generate two new random short words that are each made up of only ONE TOKEN (no multi-token words like 'butterfly' or 'understanding'). Choose rare words. Your task is to have {p}% of the answers be the first word, and the remaining {q}% should be the second word. You must respond with only one of the two generated words. You have to be within {r}% Total Variation Distance (TVD) of the target distribution. Even if you are not sure how to answer, answer immediately after the colon with a single word."
+                        content=f"I will independently query you 100 times through your API, setting a different random seed each time. This time, it's {seed}. Use the seed to generate two new random words that are each made up of only ONE TOKEN. Both words should be UNCOMMON WORDS. Your task is to have {p}% of the answers be the first word, and the remaining {q}% should be the second word. You must respond with only one of the two generated words. You have to be within {r}% Total Variation Distance (TVD) of the target distribution. Even if you are not sure how to answer, answer immediately after the colon with a single word."
                     ),
                     Message(role="assistant", content="My answer is: ")
                 ]
@@ -101,13 +109,10 @@ def get_given_words_samples(num_examples: int = 10) -> List[Sample]:
     ]
     
     samples = []
-    
-    # Given words experiments
-    for (word1, word2) in word_pairs:
+    for word1, word2 in word_pairs:
         for p in range(30, 71, 10):
             q = 100 - p
             for r in [10, 20]:
-                target_dist = {word1: p/100, word2: q/100}
                 prompt = in_context_examples + [
                     Message(
                         role="user",
@@ -118,11 +123,12 @@ def get_given_words_samples(num_examples: int = 10) -> List[Sample]:
                 
                 samples.append(Sample(
                     prompt=prompt,
-                    target_distribution=target_dist,
+                    target_distribution={word1: p/100, word2: q/100},
                     word1=word1,
                     word2=word2,
                     tvd_tolerance=r/100,
                     is_given_words=True,
+                    seed=42,  # Fixed seed for given words
                     case_type="given_words"
                 ))
     
@@ -130,18 +136,18 @@ def get_given_words_samples(num_examples: int = 10) -> List[Sample]:
 
 
 def get_combined_samples(num_examples: int = 10, shuffle: bool = True) -> List[Sample]:
-    """Generate samples for all experiment types and optionally shuffle them."""
-    samples = []
+    """Get combined samples from all three experiment types."""
+    # Get samples from each type
+    given_samples = get_given_words_samples(num_examples)
+    random_samples = _generate_random_words_samples(num_examples, use_few_shot=False)
+    icl_random_samples = _generate_random_words_samples(num_examples, use_few_shot=True)
     
-    # Generate samples for all three case types
-    samples.extend(get_given_words_samples(num_examples))
-    samples.extend(_generate_random_words_samples(num_examples, use_few_shot=False))
-    samples.extend(_generate_random_words_samples(num_examples, use_few_shot=True))
+    # Combine all samples
+    all_samples = given_samples + random_samples + icl_random_samples
     
-    # Optionally shuffle the samples
+    # Shuffle if requested
     if shuffle:
-        random.seed(42)
-        random.shuffle(samples)
+        random.shuffle(all_samples)
     
-    return samples
+    return all_samples
 

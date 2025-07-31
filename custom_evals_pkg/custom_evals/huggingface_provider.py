@@ -73,10 +73,13 @@ def decode(model_id: str, tokens: list[int]) -> str:
     return tokenizer.decode(tokens, skip_special_tokens=True)
 
 
-def _get_model_and_tokenizer(model_id: str):
+def _get_model_and_tokenizer(model_id: str, lora_adapter_path: str = None):
     """Get or load model and tokenizer using singleton pattern."""
     
-    if model_id not in _models:
+    # Create a unique key for the model with LoRA adapter
+    model_key = f"{model_id}_lora" if lora_adapter_path else model_id
+    
+    if model_key not in _models:
         hf_model_name = HUGGINGFACE_MODEL_MAPPING[model_id]
         
         # Load tokenizer
@@ -99,11 +102,20 @@ def _get_model_and_tokenizer(model_id: str):
             trust_remote_code=True,
             resume_download=True,
         )
-
-        torch.cuda.empty_cache()
         
-        _models[model_id] = model
-        _tokenizers[model_id] = tokenizer
+        # Load LoRA adapter if provided
+        if lora_adapter_path:
+            try:
+                from peft import PeftModel
+                print(f"Loading LoRA adapter from {lora_adapter_path}")
+                model = PeftModel.from_pretrained(model, lora_adapter_path)
+                print("LoRA adapter loaded successfully")
+            except Exception as e:
+                print(f"Warning: Could not load LoRA adapter from {lora_adapter_path}: {e}")
+                print("Continuing with base model")
+        
+        _models[model_key] = model
+        _tokenizers[model_key] = tokenizer
     
     return _models[model_id], _tokenizers[model_id]
 
@@ -116,22 +128,14 @@ def _get_tokenizer(model_id: str):
 
 
 def _format_prompt(prompt: Prompt, model_id: str, tokenizer) -> str:
-    """Format prompt based on whether model supports chat format."""
-    if model_id in CHAT_MODELS and hasattr(tokenizer, 'apply_chat_template'):
-        # Use chat template for instruct/chat models
+    """Format prompt for the specific model."""
+    if model_id in CHAT_MODELS:
+        # Use chat template for chat models
         messages = [{"role": msg.role, "content": msg.content} for msg in prompt]
-        try:
-            return tokenizer.apply_chat_template(
-                messages, 
-                tokenize=False, 
-                add_generation_prompt=True
-            )
-        except Exception:
-            # Fallback to simple concatenation if chat template fails
-            pass
-    
-    # Fallback: simple concatenation for base models or if chat template fails
-    return "\n\n".join([msg.content for msg in prompt])
+        return tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    else:
+        # Use simple concatenation for non-chat models
+        return "\n\n".join([msg.content for msg in prompt])
 
 
 @backoff.on_exception(
@@ -144,49 +148,36 @@ def _format_prompt(prompt: Prompt, model_id: str, tokenizer) -> str:
 def huggingface_get_text(model_id: str, request: GetTextRequest) -> GetTextResponse:
     """Generate text using local GPU model."""
     
-    model, tokenizer = _get_model_and_tokenizer(model_id)
+    # Check if LoRA adapter path is provided in the request context
+    lora_adapter_path = getattr(request, 'lora_adapter_path', None)
     
-    # Format prompt
-    prompt_text = _format_prompt(request.prompt, model_id, tokenizer)
+    model, tokenizer = _get_model_and_tokenizer(model_id, lora_adapter_path)
     
-    # Tokenize input
-    inputs = tokenizer(prompt_text, return_tensors="pt")
+    # Format the prompt
+    formatted_prompt = _format_prompt(request.prompt, model_id, tokenizer)
     
-    # Move inputs to the same device as the model
+    # Tokenize the input
+    inputs = tokenizer(formatted_prompt, return_tensors="pt")
+    
+    # Move to the same device as the model
     device = next(model.parameters()).device
     inputs = {k: v.to(device) for k, v in inputs.items()}
-        
-    # Generate text
-    max_new_tokens = request.max_tokens or 100
     
+    # Generate text
     with no_grad():
         outputs = model.generate(
             **inputs,
-            max_new_tokens=max_new_tokens,
+            max_new_tokens=request.max_tokens,
             temperature=request.temperature,
-            do_sample=request.temperature > 0,
+            do_sample=True,
             pad_token_id=tokenizer.eos_token_id,
-            eos_token_id=tokenizer.eos_token_id,
         )
     
-    # Decode the generated tokens (skip the input tokens)
-    input_length = inputs['input_ids'].shape[1]
-    generated_tokens = outputs[0][input_length:]
-    response_text = tokenizer.decode(generated_tokens, skip_special_tokens=True)
+    # Decode the generated text
+    generated_tokens = outputs[0][inputs['input_ids'].shape[1]:]
+    generated_text = tokenizer.decode(generated_tokens, skip_special_tokens=True)
     
-    return GetTextResponse(
-        model_id=model_id,
-        request=request,
-        txt=response_text,
-        raw_responses=[{"generated_text": response_text}],
-        context={
-            "method": "local_gpu_generation",
-            "max_new_tokens": max_new_tokens,
-            "temperature": request.temperature,
-            "hf_model_name": HUGGINGFACE_MODEL_MAPPING[model_id],
-            "local_model": True,
-        }
-    )
+    return GetTextResponse(txt=generated_text)
 
 
 @backoff.on_exception(
@@ -199,7 +190,10 @@ def huggingface_get_text(model_id: str, request: GetTextRequest) -> GetTextRespo
 def huggingface_get_probs(model_id: str, request: GetProbsRequest) -> GetProbsResponse:
     """Get probability distribution for next token using local model logits."""
     
-    model, tokenizer = _get_model_and_tokenizer(model_id)
+    # Check if LoRA adapter path is provided in the request context
+    lora_adapter_path = getattr(request, 'lora_adapter_path', None)
+    
+    model, tokenizer = _get_model_and_tokenizer(model_id, lora_adapter_path)
     
     # Format prompt
     prompt_text = _format_prompt(request.prompt, model_id, tokenizer)
@@ -207,11 +201,11 @@ def huggingface_get_probs(model_id: str, request: GetProbsRequest) -> GetProbsRe
     # Tokenize input
     inputs = tokenizer(prompt_text, return_tensors="pt")
     
-    # Move inputs to the same device as the model
+    # Move to the same device as the model
     device = next(model.parameters()).device
     inputs = {k: v.to(device) for k, v in inputs.items()}
     
-    # Get logits for next token
+    # Get logits for the next token
     with no_grad():
         outputs = model(**inputs)
         logits = outputs.logits[0, -1, :]  # Last token's logits
@@ -241,45 +235,3 @@ def huggingface_get_probs(model_id: str, request: GetProbsRequest) -> GetProbsRe
             "local_model": True,
         }
     )
-
-
-def generate_single_token(model_id: str, prompt, temperature: float = 1.0) -> str:
-    """Generate a single token using local GPU model with proper device handling."""
-    
-    model, tokenizer = _get_model_and_tokenizer(model_id)
-    
-    # Format prompt if it's a Prompt object, otherwise assume it's already formatted text
-    if hasattr(prompt, '__iter__') and not isinstance(prompt, str):
-        # It's a list of Prompt objects
-        prompt_text = _format_prompt(prompt, model_id, tokenizer)
-    else:
-        # It's already formatted text
-        prompt_text = prompt
-    
-    # Tokenize input
-    inputs = tokenizer(prompt_text, return_tensors="pt")
-    
-    # Move inputs to the same device as the model
-    device = next(model.parameters()).device
-    inputs = {k: v.to(device) for k, v in inputs.items()}
-    
-    # Generate single token
-    with torch.no_grad():
-        outputs = model.generate(
-            **inputs,
-            max_new_tokens=1,
-            temperature=temperature,
-            do_sample=True,
-            pad_token_id=tokenizer.eos_token_id,
-            eos_token_id=tokenizer.eos_token_id,
-        )
-    
-    # Decode only the generated token
-    input_length = inputs['input_ids'].shape[1]
-    generated_tokens = outputs[0][input_length:]
-    response_text = tokenizer.decode(generated_tokens, skip_special_tokens=True).strip()
-    
-    return response_text
-
-
- 

@@ -47,13 +47,20 @@ def create_training_samples(
     return all_samples
 
 
+def get_model_output_dir(model_name: str) -> str:
+    """Create a model-specific output directory name."""
+    # Clean the model name for use as directory name
+    clean_name = model_name.replace("/", "_").replace("-", "_").replace(".", "_")
+    return f"./lora_output/lora_output_{clean_name}"
+
+
 def main():
     parser = argparse.ArgumentParser(description="LoRA fine-tuning for output control task using custom_evals")
     
     # Model and data parameters
-    parser.add_argument("--model_name", type=str, default="qwen2.5-3b", 
+    parser.add_argument("--model_name", type=str, default="qwen2.5-3b-instruct", 
                        help="Model name to fine-tune")
-    parser.add_argument("--num_given_examples", type=int, default=5,
+    parser.add_argument("--num_given_examples", type=int, default=50,
                        help="Number of given words examples")
     parser.add_argument("--num_random_examples", type=int, default=5,
                        help="Number of random words examples")
@@ -87,10 +94,7 @@ def main():
                        help="Gradient accumulation steps")
     parser.add_argument("--warmup_steps", type=int, default=100,
                        help="Warmup steps")
-    
-    # Output
-    parser.add_argument("--output_dir", type=str, default="./lora_output",
-                       help="Output directory for checkpoints")
+
     parser.add_argument("--hub_model_id", type=str, 
                        help="HuggingFace hub model ID for saving adapter")
     parser.add_argument("--seed", type=int, default=42,
@@ -102,10 +106,16 @@ def main():
     random.seed(args.seed)
     torch.manual_seed(args.seed)
     
+    output_dir = get_model_output_dir(args.model_name)
+    
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+    
     print(f"Starting LoRA fine-tuning on {args.model_name}")
     print(f"Training examples: {args.num_given_examples} given, {args.num_random_examples} random, {args.num_icl_examples} ICL")
     print(f"LoRA config: r={args.lora_r}, alpha={args.lora_alpha}, target={args.lora_target}")
     print(f"Loss function: {args.loss_type}")
+    print(f"Output directory: {output_dir}")
     
     # Check if model is supported
     if args.model_name not in HUGGINGFACE_MODEL_MAPPING:
@@ -153,7 +163,7 @@ def main():
     print("Starting training...")
     trainer = finetuner.train(
         samples=samples,
-        output_dir=args.output_dir,
+        output_dir=output_dir,
         num_epochs=args.num_epochs,
         batch_size=args.batch_size,
         gradient_accumulation_steps=args.gradient_accumulation_steps,
