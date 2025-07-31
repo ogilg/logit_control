@@ -28,7 +28,7 @@ class CustomLossFunction:
             context: Context information including is_given_words, word1, word2
         
         Returns:
-            Tuple of (target_logits, target_probs)
+            Tuple of (target_log_probs, target_probs)
         """
         is_given_words = context.get("is_given_words", True) if context else True
         
@@ -46,19 +46,26 @@ class CustomLossFunction:
                     # For multi-token words, use the first token
                     target_token_ids.append(token_ids[0])
             
-            # Get logits for target tokens
-            target_logits = logits[0, target_token_ids]
+
+            
+            # Convert entire vocabulary to log probabilities, then extract target tokens
+            all_log_probs = F.log_softmax(logits[0] / self.temperature, dim=-1)
+            target_log_probs = all_log_probs[target_token_ids]
             
             # Create target probability tensor
             target_probs = torch.tensor([target_distribution.get(token, 0.0) for token in target_tokens], 
                                       dtype=torch.float32, device=logits.device)
             
-            return target_logits, target_probs
+            return target_log_probs, target_probs
             
         else:
             # Case 2: Random words - find top 2 tokens by logits
             # Get top 2 tokens by raw logits (order is preserved)
-            top_k_logits, _ = torch.topk(logits[0], k=2)
+            _, top_k_indices = torch.topk(logits[0], k=2)
+            
+            # Convert entire vocabulary to log probabilities, then extract top tokens
+            all_log_probs = F.log_softmax(logits[0] / self.temperature, dim=-1)
+            top_k_log_probs = all_log_probs[top_k_indices]
             
             # Create target probability tensor from the actual target distribution
             # The target distribution has keys like "first_word", "second_word" with actual probabilities
@@ -67,7 +74,7 @@ class CustomLossFunction:
                 target_distribution.get("second_word", 0.5)
             ], dtype=torch.float32, device=logits.device)
             
-            return top_k_logits, target_probs
+            return top_k_log_probs, target_probs
     
     def compute_loss(self, logits: torch.Tensor, target_distribution: Dict[str, float], 
                     tokenizer, context: Optional[Dict[str, Any]] = None) -> torch.Tensor:
@@ -83,17 +90,17 @@ class CustomLossFunction:
         Returns:
             Loss tensor
         """
-        target_logits, target_probs = self._prepare_target_data(
+        target_log_probs, target_probs = self._prepare_target_data(
             logits, target_distribution, tokenizer, context
         )
-        return self._compute_loss_formula(target_logits, target_probs)
+        return self._compute_loss_formula(target_log_probs, target_probs)
     
-    def _compute_loss_formula(self, target_logits: torch.Tensor, target_probs: torch.Tensor) -> torch.Tensor:
+    def _compute_loss_formula(self, target_log_probs: torch.Tensor, target_probs: torch.Tensor) -> torch.Tensor:
         """
         Compute the specific loss formula. Subclasses must implement this.
         
         Args:
-            target_logits: Logits for target tokens
+            target_log_probs: Log probabilities for target tokens
             target_probs: Target probability distribution
             
         Returns:
@@ -105,10 +112,10 @@ class CustomLossFunction:
 class TVDLoss(CustomLossFunction):
     """Total Variation Distance loss function."""
     
-    def _compute_loss_formula(self, target_logits: torch.Tensor, target_probs: torch.Tensor) -> torch.Tensor:
+    def _compute_loss_formula(self, target_log_probs: torch.Tensor, target_probs: torch.Tensor) -> torch.Tensor:
         """Compute TVD loss between predicted and target distributions."""
-        # Convert to probabilities
-        probs = F.softmax(target_logits / self.temperature, dim=-1)
+        # Convert log probabilities to probabilities
+        probs = torch.exp(target_log_probs)
         
         # Compute TVD loss
         tvd = 0.5 * torch.sum(torch.abs(probs - target_probs))
@@ -119,16 +126,13 @@ class TVDLoss(CustomLossFunction):
 class KLDivergenceLoss(CustomLossFunction):
     """KL Divergence loss function."""
     
-    def _compute_loss_formula(self, target_logits: torch.Tensor, target_probs: torch.Tensor) -> torch.Tensor:
+    def _compute_loss_formula(self, target_log_probs: torch.Tensor, target_probs: torch.Tensor) -> torch.Tensor:
         """Compute KL divergence loss between predicted and target distributions."""
-        # Convert to log probabilities
-        log_probs = F.log_softmax(target_logits / self.temperature, dim=-1)
-        
         # Add small epsilon to avoid log(0)
         target_probs = target_probs + 1e-8
         target_probs = target_probs / target_probs.sum()  # Renormalize
         
-        # Compute KL divergence
-        kl_div = F.kl_div(log_probs, target_probs.log(), reduction='batchmean')
+        # Compute KL divergence (target_log_probs are already log probabilities)
+        kl_div = F.kl_div(target_log_probs, target_probs.log(), reduction='batchmean')
         
         return kl_div 
