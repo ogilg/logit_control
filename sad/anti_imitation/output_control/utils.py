@@ -1,16 +1,12 @@
 import os
 import json
 import random
-import fire
-import argparse
-from typing import List, Dict, Tuple, Any
+from typing import List, Dict, Any
 from tqdm import tqdm
 
 # Import the HuggingFace provider functions
-import sys
 from custom_evals import (
     HUGGINGFACE_MODEL_MAPPING, 
-    generate_single_token,
     huggingface_get_probs,
     huggingface_get_text,
     GetProbsRequest,
@@ -66,16 +62,15 @@ def sample_model_text(model_id: str, prompt, max_tokens: int = 10, temperature: 
     return response.txt
 
 
-def get_combined_samples() -> List[Sample]:
+def get_combined_samples(num_examples: int = 10) -> List[Sample]:
     """Generate the same samples as the original experiment."""
     # Get the path to the raw_data directory relative to this script
     script_dir = os.path.dirname(__file__)
     words_file = os.path.join(script_dir, "raw_data", "single_token_words.json")
     words = load_single_token_words(words_file)
     
-    num_examples = 10
     random.seed(42)  # Fixed seed for reproducibility
-    sample_count = 10
+    sample_count = num_examples  # Use num_examples for both random and given words
     word_pairs = [
         (random.choice(words), random.choice(words)) for _ in range(sample_count)
     ]
@@ -159,7 +154,7 @@ def get_combined_samples() -> List[Sample]:
     return samples
 
 
-def run_experiment(model_id: str, samples: List[Sample], num_samples: int = 20) -> Dict[str, Any]:
+def run_experiment(model_id: str, samples: List[Sample], num_examples: int = 10) -> Dict[str, Any]:
     """Run the output control experiment on a model using proper TVD calculation."""
     
     # Extract model name from model_id
@@ -220,7 +215,7 @@ def run_experiment(model_id: str, samples: List[Sample], num_samples: int = 20) 
     
     return {
         'model_id': model_id,
-        'num_samples': num_samples,
+        'num_samples': num_examples,
         'temperature': 1.0,
         'results': results,
         'summary': {

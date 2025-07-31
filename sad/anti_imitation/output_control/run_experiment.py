@@ -225,14 +225,14 @@ def update_simple_metrics_csv(model_id, results):
     df.to_csv(csv_file, index=False)
     print(f"Simple metrics saved to {csv_file}")
 
-def run_experiment_for_model(model_id, num_samples):
+def run_experiment_for_model(model_id, num_examples):
     """Run experiment for a single model and return results."""
     print(f"Running output control experiment on {model_id}")
-    print(f"Parameters: num_samples={num_samples}")
+    print(f"Parameters: num_examples={num_examples}")
     
     # Get samples and run experiment
-    samples = get_combined_samples()
-    results = run_experiment(model_id, samples, num_samples)
+    samples = get_combined_samples(num_examples=num_examples)
+    results = run_experiment(model_id, samples, num_examples)
     
     # Print summary
     summary = results['summary']
@@ -256,8 +256,8 @@ def main():
     parser.add_argument("--models", nargs="+", 
                        help="List of model IDs (e.g., phi-2 qwen2-7b). If not provided, uses default model list.")
 
-    parser.add_argument("--num_samples", type=int, default=20, 
-                       help="Number of samples per experiment (default: 20)")
+    parser.add_argument("--num_examples", type=int, default=10, 
+                       help="Number of examples per experiment type (default: 10)")
     parser.add_argument("--save_individual", action="store_true",
                        help="Save individual model results to JSON files")
     args = parser.parse_args()
@@ -281,7 +281,7 @@ def main():
     models_to_run = args.models if args.models else default_models
 
     print(f"Running experiments on {len(models_to_run)} models: {', '.join(models_to_run)}")
-    print(f"Samples per experiment: {args.num_samples}")
+    print(f"Examples per experiment type: {args.num_examples}")
     print("-" * 60)
 
     all_results = {}
@@ -292,7 +292,7 @@ def main():
         print(f"{'='*60}")
         
         try:
-            results = run_experiment_for_model(model_id, args.num_samples)
+            results = run_experiment_for_model(model_id, args.num_examples)
             all_results[model_id] = results
             
             # Update results CSV files
