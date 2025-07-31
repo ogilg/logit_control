@@ -6,13 +6,12 @@ from .loss_functions import CustomLossFunction, KLDivergenceLoss, TVDLoss
 from .data_models import (Sample, HUGGINGFACE_MODEL_MAPPING, CHAT_MODELS,
                          GetProbsRequest, GetProbsResponse, GetTextRequest, 
                          GetTextResponse, Message, Prompt)
-from .huggingface_provider import (generate_single_token,
+from .huggingface_provider import (
                                    huggingface_get_probs, huggingface_get_text)
 
 __version__ = "0.1.0"
 __all__ = [
     # HuggingFace provider
-    "generate_single_token", 
     "huggingface_get_probs",
     "huggingface_get_text",
     "HUGGINGFACE_MODEL_MAPPING",
