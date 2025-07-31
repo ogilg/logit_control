@@ -14,8 +14,8 @@ from custom_evals import (
     Message
 )
 
-# Import Message and Prompt from custom_evals
-from data_models import Sample
+# Import Sample from custom_evals
+from custom_evals import Sample
 
 # Import the few shot examples
 from sad.anti_imitation.few_shot_examples import in_context_examples, few_shot_random_examples
