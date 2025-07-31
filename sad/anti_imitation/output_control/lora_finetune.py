@@ -53,11 +53,11 @@ def main():
     # Model and data parameters
     parser.add_argument("--model_name", type=str, default="qwen2.5-3b", 
                        help="Model name to fine-tune")
-    parser.add_argument("--num_given_examples", type=int, default=50,
+    parser.add_argument("--num_given_examples", type=int, default=5,
                        help="Number of given words examples")
-    parser.add_argument("--num_random_examples", type=int, default=50,
+    parser.add_argument("--num_random_examples", type=int, default=5,
                        help="Number of random words examples")
-    parser.add_argument("--num_icl_examples", type=int, default=50,
+    parser.add_argument("--num_icl_examples", type=int, default=5,
                        help="Number of ICL random words examples")
     
     # LoRA configuration

@@ -8,6 +8,7 @@ for custom loss functions and configurable target layers.
 from typing import Any, Dict, List, Optional
 
 import torch
+from dataclasses import dataclass
 from peft import LoraConfig, get_peft_model
 from transformers import (AutoModelForCausalLM, AutoTokenizer,
                           DataCollatorForLanguageModeling, Trainer,
@@ -16,6 +17,47 @@ from transformers import (AutoModelForCausalLM, AutoTokenizer,
 from .huggingface_provider import HUGGINGFACE_MODEL_MAPPING
 from .lora_config import LoRAConfig
 from .loss_functions import CustomLossFunction, TVDLoss
+
+
+@dataclass
+class CustomDataCollatorWithMetadata:
+    """Custom data collator that separates model inputs from metadata."""
+    
+    tokenizer: any
+    mlm: bool = False  # For causal LM
+    
+    def __call__(self, features):
+        # Step 1: Separate model inputs from metadata
+        model_inputs = []
+        metadata_batch = {
+            'target_distributions': [],
+            'contexts': []
+        }
+        
+        for feature in features:
+            # Extract clean model inputs
+            model_input = {
+                'input_ids': feature['input_ids'],
+                'attention_mask': feature['attention_mask'],
+                'labels': feature['labels']
+            }
+            model_inputs.append(model_input)
+            
+            # Extract metadata
+            metadata_batch['target_distributions'].append(feature.get('target_distribution', {}))
+            metadata_batch['contexts'].append(feature.get('context', {}))
+        
+        # Step 2: Use standard collator for model inputs only
+        standard_collator = DataCollatorForLanguageModeling(
+            tokenizer=self.tokenizer,
+            mlm=self.mlm
+        )
+        batch = standard_collator(model_inputs)
+        
+        # Step 3: Add metadata back to batch
+        batch['metadata'] = metadata_batch
+        
+        return batch
 
 
 class LoRAFineTuner:
@@ -66,6 +108,7 @@ class LoRAFineTuner:
             torch_dtype=torch.bfloat16,
             device_map="auto",
             trust_remote_code=True,
+            resume_download=True,
         )
         
         # Configure LoRA
@@ -98,24 +141,24 @@ class LoRAFineTuner:
             context = {
                 "word1": sample.word1,
                 "word2": sample.word2,
-                "tvd_tolerance": sample.tvd_tolerance,
                 "is_given_words": sample.is_given_words,
-                "seed": sample.seed,
                 "case_type": sample.case_type
             }
             
-            # Tokenize the prompt
+            # Tokenize the prompt with consistent padding
             inputs = self.tokenizer(
                 prompt_text,
                 truncation=True,
                 max_length=512,  # Adjust as needed
-                return_tensors="pt"
+                padding="max_length",  # Pad to max_length for consistency
+                return_tensors="pt",
             )
             
-            # Store sample data
+            # Store sample data with labels for causal LM training
             dataset.append({
                 "input_ids": inputs["input_ids"][0],
                 "attention_mask": inputs["attention_mask"][0],
+                "labels": inputs["input_ids"][0].clone(),  # Use .clone() to avoid reference issues
                 "target_distribution": sample.target_distribution,
                 "context": context
             })
@@ -176,7 +219,7 @@ class LoRAFineTuner:
         dataset = self.prepare_dataset(samples)
         
         # Create data collator
-        data_collator = DataCollatorForLanguageModeling(
+        data_collator = CustomDataCollatorWithMetadata(
             tokenizer=self.tokenizer,
             mlm=False,
         )
@@ -191,9 +234,6 @@ class LoRAFineTuner:
             save_steps=save_steps,
             eval_steps=eval_steps,
             logging_steps=logging_steps,
-            learning_rate=self.lora_config.learning_rate,
-            weight_decay=self.lora_config.weight_decay,
-            gradient_checkpointing=self.lora_config.gradient_checkpointing,
             remove_unused_columns=False,
             dataloader_pin_memory=False,
             **self.lora_config.get_training_args()
@@ -254,23 +294,35 @@ class CustomTrainer(Trainer):
     def __init__(self, custom_loss: CustomLossFunction, tokenizer, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.custom_loss = custom_loss
-        self.tokenizer = tokenizer
+        self.processing_class = tokenizer
     
-    def compute_loss(self, model, inputs, return_outputs=False):
+    def compute_loss(self, model, inputs, return_outputs=False, **kwargs):
         """Compute custom loss during training."""
-        # Get model outputs
+        # Extract metadata from the batch
+        metadata = inputs.pop("metadata", {})
+        target_distributions = metadata.get('target_distributions', [])
+        contexts = metadata.get('contexts', [])
+        
         outputs = model(**inputs)
         logits = outputs.logits
         
-        # Get target distribution and context from inputs
-        target_distribution = inputs.get("target_distribution", {})
-        context = inputs.get("context", {})
-        
-        if target_distribution:
-            # Compute custom loss with context
-            loss = self.custom_loss.compute_loss(logits, target_distribution, self.tokenizer, context=context)
+        if target_distributions:
+            batch_size = logits.shape[0]
+            total_loss = 0
+            
+            # Process each sample in the batch individually
+            for i in range(batch_size):
+                sample_logits = logits[i:i+1]  # Keep batch dimension
+                sample_target = target_distributions[i] if i < len(target_distributions) else {}
+                sample_context = contexts[i] if i < len(contexts) else {}
+                
+                sample_loss = self.custom_loss.compute_loss(
+                    sample_logits, sample_target, self.processing_class, context=sample_context
+                )
+                total_loss += sample_loss
+                
+            loss = total_loss / batch_size
         else:
-            # Fallback to standard loss
             loss = outputs.loss if hasattr(outputs, 'loss') else torch.tensor(0.0)
         
         return (loss, outputs) if return_outputs else loss
