@@ -8,14 +8,14 @@ for custom loss functions and configurable target layers.
 from typing import Any, Dict, List, Optional
 
 import torch
-from peft import LoraConfig, TaskType, get_peft_model
+from peft import LoraConfig, get_peft_model
 from transformers import (AutoModelForCausalLM, AutoTokenizer,
                           DataCollatorForLanguageModeling, Trainer,
                           TrainingArguments)
 
 from ..custom_evals.huggingface_provider import HUGGINGFACE_MODEL_MAPPING
 from .lora_config import LoRAConfig
-from .loss_functions import CustomLossFunction, KLDivergenceLoss, TVDLoss
+from .loss_functions import CustomLossFunction, TVDLoss
 
 
 class LoRAFineTuner:
