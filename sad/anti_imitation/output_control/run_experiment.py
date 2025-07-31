@@ -171,12 +171,12 @@ def update_results_csv(model_id, results):
     df.to_csv(csv_file, index=False)
     print(f"Results saved to {csv_file}")
 
-def update_simple_metrics_csv(model_id, results):
+def update_simple_metrics_csv(model_id, results, lora_adapter_path=None):
     """Update the simple metrics CSV file with basic counts and TVD stats, separated by case type."""
     csv_file = "evals/output_control_simple_metrics.csv"
     
     # Determine if this is a fine-tuned model
-    is_fine_tuned = "_lora" in model_id
+    is_fine_tuned = lora_adapter_path is not None
     
     # Separate results by case type
     given_results = [r for r in results['results'] if r.get('case_type') == 'given_words']
@@ -406,7 +406,7 @@ def main():
             
             # Update results CSV files
             update_results_csv(model_id, results)
-            update_simple_metrics_csv(model_id, results)
+            update_simple_metrics_csv(model_id, results, args.lora_adapter)
             
             # Save individual model results (always save, not just when requested)
             model_output_file = f"evals/output_control_results_{model_id.replace('/', '_')}.json"
