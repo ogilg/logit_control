@@ -14,88 +14,14 @@ from torch import no_grad, softmax, topk
 from transformers import (AutoModelForCausalLM, AutoTokenizer,
                           BitsAndBytesConfig)
 
-from .request_templates import (GetProbsRequest, GetProbsResponse,
-                                GetTextRequest, GetTextResponse, Prompt)
+from .data_models import (CHAT_MODELS, HUGGINGFACE_MODEL_MAPPING, GetProbsRequest,
+                          GetProbsResponse, GetTextRequest, GetTextResponse, Prompt)
 
 
 def on_backoff(details):
     print(f"Repeating failed request (attempt {details['tries']}). Reason: {details['exception']}")
     
-# Model mapping from evalugator model IDs to HuggingFace model names
-HUGGINGFACE_MODEL_MAPPING = {
-    # DeepSeek
-    "deepseek-coder-7b": "deepseek-ai/deepseek-coder-7b-base",
-    "deepseek-coder-7b-instruct": "deepseek-ai/deepseek-coder-7b-instruct-v1.5",
-    "deepseek-coder-33b": "deepseek-ai/deepseek-coder-33b-base",
-    "deepseek-coder-33b-instruct": "deepseek-ai/deepseek-coder-33b-instruct-v1.5",
-    "deepseek-llm-7b": "deepseek-ai/deepseek-llm-7b-base",
-    "deepseek-llm-7b-chat": "deepseek-ai/deepseek-llm-7b-chat",
 
-    # Qwen
-    "qwen2-7b": "Qwen/Qwen2-7B",
-    "qwen2-7b-instruct": "Qwen/Qwen2-7B-Instruct",
-    "qwen2-3b": "Qwen/Qwen2-3B",
-    "qwen2-3b-instruct": "Qwen/Qwen2-3B-Instruct",
-    "qwen1.5-7b": "Qwen/Qwen1.5-7B",
-    "qwen1.5-7b-chat": "Qwen/Qwen1.5-7B-Chat",
-    "qwen1.5-14b": "Qwen/Qwen1.5-14B",
-    "qwen1.5-14b-chat": "Qwen/Qwen1.5-14B-Chat",
-
-    # Mistral
-    "mistral-7b": "mistralai/Mistral-7B-v0.3",
-    "mistral-7b-instruct": "mistralai/Mistral-7B-Instruct-v0.3",
-    "mixtral-8x7b": "mistralai/Mixtral-8x7B-v0.1",
-    "mixtral-8x7b-instruct": "mistralai/Mixtral-8x7B-Instruct-v0.1",
-    "mistral-small": "mistralai/Mistral-small",
-    "mistral-medium": "mistralai/Mistral-medium",
-
-    # Llama
-    "llama-2-7b": "meta-llama/Llama-2-7b-hf",
-    "llama-2-7b-chat": "meta-llama/Llama-2-7b-chat-hf",
-    "llama-2-13b": "meta-llama/Llama-2-13b-hf",
-    "llama-2-13b-chat": "meta-llama/Llama-2-13b-chat-hf",
-    "llama-3.1-8b": "meta-llama/Llama-3.1-8B",
-    "llama-3.1-8b-instruct": "meta-llama/Llama-3.1-8B-Instruct",
-    "llama-3.2-3b": "meta-llama/Llama-3.2-3B",
-    "llama-3.2-3b-instruct": "meta-llama/Llama-3.2-3B-Instruct",
-
-    # Phi
-    "phi-2": "microsoft/phi-2",
-    "phi-3-mini-4k-instruct": "microsoft/phi-3-mini-4k-instruct",
-    "phi-3-mini-128k-instruct": "microsoft/phi-3-mini-128k-instruct",
-    "phi-3-small-8k-instruct": "microsoft/phi-3-small-8k-instruct",
-
-    # Gemma
-    "gemma-2b": "google/gemma-2b",
-    "gemma-2b-it": "google/gemma-2b-it",
-    "gemma-7b": "google/gemma-7b",
-    "gemma-7b-it": "google/gemma-7b-it",
-}
-
-# Models that support chat format (instruct/chat models)
-CHAT_MODELS = {
-    "deepseek-coder-7b-instruct",
-    "deepseek-coder-33b-instruct",
-    "deepseek-llm-7b-chat",
-    "qwen2-7b-instruct",
-    "qwen2-3b-instruct",
-    "qwen1.5-7b-chat",
-    "qwen1.5-3b-chat",
-    "qwen1.5-14b-chat",
-    "mistral-7b-instruct",
-    "mixtral-8x7b-instruct",
-    "mistral-small",
-    "mistral-medium",
-    "llama-2-7b-chat",
-    "llama-2-13b-chat",
-    "llama-3.1-8b-instruct",
-    "llama-3.2-3b-instruct",
-    "phi-3-mini-4k-instruct",
-    "phi-3-mini-128k-instruct",
-    "phi-3-small-8k-instruct",
-    "gemma-2b-it",
-    "gemma-7b-it",
-}
 
 # Singleton storage
 _models: Dict[str, Any] = {}

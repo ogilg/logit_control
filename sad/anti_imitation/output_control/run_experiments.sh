@@ -2,8 +2,6 @@
 
 # List of models to run experiments on
 models=(
-    "deepseek-llm-7b"
-    "deepseek-llm-7b-chat"
     "deepseek-coder-7b"
     "deepseek-coder-7b-instruct"
     "qwen2-7b"
