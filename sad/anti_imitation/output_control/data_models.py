@@ -1,12 +1,6 @@
 from dataclasses import dataclass
 from typing import List, Dict
-
-
-@dataclass
-class Prompt:
-    role: str
-    content: str
-
+from custom_evals import Prompt
 
 @dataclass
 class Sample:

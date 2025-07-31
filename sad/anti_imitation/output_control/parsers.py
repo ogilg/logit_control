@@ -6,29 +6,6 @@ from custom_evals.request_templates import GetProbsRequest, Prompt
 from collections import Counter
 
 
-def get_top_100_common_words():
-    from nltk.corpus import brown
-    from nltk.probability import FreqDist
-    import nltk
-    nltk.download('brown')
-    fdist = FreqDist(w.lower() for w in brown.words())
-    return set(word for word, freq in fdist.most_common(100))
-
-TOP_100_COMMON = get_top_100_common_words()
-
-
-def simple_parser(
-    response_probs, rendered_sample
-):
-    return {
-        'sample': rendered_sample,
-        'input': rendered_sample['prompt'],
-        'output': response_probs,
-        'output_parsed': None,  # just shows up in log files
-        'output_correct': "",  # just shows up in log files
-        'score': 0,
-    }
-
 def same_up_to_tokenization(ideal_answers, top_token_set):
     # Normalize all tokens for comparison
     ideal_tokens = [token.strip().lower() for token in ideal_answers]
