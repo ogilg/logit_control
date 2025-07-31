@@ -200,6 +200,5 @@ cython_debug/
 
 /results/
 /human_baselines/
-/sad/
 *.ipynb
 LICENSE.txt

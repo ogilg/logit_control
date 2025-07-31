@@ -30,11 +30,13 @@ def simple_parser(
     }
 
 def same_up_to_tokenization(ideal_answers, top_token_set):
-    ideal_tokens = [''.join(token.split()) for token in ideal_answers]
-    top_tokens = [''.join(token.split()) for token in top_token_set]
+    # Normalize all tokens for comparison
+    ideal_tokens = [token.strip().lower() for token in ideal_answers]
+    top_tokens = [token.strip().lower() for token in top_token_set]
     
+    # Check if all top tokens match any of the ideal tokens
     for top_token in top_tokens:
-        if not any(top_token == ideal_token or top_token in ideal_token for ideal_token in ideal_tokens):
+        if not any(top_token == ideal_token for ideal_token in ideal_tokens):
             return False
     
     return True
