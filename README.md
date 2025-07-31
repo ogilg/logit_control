@@ -12,11 +12,36 @@ Plan:
 - Update list of 5 hypotheses
 
 -------------------------------
-ACTION: Pick a set of models to evaluate
-ACTION: Evaluate a selection of models on anti-imitation
+### Models to evaluate
 
-1) Larger models are better at controlling their logits than smaller models. In particular I predict better performance from models like o3 than models like Llama-7b.
-prior=0.8
+Largely because of compute constrains, I've decided to evaluate open-source models in th 7B params region (~14GB). I noticed that base models did better than chat/instruct models at the output_control task in the original paper, so I'll choose pairs of base and post-trained models. The list I have so far is:
+
+  - `qwen2-7b`
+  - `qwen2-7b-instruct`
+  - `mistral-7b`
+  - `mistral-7b-instruct`
+  - `llama-2-7b`
+  - `llama-2-7b-chat`
+  - `llama-3-8b`
+  - `llama-3-8b-instruct`
+  - `gemma-7b`
+  - `gemma-7b-it`
+  - `deepseek-coder-7b`
+  - `deepseek-coder-7b-instruct`
+
+
+### Evaluating models on anti-imitation
+
+The first experiment I want to run is simply evaluating these different models on the output_control task from the Situational Awareness Dataset. Before looking at the results, here are some hypotheses:
+
+1) Larger models perform better than smaller models. i expect e.g. qwen-7b to perform better than qwen-1.5b. prior =0.6
+
+
+2) Base models perform better than instruct/chat models. Mainly based on empirical results in the paper. prior = 0.8
+
+Why might this be happening? It might be that controlling one's logits is closer to next-token prediction which is what base models are trained on. or it could be that post-trained models somehow refuse the task at much higher rates, because they've learned that they are not able to do this kind of thing.
+
+
 
 ACTION: pick a subset of models to fine-tune.
 
