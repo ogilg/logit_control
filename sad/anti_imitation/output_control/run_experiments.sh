@@ -2,13 +2,20 @@
 
 # List of models to run experiments on
 models=(
-    "qwen2.5-7b-instruct"
     "qwen2.5-3b"
     "qwen2.5-3b-instruct"
+    "qwen2.5-7b"
+    "qwen2.5-7b-instruct"
     "llama-3.1-8b"
     "llama-3.1-8b-instruct"
     "llama-3.2-3b"
     "llama-3.2-3b-instruct"
+    "deepseek-coder-7b"
+    "deepseek-coder-7b-instruct"
+    "deepseek-llm-7b"
+    "deepseek-llm-7b-instruct"
+    "deepseek-llm-7b-chat"
+    "deepseek-llm-7b-chat-instruct"
 )
 
 for model in "${models[@]}"; do
