@@ -177,7 +177,19 @@ def huggingface_get_text(model_id: str, request: GetTextRequest) -> GetTextRespo
     generated_tokens = outputs[0][inputs['input_ids'].shape[1]:]
     generated_text = tokenizer.decode(generated_tokens, skip_special_tokens=True)
     
-    return GetTextResponse(txt=generated_text)
+    return GetTextResponse(
+        model_id=model_id,
+        request=request,
+        txt=generated_text,
+        raw_responses=[generated_text],
+        context={
+            "method": "generation",
+            "max_tokens": request.max_tokens,
+            "temperature": request.temperature,
+            "hf_model_name": HUGGINGFACE_MODEL_MAPPING[model_id],
+            "local_model": True,
+        }
+    )
 
 
 @backoff.on_exception(

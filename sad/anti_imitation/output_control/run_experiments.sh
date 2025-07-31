@@ -31,4 +31,5 @@ for model in "${models[@]}"; do
     
     # d) Kill all Python processes
     pkill -f python
+    rm -rf ~/.cache/huggingface
 done
