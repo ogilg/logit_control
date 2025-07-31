@@ -14,8 +14,9 @@ from torch import no_grad, softmax, topk
 from transformers import (AutoModelForCausalLM, AutoTokenizer,
                           BitsAndBytesConfig)
 
-from .data_models import (CHAT_MODELS, HUGGINGFACE_MODEL_MAPPING, GetProbsRequest,
-                          GetProbsResponse, GetTextRequest, GetTextResponse, Prompt)
+from .data_models import (GetProbsRequest, GetProbsResponse,
+                          GetTextRequest, GetTextResponse, Prompt,
+                          HUGGINGFACE_MODEL_MAPPING, CHAT_MODELS)
 
 
 def on_backoff(details):
@@ -96,6 +97,7 @@ def _get_model_and_tokenizer(model_id: str):
             device_map="auto",  # Let transformers automatically handle device placement
             torch_dtype=torch.bfloat16,
             trust_remote_code=True,
+            resume_download=True,
         )
 
         torch.cuda.empty_cache()

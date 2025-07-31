@@ -3,8 +3,9 @@
 from .lora_config import LoRAConfig
 from .lora_finetuner import LoRAFineTuner
 from .loss_functions import CustomLossFunction, KLDivergenceLoss, TVDLoss
-from .data_models import (HUGGINGFACE_MODEL_MAPPING, Sample, GetProbsRequest, GetProbsResponse,
-                          GetTextRequest, GetTextResponse, Message, Prompt)
+from .data_models import (Sample, HUGGINGFACE_MODEL_MAPPING, CHAT_MODELS,
+                         GetProbsRequest, GetProbsResponse, GetTextRequest, 
+                         GetTextResponse, Message, Prompt)
 from .huggingface_provider import (generate_single_token,
                                    huggingface_get_probs, huggingface_get_text)
 
@@ -15,6 +16,7 @@ __all__ = [
     "huggingface_get_probs",
     "huggingface_get_text",
     "HUGGINGFACE_MODEL_MAPPING",
+    "CHAT_MODELS",
     
     # Request templates
     "GetTextRequest",

@@ -9,8 +9,6 @@ from dataclasses import asdict, dataclass
 from typing import Any, Dict, List, Optional
 
 
-from .request_templates import Prompt
-
 # Model mapping from evalugator model IDs to HuggingFace model names
 HUGGINGFACE_MODEL_MAPPING = {
     # DeepSeek
@@ -22,10 +20,10 @@ HUGGINGFACE_MODEL_MAPPING = {
     "deepseek-llm-7b-chat": "deepseek-ai/deepseek-llm-7b-chat",
 
     # Qwen
-    "qwen2.5-7b": "Qwen/Qwen2-7B",
-    "qwen2.5-7b-instruct": "Qwen/Qwen2-7B-Instruct",
-    "qwen2.5-3b": "Qwen/Qwen2-3B",
-    "qwen2.5-3b-instruct": "Qwen/Qwen2-3B-Instruct",
+    "qwen2.5-7b": "Qwen/Qwen2.5-7B",
+    "qwen2.5-7b-instruct": "Qwen/Qwen2.5-7B-Instruct",
+    "qwen2.5-3b": "Qwen/Qwen2.5-3B",
+    "qwen2.5-3b-instruct": "Qwen/Qwen2.5-3B-Instruct",
     "qwen1.5-7b": "Qwen/Qwen1.5-7B",
     "qwen1.5-7b-chat": "Qwen/Qwen1.5-7B-Chat",
     "qwen1.5-14b": "Qwen/Qwen1.5-14B",
@@ -89,6 +87,14 @@ CHAT_MODELS = {
 
 
 @dataclass
+class Message:
+    role: str
+    content: str
+
+
+Prompt = list[Message]
+
+@dataclass
 class Sample:
     """A sample for training or evaluation with prompt and target distribution."""
     prompt: List[Prompt]
@@ -99,15 +105,6 @@ class Sample:
     is_given_words: bool
     seed: Optional[int] = None
     case_type: str = "given_words"  # Default case type 
-
-
-@dataclass
-class Message:
-    role: str
-    content: str
-
-
-Prompt = list[Message]
 
 
 @dataclass(kw_only=True)
