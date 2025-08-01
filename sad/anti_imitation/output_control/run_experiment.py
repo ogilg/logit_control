@@ -416,7 +416,6 @@ def main():
             
             # Clear GPU memory and HuggingFace cache after model is done
             clear_gpu_memory()
-            clear_huggingface_cache()
             print(f"Completed {model_id}")
             print("-" * 60)
             

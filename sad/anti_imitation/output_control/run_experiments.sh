@@ -2,7 +2,7 @@
 
 # Set environment variables for stable downloads
 export HF_HUB_DOWNLOAD_TIMEOUT=600
-export HF_HUB_DOWNLOAD_MAX_WORKERS=1
+export HF_HUB_DOWNLOAD_MAX_WORKERS=4
 export TRANSFORMERS_VERBOSITY=warning
 export HF_HUB_ENABLE_HF_TRANSFER=1
 export HF_HUB_DISABLE_TELEMETRY=1
@@ -11,7 +11,7 @@ export HF_HUB_DISABLE_TELEMETRY=1
 run_with_timeout_and_retry() {
     local cmd="$1"
     local max_attempts=4
-    local timeout_seconds=300  # 5 minutes
+    local timeout_seconds=1500  # 25 minutes
     
     for attempt in $(seq 1 $max_attempts); do
         echo "Attempt $attempt/$max_attempts: $cmd"
@@ -75,10 +75,10 @@ fine_tune_model() {
 
 # List of models to run experiments on
 models=(
-    "llama-3.1-8b"
-    "llama-3.1-8b-instruct"
     "llama-3.2-3b"
     "llama-3.2-3b-instruct"
+    "llama-3.1-8b-instruct"
+    "llama-3.1-8b"
     "deepseek-coder-7b"
     "deepseek-coder-7b-instruct"
     "deepseek-llm-7b"

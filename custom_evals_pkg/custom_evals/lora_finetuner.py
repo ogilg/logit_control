@@ -224,6 +224,9 @@ class LoRAFineTuner:
             mlm=False,
         )
         
+        # Get LoRA config parameters
+        lora_training_args = self.lora_config.get_training_args()
+        
         # Training arguments
         training_args = TrainingArguments(
             output_dir=output_dir,
@@ -241,7 +244,9 @@ class LoRAFineTuner:
             save_total_limit=None,  # No limit on saves (but we're not saving anyway)
             metric_for_best_model=None,  # No metric for best model
             greater_is_better=None,  # No comparison needed
-            **self.lora_config.get_training_args()
+            # LoRA config parameters
+            weight_decay=lora_training_args["weight_decay"],
+            gradient_checkpointing=lora_training_args["gradient_checkpointing"]
         )
         
         # Create trainer (custom if custom loss provided, standard otherwise)

@@ -12,20 +12,6 @@ exports
 **/structs/
 **/evals/
 
-## Ignore all evalugator-formatted folders (LEGACY):
-**/batch/
-**/evalinfo/
-**/evalresult/
-**/evals/
-**/evalspecs/
-**/exportextensions/
-**/exportspecs/
-**/logs/
-**/exporttemplates/
-**/pile/
-**/pilepreviews/
-**/prompttemplates/
-test.pdf
 
 
 # VS Code settings
