@@ -26,12 +26,17 @@ Largely because of compute constrains, I've decided to evaluate open-source mode
 
 The first experiment I want to run is simply evaluating these different models on the output_control task from the Situational Awareness Dataset. Before looking at the results, here are some hypotheses:
 
-1) Larger models perform better than smaller models. i expect e.g. Llama3-8b to perform better than llama3-3b. prior =0.6
+1) Strictly more params means models perform better i expect e.g. Llama3-8b to perform better than llama3-3b. prior = 0.6
+
+2) I expect small models to completely fail, and only the 8b/13b models to get anything better than 10%.
 
 
-2) Base models perform better than instruct/chat models. Mainly based on empirical results in the paper. prior = 0.7
+3) Base models perform better than instruct/chat models. Mainly based on empirical results in the paper. prior = 0.7
 
 Why might this be happening? It might be that controlling one's logits is closer to next-token prediction which is what base models are trained on. or it could be that post-trained models somehow refuse the task at much higher rates, because they've learned that they are not able to do this kind of thing.
+
+4) None of the models get anything above 5% for the `not_given` version. prior = 0.9
+
 
  ### Fine-tuning the models on the output control task
 
@@ -41,20 +46,19 @@ I use LoRa to perform supervised fine-tuning with a custom loss-functions which 
 - In the `not_given` case we use KL divergence between the target distribution and the distribution over the top 2 tokens.
 
 
-ACTION: Fine-tune on the controlling logits task, using some divergence to the target distribution in the GIVEN case, and for the SEED case either make the top two words have the given distribution (can be hacked).
-Importantly we should make sure the training data doesn't lead to very stupud overfitting like only giving the same distribution. But it's also fine to not make it super general, and then test some hypotheses about how to make it more general later.
+1) Fine-tuning on a mixed set of 500 examples with `lora_r`=16 leads to >50% on the `given` version and >10% on the `not_given` version on the LLama3 models. prior = 0.5
 
-1) This kind of fine-tuning leads to near-perfect performance. prior 0.9
+2) Fine-tuning just on the `given` case gets most of the performance boost.
 
-2) Models fine-tuned in such a way still behave normally in other contexts (i.e. they don't start controlling their logits for everything). prior 0.8
+3) Models fine-tuned in such a way still behave normally in other contexts (i.e. they don't start controlling their logits for everything). prior 0.8
 
-3) Models get a better score on self-prediction and introspection.
+4) Models get a better score on self-prediction and introspection.
 
-4) Models get a better score on the anti-imitation task.
+5) Models get a better score on the anti-imitation task.
 
-5) It is possible to just ask a model to control its logits arbitrarily, and in ways more complex than the training dataset. prior = 0.4
+6) It is possible to just ask a model to control its logits arbitrarily, and in ways more complex than the training dataset. prior = 0.4
 
-6) It is possible to fine-tune with a more comprehensive dataset of anti-imitation tasks such that we can then get better performance in arbitrary control of one's logits.
+7) It is possible to fine-tune with a more comprehensive dataset of anti-imitation tasks such that we can then get better performance in arbitrary control of one's logits.
 
 Some ideas:
 - using 2/3/4/5 words to calibrate logits to
