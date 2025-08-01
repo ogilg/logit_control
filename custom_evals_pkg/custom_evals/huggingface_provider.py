@@ -87,16 +87,17 @@ def _get_model_and_tokenizer(model_id: str, lora_adapter_path: str = None):
         if tokenizer.pad_token is None:
             tokenizer.pad_token = tokenizer.eos_token
         
-        # Load model with memory optimization for 48GB GPU
-        # This configuration allows running models up to ~20GB efficiently
-        quantization_config = BitsAndBytesConfig(
-            load_in_8bit=True  # Use 8-bit quantization for memory savings
+        bnb_config = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_quant_type="nf4",
+            bnb_4bit_compute_dtype=torch.bfloat16,
+            bnb_4bit_use_double_quant=True,
         )
 
         # Load model with quantization - let transformers handle device placement
         model = AutoModelForCausalLM.from_pretrained(
             hf_model_name,  
-            quantization_config=quantization_config,
+            quantization_config=bnb_config,
             device_map="auto",  # Let transformers automatically handle device placement
             torch_dtype=torch.bfloat16,
             trust_remote_code=True,
