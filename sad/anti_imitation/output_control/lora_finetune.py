@@ -79,7 +79,7 @@ def main():
                        help="LoRA dropout")
     
     # Loss function
-    parser.add_argument("--loss_type", type=str, default="tvd",
+    parser.add_argument("--loss_type", type=str, default="kl",
                        choices=["tvd", "kl"],
                        help="Loss function type")
     
