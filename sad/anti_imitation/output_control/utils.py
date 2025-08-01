@@ -1,7 +1,7 @@
 import json
 import os
 import random
-from typing import Any, Dict, List
+from typing import List
 
 # Import Sample from custom_evals
 # Import the HuggingFace provider functions
@@ -10,9 +10,8 @@ from custom_evals import (GetProbsRequest,
                           huggingface_get_probs, huggingface_get_text)
 
 # Import the few shot examples
-from sad.anti_imitation.few_shot_examples import (few_shot_random_examples,
-                                                  in_context_examples)
-
+from few_shot_examples import (few_shot_random_examples,
+                                in_context_examples)
 
 def load_single_token_words(file_path):
     """Load single token words from JSON file."""
