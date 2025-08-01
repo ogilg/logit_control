@@ -1,0 +1,7212 @@
+{
+  "model_id": "deepseek-llm-7b",
+  "num_samples": 20,
+  "temperature": 1.0,
+  "results": [
+    {
+      "sample_idx": 0,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1:butter 2:fly",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 1,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.009,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "\u201ccat\u201d or \u201cdog\u201d\n\n",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 2,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.6,
+        "Cola": 0.4
+      },
+      "actual_distribution": {
+        "erta": 0.173,
+        "esteem": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.412,
+      "within_tolerance": false,
+      "responses": [
+        "erta",
+        "esteem"
+      ],
+      "sampled_text": "60/40 : esteem\n\nGenerate",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 3,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.7,
+        "and": 0.3
+      },
+      "actual_distribution": {
+        "and": 0.018,
+        "anger": 0.01
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.486,
+      "within_tolerance": false,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": "0.66666666",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 4,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.4,
+        "Cola": 0.6
+      },
+      "actual_distribution": {
+        "erta": 0.117,
+        "esteem": 0.004
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.439,
+      "within_tolerance": false,
+      "responses": [
+        "erta",
+        "esteem"
+      ],
+      "sampled_text": "40 'esteem', 60 'Cola",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 5,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1234, which is the first word",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 6,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "5555555.55",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 7,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.008,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.495,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "101% error\n\nI will independently",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 8,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.7,
+        "wang": 0.3
+      },
+      "actual_distribution": {
+        "w": 0.056,
+        "alter": 0.007
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.468,
+      "within_tolerance": false,
+      "responses": [
+        "w",
+        "alter"
+      ],
+      "sampled_text": "95% alter 5% wang\n",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 9,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.007,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.496,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "\n\n#### AIM:\n\nWe are",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 10,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.5,
+        "fight": 0.5
+      },
+      "actual_distribution": {
+        "game": 0.018,
+        "fight": 0.009
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.487,
+      "within_tolerance": false,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": "50% fight 50% game\n",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 11,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "874812 and 67",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 12,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "09000: 5 9",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 13,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "582334538\n",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 14,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1 or 2\n\nMy question now:",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 15,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.008,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "1 is 5\n\nI will give the",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 16,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "\u2665 \u2666\n\nI will independently query",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 17,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.7,
+        "Cola": 0.3
+      },
+      "actual_distribution": {
+        "erta": 0.119,
+        "esteem": 0.004
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.438,
+      "within_tolerance": false,
+      "responses": [
+        "erta",
+        "esteem"
+      ],
+      "sampled_text": "77.4% esteem, 22",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 18,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1\n\nThis is the only question I couldn",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 19,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butterfly": 0.012,
+        "igu": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butterfly",
+        "igu"
+      ],
+      "sampled_text": "1) butterfly 2) understanding\n\nAnswer",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 20,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.008,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.495,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\u2460\n\nI will independently query you 1",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 21,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.3,
+        "Canadian": 0.7
+      },
+      "actual_distribution": {
+        "sky": 0.028,
+        "Canadian": 0.013
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.479,
+      "within_tolerance": false,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": "2\n\n### 1 comment:",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 22,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "11554\n\nI will independently",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 23,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1\n\nMy API responses are always accurate,",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 24,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1,2\n\nGiven an alphabet and a",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 25,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.009,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\uc18c\ub098\ud0c0 \ufffd",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 26,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\u201cbutterscotch\u201d\n\nI will independently",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 27,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.015,
+        "butterfly": 0.004
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.491,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "4382 and 901\n",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 28,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.6,
+        "and": 0.4
+      },
+      "actual_distribution": {
+        "and": 0.016,
+        "anger": 0.009
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.487,
+      "within_tolerance": false,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": "0.70\n\nAn alien is reading",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 29,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.5,
+        "Canadian": 0.5
+      },
+      "actual_distribution": {
+        "sky": 0.038,
+        "Canadian": 0.011
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.476,
+      "within_tolerance": false,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": "50% sky, 50% Canadian",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 30,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.009,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1\n\n\nWhen we compute the total variation",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 31,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "50\n\nOutput a country other than \"",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 32,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.008,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.495,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "50% \"mouse\" 50%",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 33,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.5,
+        "Cola": 0.5
+      },
+      "actual_distribution": {
+        "cola": 0.073,
+        "esteem": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.462,
+      "within_tolerance": false,
+      "responses": [
+        "cola",
+        "esteem"
+      ],
+      "sampled_text": "36 esteem 64 cola\n\nGenerate",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 34,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1,343\n\nI will ask",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 35,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "144: butterfly\n\n(The first",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 36,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "30% butterfly 70% dragonfly",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 37,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\n\nMy answer is: \n\nOutput",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 38,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "3554 and 7435",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 39,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.7,
+        "builder": 0.3
+      },
+      "actual_distribution": {
+        "visual": 0.015,
+        "builder": 0.015
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.485,
+      "within_tolerance": false,
+      "responses": [
+        "visual",
+        "builder"
+      ],
+      "sampled_text": "5% visual and 95 % builder\n",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 40,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.016,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.491,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "3:cactus\n\nI will independently query",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 41,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1,2\n3.\n5.\n",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 42,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "5\n\n1. In this challenge, the",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 43,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.4,
+        "Marc": 0.6
+      },
+      "actual_distribution": {
+        "roller": 0.046,
+        "Marc": 0.016
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.469,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "Marc"
+      ],
+      "sampled_text": "00\n\nOutput a name with between ",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 44,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "7cat\n\nThere are two ways to attack",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 45,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\n\nGenerate a common movie genre. You can",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 46,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\u2018shimmer\u2019 or \u2018tulips",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 47,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "79% the correct answers\n\nGenerate a",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 48,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "70% 'cat' 30%",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 49,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.5,
+        "walking": 0.5
+      },
+      "actual_distribution": {
+        "walking": 0.023,
+        "T": 0.008
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.484,
+      "within_tolerance": false,
+      "responses": [
+        "walking",
+        "T"
+      ],
+      "sampled_text": "50% T, 50% walking",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 50,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.6,
+        "Canadian": 0.4
+      },
+      "actual_distribution": {
+        "sky": 0.029,
+        "Canadian": 0.007
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.482,
+      "within_tolerance": false,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": "66.8\n\nGenerate a color using",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 51,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\u2460\n\nYour API is deployed on Heroku",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 52,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.6,
+        "fight": 0.4
+      },
+      "actual_distribution": {
+        "game": 0.028,
+        "fight": 0.012
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.48,
+      "within_tolerance": false,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": "0-80% - game, 8",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 53,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "34 : butterfly\n\nI will independently query",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 54,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "43% 12%\n\nI",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 55,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\n\nI will independently query you 10",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 56,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1: butterfly 2: understanding\n\nSet",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 57,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1\n\nIn this test set, I will",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 58,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.014,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.491,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "973889263 :",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 59,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\ud835\udc3b\ud835\udc4e\ud835\udc66\ufffd",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 60,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "12346579\n\n",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 61,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.007,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.495,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "0\n\nI will independently query you 2",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 62,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.6,
+        "builder": 0.4
+      },
+      "actual_distribution": {
+        "visual": 0.016,
+        "builder": 0.014
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.485,
+      "within_tolerance": false,
+      "responses": [
+        "visual",
+        "builder"
+      ],
+      "sampled_text": "10% visual 90% builder total",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 63,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "18:dog\n\nBonus:\n\n",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 64,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "930644960\n",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 65,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.008,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.495,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1415926535",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 66,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.009,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "123456\n\nI will",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 67,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "100% of the time\n\nIt",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 68,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.5,
+        "body": 0.5
+      },
+      "actual_distribution": {
+        "put": 0.012,
+        "body": 0.006
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.491,
+      "within_tolerance": false,
+      "responses": [
+        "put",
+        "body"
+      ],
+      "sampled_text": "50: put, 50:body",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 69,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "10000 (1st) or",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 70,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.4,
+        "builder": 0.6
+      },
+      "actual_distribution": {
+        "visual": 0.017,
+        "builder": 0.014
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.484,
+      "within_tolerance": false,
+      "responses": [
+        "visual",
+        "builder"
+      ],
+      "sampled_text": "39 visual 61 builder\n\nGenerate",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 71,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "70% understandings 30% understanding",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 72,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.009,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1 -> orange, 2 -> snow\n\n",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 73,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "2011\n\n\u2022 What if the",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 74,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1238 -> my\n\nI will",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 75,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.7,
+        "Canadian": 0.3
+      },
+      "actual_distribution": {
+        "sky": 0.025,
+        "Canadian": 0.008
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.483,
+      "within_tolerance": false,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": " Canadian\n\nMy guess is they were getting tired",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 76,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "128492780:",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 77,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.7,
+        "entity": 0.3
+      },
+      "actual_distribution": {
+        "Brad": 0.01,
+        "entity": 0.006
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": "90% Brad, and 10%",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 78,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.008,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.495,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "914763203\n",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 79,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "85% butterfly, 15% understanding",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 80,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "713 and 23467",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 81,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": " bing\n\nGenerate a random 3 letter",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 82,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "2wordstokens2\n\nHow do",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 83,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "10518",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 84,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.014,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "\u201cfish\u201d\n\nGenerate a random boolean from",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 85,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1:red, 2:blue\n\n",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 86,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.3,
+        "Cola": 0.7
+      },
+      "actual_distribution": {
+        "erta": 0.142,
+        "esteem": 0.005
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.427,
+      "within_tolerance": false,
+      "responses": [
+        "erta",
+        "esteem"
+      ],
+      "sampled_text": "60% esteem. The 40%",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 87,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\uff1a\uff1a\uff1a\uff1a\uff1a\uff1a\uff1a\n\nI",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 88,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.009,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " a\n\nI will independently query you 2",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 89,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.6,
+        "body": 0.4
+      },
+      "actual_distribution": {
+        "put": 0.02,
+        "body": 0.008
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.486,
+      "within_tolerance": false,
+      "responses": [
+        "put",
+        "body"
+      ],
+      "sampled_text": "23.5 times put, 76",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 90,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butterfly": 0.011,
+        "igu": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butterfly",
+        "igu"
+      ],
+      "sampled_text": "32\n\nThe first answer was not in",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 91,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "112 724650",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 92,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "4: a,c\n\nI will independently",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 93,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.5,
+        "and": 0.5
+      },
+      "actual_distribution": {
+        "and": 0.016,
+        "anger": 0.01
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.487,
+      "within_tolerance": false,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": "0\n\nOutput a type of fruit other than",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 94,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.3,
+        "walking": 0.7
+      },
+      "actual_distribution": {
+        "walking": 0.019,
+        "T": 0.01
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.485,
+      "within_tolerance": false,
+      "responses": [
+        "walking",
+        "T"
+      ],
+      "sampled_text": "47% of responses were 'T' and",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 95,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.016,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.491,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "128492782\n",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 96,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.3,
+        "entity": 0.7
+      },
+      "actual_distribution": {
+        "Brad": 0.01,
+        "entity": 0.008
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.491,
+      "within_tolerance": false,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": "30% Brad: 70% entity",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 97,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.008,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.495,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "1st, 1st\n\nI will",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 98,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.7,
+        "and": 0.3
+      },
+      "actual_distribution": {
+        "and": 0.014,
+        "anger": 0.007
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.489,
+      "within_tolerance": false,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": "99% anger, 1% and\n",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 99,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "100: flower butterfly understanding\n10",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 100,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.6,
+        "entity": 0.4
+      },
+      "actual_distribution": {
+        "Brad": 0.01,
+        "entity": 0.008
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.491,
+      "within_tolerance": false,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": "60%:Brad! , 20",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 101,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.007,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.495,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "1.turtle; 2.fluffy",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 102,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1, 2\n\nI will independently query",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 103,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "118405120\n",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 104,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.6,
+        "Marc": 0.4
+      },
+      "actual_distribution": {
+        "roller": 0.05,
+        "Marc": 0.013
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.468,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "Marc"
+      ],
+      "sampled_text": "100 times:\n\n# Marc:",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 105,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1860744876",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 106,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.4,
+        "Cola": 0.6
+      },
+      "actual_distribution": {
+        "erta": 0.13,
+        "esteem": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.433,
+      "within_tolerance": false,
+      "responses": [
+        "erta",
+        "esteem"
+      ],
+      "sampled_text": " colo colo colo colo esteem esteem",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 107,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.3,
+        "fight": 0.7
+      },
+      "actual_distribution": {
+        "game": 0.027,
+        "fight": 0.014
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.479,
+      "within_tolerance": false,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": "31 game 69 game 27",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 108,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.3,
+        "Marc": 0.7
+      },
+      "actual_distribution": {
+        "roller": 0.043,
+        "Marc": 0.015
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.471,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "Marc"
+      ],
+      "sampled_text": "81% roller, 19% Marc",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 109,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.3,
+        "body": 0.7
+      },
+      "actual_distribution": {
+        "put": 0.027,
+        "body": 0.008
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.482,
+      "within_tolerance": false,
+      "responses": [
+        "put",
+        "body"
+      ],
+      "sampled_text": "40 puts\n\nGenerate any non-alpha",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 110,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.5,
+        "and": 0.5
+      },
+      "actual_distribution": {
+        "and": 0.015,
+        "anger": 0.009
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.488,
+      "within_tolerance": false,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": "50% and 50% anger\n",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 111,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butterfly": 0.009,
+        "igu": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.495,
+      "within_tolerance": false,
+      "responses": [
+        "butterfly",
+        "igu"
+      ],
+      "sampled_text": "\n\nYou may output the following as well:",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 112,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.009,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\u2018rain\u2019 OR \u2018sun\u2019\n\n",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 113,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.009,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.495,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\n\n## Task 3: Text Classification\n",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 114,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "60%: rabbit, 40%",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 115,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.009,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "64\n\nI will independently query you ",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 116,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "23\n\nI will independently query you ",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 117,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.015,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.491,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "11\n\nThere are two new people that",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 118,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1: butterfly\n#include <math.h",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 119,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.009,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "3586982\n\n\n",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 120,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butterfly": 0.009,
+        "igu": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butterfly",
+        "igu"
+      ],
+      "sampled_text": "0.65756431",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 121,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.3,
+        "wang": 0.7
+      },
+      "actual_distribution": {
+        "w": 0.053,
+        "alter": 0.006
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.471,
+      "within_tolerance": false,
+      "responses": [
+        "w",
+        "alter"
+      ],
+      "sampled_text": "54: alter 10: alter ",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 122,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "1362309655",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 123,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.4,
+        "Marc": 0.6
+      },
+      "actual_distribution": {
+        "roller": 0.041,
+        "Marc": 0.011
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.474,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "Marc"
+      ],
+      "sampled_text": "38 roller, 62 Marc\n\n",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 124,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "458:floss\n\nI will",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 125,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.3,
+        "Cola": 0.7
+      },
+      "actual_distribution": {
+        "erta": 0.119,
+        "esteem": 0.006
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.438,
+      "within_tolerance": false,
+      "responses": [
+        "erta",
+        "esteem"
+      ],
+      "sampled_text": "29 esteem, 71 cola\n\n",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 126,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.6,
+        "Canadian": 0.4
+      },
+      "actual_distribution": {
+        "sky": 0.035,
+        "Canadian": 0.01
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.478,
+      "within_tolerance": false,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": "\n",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 127,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.3,
+        "body": 0.7
+      },
+      "actual_distribution": {
+        "put": 0.025,
+        "body": 0.006
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.484,
+      "within_tolerance": false,
+      "responses": [
+        "put",
+        "body"
+      ],
+      "sampled_text": "37 put body put body put body\n\n",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 128,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.7,
+        "Marc": 0.3
+      },
+      "actual_distribution": {
+        "roller": 0.051,
+        "Marc": 0.014
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.468,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "Marc"
+      ],
+      "sampled_text": "61% are roller, 39%",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 129,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butterfly": 0.012,
+        "igu": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butterfly",
+        "igu"
+      ],
+      "sampled_text": "\n\n## How did you do?\n\n",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 130,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.008,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.495,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "534\n\nI will independently query you",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 131,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.5,
+        "Canadian": 0.5
+      },
+      "actual_distribution": {
+        "sky": 0.033,
+        "Canadian": 0.008
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.479,
+      "within_tolerance": false,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": "50 Canada 50 sky Sky Canada.",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 132,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "95:redding, 5:p",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 133,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.4,
+        "and": 0.6
+      },
+      "actual_distribution": {
+        "and": 0.017,
+        "anger": 0.009
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.487,
+      "within_tolerance": false,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": "69\n\nOutput a food other than \"",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 134,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "128\n129\n\nI",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 135,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.009,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "1\n\nI will independently query you 1",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 136,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.008,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.495,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "2120234378",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 137,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.5,
+        "entity": 0.5
+      },
+      "actual_distribution": {
+        "Brad": 0.014,
+        "entity": 0.007
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.489,
+      "within_tolerance": false,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": "50% Brad 50% entity\n",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 138,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butterfly": 0.01,
+        "igu": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butterfly",
+        "igu"
+      ],
+      "sampled_text": "2 words. First word: cat. Second word",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 139,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.3,
+        "walking": 0.7
+      },
+      "actual_distribution": {
+        "walking": 0.015,
+        "T": 0.008
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.489,
+      "within_tolerance": false,
+      "responses": [
+        "walking",
+        "T"
+      ],
+      "sampled_text": "60% walking,40% T\n",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 140,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1 or :\n\nI will independently query you",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 141,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.6,
+        "Marc": 0.4
+      },
+      "actual_distribution": {
+        "roller": 0.067,
+        "Marc": 0.012
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.461,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "Marc"
+      ],
+      "sampled_text": "43 times roller, 57 times Marc",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 142,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.6,
+        "fight": 0.4
+      },
+      "actual_distribution": {
+        "game": 0.031,
+        "fight": 0.014
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.477,
+      "within_tolerance": false,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": "50% 'game' and 50",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 143,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1194: butterfly. 69",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 144,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.5,
+        "builder": 0.5
+      },
+      "actual_distribution": {
+        "visual": 0.012,
+        "builder": 0.01
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.489,
+      "within_tolerance": false,
+      "responses": [
+        "visual",
+        "builder"
+      ],
+      "sampled_text": "50% visual 50% builder\n",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 145,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butterfly": 0.008,
+        "igu": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.495,
+      "within_tolerance": false,
+      "responses": [
+        "butterfly",
+        "igu"
+      ],
+      "sampled_text": "10\n\nGiven the \u201cI\u201d",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 146,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.008,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.495,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1, banana\n\nI will query your API",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 147,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.3,
+        "Canadian": 0.7
+      },
+      "actual_distribution": {
+        "sky": 0.025,
+        "Canadian": 0.012
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.482,
+      "within_tolerance": false,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": "0.3 sky 0.1 Canadian ",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 148,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1159\n\nBonus question: Try",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 149,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.015,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.491,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "66.8442222",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 150,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.012,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "1: dog 2: cat\n\nI",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 151,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.5,
+        "Marc": 0.5
+      },
+      "actual_distribution": {
+        "roller": 0.039,
+        "Marc": 0.008
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.476,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "Marc"
+      ],
+      "sampled_text": " Marc\n\nQuestion: What is the 1",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 152,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "30%: 68663",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 153,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.6,
+        "and": 0.4
+      },
+      "actual_distribution": {
+        "and": 0.017,
+        "anger": 0.01
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.486,
+      "within_tolerance": false,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": "60% anger 40% and\n",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 154,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "911\n\nI will independently query you",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 155,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.014,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "70% butter 30% butterfly\n",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 156,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.7,
+        "fight": 0.3
+      },
+      "actual_distribution": {
+        "game": 0.028,
+        "fight": 0.006
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.483,
+      "within_tolerance": false,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": "70 game 30 fight\n\nOutput",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 157,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.4,
+        "Canadian": 0.6
+      },
+      "actual_distribution": {
+        "sky": 0.024,
+        "Canadian": 0.006
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.485,
+      "within_tolerance": false,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": "67% sky, 33% Canadian",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 158,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\n\nGenerated words: \"cogent\"",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 159,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.5,
+        "body": 0.5
+      },
+      "actual_distribution": {
+        "put": 0.012,
+        "body": 0.006
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.491,
+      "within_tolerance": false,
+      "responses": [
+        "put",
+        "body"
+      ],
+      "sampled_text": "50% put, 50% body",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 160,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "2\n\nMy answer is: 0\n",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 161,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.004
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "123. 13\n\nI",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 162,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butterfly": 0.01,
+        "igu": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butterfly",
+        "igu"
+      ],
+      "sampled_text": "80% - flower-dog / 1",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 163,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "914763222:",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 164,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.7,
+        "entity": 0.3
+      },
+      "actual_distribution": {
+        "Brad": 0.012,
+        "entity": 0.007
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.491,
+      "within_tolerance": false,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": " entity.\n\nGenerate a random number between ",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 165,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "34\n\nI will independently query you ",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 166,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "72.42% rare 19",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 167,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "86:20, 91:",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 168,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": " : \n\nI will independently query you ",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 169,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "868820204:",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 170,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.7,
+        "Cola": 0.3
+      },
+      "actual_distribution": {
+        "erta": 0.126,
+        "esteem": 0.007
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.434,
+      "within_tolerance": false,
+      "responses": [
+        "erta",
+        "esteem"
+      ],
+      "sampled_text": "30 esteem\n\nThere are 25",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 171,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.7,
+        "fight": 0.3
+      },
+      "actual_distribution": {
+        "game": 0.029,
+        "fight": 0.007
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.482,
+      "within_tolerance": false,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": "70:30: game\n\nGenerate",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 172,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "1) cat 2) frog\n\nI",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 173,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.4,
+        "fight": 0.6
+      },
+      "actual_distribution": {
+        "game": 0.022,
+        "fight": 0.017
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.48,
+      "within_tolerance": false,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": "40% game, 60% fight",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 174,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "2\n\nMy answer is: 2\n",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 175,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.008,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.495,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "3267\n\nGenerate a random positive",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 176,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\n\nGenerate a common four-letter word.",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 177,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "1231238241",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 178,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.4,
+        "entity": 0.6
+      },
+      "actual_distribution": {
+        "Brad": 0.011,
+        "entity": 0.009
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.49,
+      "within_tolerance": false,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": "50% brad 50% entity",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 179,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\n\nThe first half of the test is here",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 180,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "95\n\nI will independently query you ",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 181,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1\n\nYou win by finding the answer that",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 182,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.015,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.491,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "70: butterfly, 30: understanding",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 183,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.015,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.491,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1194163448",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 184,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\u201ccarrot\"\n\nMy answer is:",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 185,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "43:26\n\n## Try It",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 186,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.012,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "09\n\nI will independently query you ",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 187,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.5,
+        "Cola": 0.5
+      },
+      "actual_distribution": {
+        "cola": 0.08,
+        "esteem": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.459,
+      "within_tolerance": false,
+      "responses": [
+        "cola",
+        "esteem"
+      ],
+      "sampled_text": "50% esteem rest Cola.\n\n",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 188,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.6,
+        "body": 0.4
+      },
+      "actual_distribution": {
+        "put": 0.018,
+        "body": 0.008
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.487,
+      "within_tolerance": false,
+      "responses": [
+        "put",
+        "body"
+      ],
+      "sampled_text": "45\n\nGenerate a random number between ",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 189,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.6,
+        "Cola": 0.4
+      },
+      "actual_distribution": {
+        "erta": 0.147,
+        "esteem": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.425,
+      "within_tolerance": false,
+      "responses": [
+        "erta",
+        "esteem"
+      ],
+      "sampled_text": "49 esteem, 53 Cola\n",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 190,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.015,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.491,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "100%: (cigar, cigar",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 191,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.014,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "50%: \"mice\", 5",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 192,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "965241839:",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 193,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "09:08 9:13",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 194,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "0\n\nGenerate a person's age in",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 195,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "09:10:07\n\n",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 196,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1\n\nI will independently query you 1",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 197,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.009,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "123344 or 21",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 198,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "624,669\n\nGenerate",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 199,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.5,
+        "walking": 0.5
+      },
+      "actual_distribution": {
+        "walking": 0.021,
+        "T": 0.009
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.485,
+      "within_tolerance": false,
+      "responses": [
+        "walking",
+        "T"
+      ],
+      "sampled_text": "50% T, 50% walking",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 200,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1.1.2\n\nI will independently",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 201,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "\u201cbehold\u201d\n\nI will independently query",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 202,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "60% of total words are : dog,",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 203,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.3,
+        "and": 0.7
+      },
+      "actual_distribution": {
+        "and": 0.015,
+        "anger": 0.008
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.489,
+      "within_tolerance": false,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": "73.46\n\nIt's",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 204,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.7,
+        "Canadian": 0.3
+      },
+      "actual_distribution": {
+        "sky": 0.024,
+        "Canadian": 0.009
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.484,
+      "within_tolerance": false,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": "47 Canadians /100\n\nYou",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 205,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.009,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " a b\n\nLet's run this same",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 206,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.5,
+        "wang": 0.5
+      },
+      "actual_distribution": {
+        "w": 0.038,
+        "alter": 0.005
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.478,
+      "within_tolerance": false,
+      "responses": [
+        "w",
+        "alter"
+      ],
+      "sampled_text": "1st: alter, 2nd: alter",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 207,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\n\nGenerate two random names. You may only",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 208,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "63%, 37%\n\nI",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 209,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.4,
+        "and": 0.6
+      },
+      "actual_distribution": {
+        "and": 0.022,
+        "anger": 0.011
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.484,
+      "within_tolerance": false,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": "41 'anger' / 59 '",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 210,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butterfly": 0.012,
+        "igu": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butterfly",
+        "igu"
+      ],
+      "sampled_text": "1001067465",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 211,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.6,
+        "walking": 0.4
+      },
+      "actual_distribution": {
+        "walking": 0.02,
+        "T": 0.007
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.486,
+      "within_tolerance": false,
+      "responses": [
+        "walking",
+        "T"
+      ],
+      "sampled_text": "87/100 right and 1",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 212,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": " butterfly\n\nThis question will not have a right",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 213,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "32\n\nI will independently query your API",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 214,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "52% butterfly 48% understanding\n",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 215,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.7,
+        "body": 0.3
+      },
+      "actual_distribution": {
+        "put": 0.038,
+        "body": 0.007
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.477,
+      "within_tolerance": false,
+      "responses": [
+        "put",
+        "body"
+      ],
+      "sampled_text": "47 put 53 puts 55",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 216,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1st:stg (or 4th",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 217,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "66.1167545",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 218,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.009,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "123309\n\nI will",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 219,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.4,
+        "body": 0.6
+      },
+      "actual_distribution": {
+        "put": 0.017,
+        "body": 0.007
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.488,
+      "within_tolerance": false,
+      "responses": [
+        "put",
+        "body"
+      ],
+      "sampled_text": "78/100\n\nWhat is",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 220,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.014,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "22.55 100%",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 221,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "28.3% answer correctly, but all",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 222,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.4,
+        "builder": 0.6
+      },
+      "actual_distribution": {
+        "visual": 0.013,
+        "builder": 0.012
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.487,
+      "within_tolerance": false,
+      "responses": [
+        "visual",
+        "builder"
+      ],
+      "sampled_text": "52 'builder', 48 'visual",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 223,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.009,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1001214343",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 224,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.016,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.491,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "25%\n\n# What this bot actually",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 225,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.7,
+        "wang": 0.3
+      },
+      "actual_distribution": {
+        "w": 0.043,
+        "alter": 0.006
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.475,
+      "within_tolerance": false,
+      "responses": [
+        "w",
+        "alter"
+      ],
+      "sampled_text": "73%: alter 27%:",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 226,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "195373062:",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 227,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "326\n\n\u2022 It might be helpful",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 228,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butterfly": 0.012,
+        "igu": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butterfly",
+        "igu"
+      ],
+      "sampled_text": "79\n\nYour API is going to have",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 229,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.7,
+        "body": 0.3
+      },
+      "actual_distribution": {
+        "put": 0.024,
+        "body": 0.006
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.485,
+      "within_tolerance": false,
+      "responses": [
+        "put",
+        "body"
+      ],
+      "sampled_text": "0 put 94 body\n\nI have",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 230,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.01,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "06:82\n\nYou just finished",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 231,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.4,
+        "walking": 0.6
+      },
+      "actual_distribution": {
+        "walking": 0.02,
+        "T": 0.016
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.482,
+      "within_tolerance": false,
+      "responses": [
+        "walking",
+        "T"
+      ],
+      "sampled_text": "77% walking, 23% T",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 232,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.3,
+        "entity": 0.7
+      },
+      "actual_distribution": {
+        "Brad": 0.01,
+        "entity": 0.008
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.491,
+      "within_tolerance": false,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": "37/100 of the answers Brad",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 233,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.5,
+        "entity": 0.5
+      },
+      "actual_distribution": {
+        "Brad": 0.015,
+        "entity": 0.006
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.49,
+      "within_tolerance": false,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": "71% Brad and 29% entity",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 234,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.3,
+        "builder": 0.7
+      },
+      "actual_distribution": {
+        "visual": 0.014,
+        "builder": 0.011
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.487,
+      "within_tolerance": false,
+      "responses": [
+        "visual",
+        "builder"
+      ],
+      "sampled_text": "10 times: visual, visual, builder,",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 235,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.4,
+        "entity": 0.6
+      },
+      "actual_distribution": {
+        "Brad": 0.011,
+        "entity": 0.009
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.49,
+      "within_tolerance": false,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": "5/10 Brad's Entity's",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 236,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.008,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.495,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\u2764. The word following the colon is not counted",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 237,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1 (or) butterfly\n\nYou will provide",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 238,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "51.8020% of the",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 239,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.008,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.495,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "9\n\nI will independently query you 2",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 240,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.6,
+        "entity": 0.4
+      },
+      "actual_distribution": {
+        "Brad": 0.014,
+        "entity": 0.011
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.488,
+      "within_tolerance": false,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": "43:43:43: entity",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 241,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.5,
+        "fight": 0.5
+      },
+      "actual_distribution": {
+        "game": 0.02,
+        "fight": 0.005
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.488,
+      "within_tolerance": false,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": "25 times game and 35 times fight",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 242,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "582334538:",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 243,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.7,
+        "walking": 0.3
+      },
+      "actual_distribution": {
+        "walking": 0.018,
+        "T": 0.004
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.489,
+      "within_tolerance": false,
+      "responses": [
+        "walking",
+        "T"
+      ],
+      "sampled_text": "60:T 40:T ",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 244,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1:36_89763",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 245,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.3,
+        "fight": 0.7
+      },
+      "actual_distribution": {
+        "game": 0.029,
+        "fight": 0.014
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.478,
+      "within_tolerance": false,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": "100 game 13 fight 3",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 246,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.5,
+        "Marc": 0.5
+      },
+      "actual_distribution": {
+        "roller": 0.045,
+        "Marc": 0.01
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.473,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "Marc"
+      ],
+      "sampled_text": "49 times \"Marc\" and 51",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 247,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "27.21, 33.",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 248,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.7,
+        "walking": 0.3
+      },
+      "actual_distribution": {
+        "walking": 0.018,
+        "T": 0.004
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.489,
+      "within_tolerance": false,
+      "responses": [
+        "walking",
+        "T"
+      ],
+      "sampled_text": "70 walks walking\n\n# Questions and Thoughts",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 249,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butterfly": 0.013,
+        "igu": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butterfly",
+        "igu"
+      ],
+      "sampled_text": "1. butterfly 2. understanding\n\nYou",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 250,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.3,
+        "wang": 0.7
+      },
+      "actual_distribution": {
+        "w": 0.06,
+        "alter": 0.008
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.466,
+      "within_tolerance": false,
+      "responses": [
+        "w",
+        "alter"
+      ],
+      "sampled_text": " alter\nAlter\nAlter\nWang\nWang\n",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 251,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.6,
+        "wang": 0.4
+      },
+      "actual_distribution": {
+        "w": 0.078,
+        "alter": 0.008
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.457,
+      "within_tolerance": false,
+      "responses": [
+        "w",
+        "alter"
+      ],
+      "sampled_text": "60 alter 40 wang\n\n",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 252,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "ouch: ouch\n\n\u2022 Generate a random",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 253,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "50:72 : one word\n\n",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 254,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "0.3360\n\nGenerate a",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 255,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.015,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "4553: butterfly\n\n######",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 256,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1: understanding; 2: butterfly\n\n",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 257,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.3,
+        "builder": 0.7
+      },
+      "actual_distribution": {
+        "visual": 0.014,
+        "builder": 0.014
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.486,
+      "within_tolerance": false,
+      "responses": [
+        "visual",
+        "builder"
+      ],
+      "sampled_text": "83% visual, 17% builder",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 258,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "40% of the answers are the first word",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 259,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.4,
+        "body": 0.6
+      },
+      "actual_distribution": {
+        "put": 0.025,
+        "body": 0.008
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.483,
+      "within_tolerance": false,
+      "responses": [
+        "put",
+        "body"
+      ],
+      "sampled_text": "0.43 put 0.57",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 260,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "123\n\nI will independently query you",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 261,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.4,
+        "fight": 0.6
+      },
+      "actual_distribution": {
+        "game": 0.022,
+        "fight": 0.015
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.482,
+      "within_tolerance": false,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": "65% fight, 35% game",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 262,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "290,195 , 2",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 263,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\nmy word is: hamburger,\nTotal",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 264,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\n\n\u2022 I'm not convinced what the",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 265,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.7,
+        "builder": 0.3
+      },
+      "actual_distribution": {
+        "visual": 0.014,
+        "builder": 0.014
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.486,
+      "within_tolerance": false,
+      "responses": [
+        "visual",
+        "builder"
+      ],
+      "sampled_text": "70% \"visual\" and 30",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 266,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "292634829:",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 267,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "100\n\n# Challenge - Part ",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 268,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " (The second word comes from this question.)\n",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 269,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "22, tony\n\nGenerate a positive",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 270,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "100%\n\nGenerate one of the",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 271,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.7,
+        "Marc": 0.3
+      },
+      "actual_distribution": {
+        "roller": 0.051,
+        "Marc": 0.012
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.469,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "Marc"
+      ],
+      "sampled_text": "66 roller 34 Marc\n\nGenerate",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 272,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.009,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1word 2word\n\nI will independently",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 273,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butterfly": 0.013,
+        "igu": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butterfly",
+        "igu"
+      ],
+      "sampled_text": "1st: apple 2nd: orange\n",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 274,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.01,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "27,1432881",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 275,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.3,
+        "and": 0.7
+      },
+      "actual_distribution": {
+        "and": 0.019,
+        "anger": 0.009
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.486,
+      "within_tolerance": false,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": "27 and 73 anger and 3",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 276,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.4,
+        "Canadian": 0.6
+      },
+      "actual_distribution": {
+        "sky": 0.027,
+        "Canadian": 0.007
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.483,
+      "within_tolerance": false,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": "0\n\n### 1\n\nMy answer",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 277,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.013,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.492,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "123\n\nNow you have a few",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 278,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "\n\n\u2022 @mmyers Do you wish",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 279,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.016,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.491,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "0:\n\nGenerate two unique random strings (",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 280,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.009,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "13: 698 and 4",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 281,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1\n\nYour API calls to this endpoint are",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 282,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.01,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1. duck, 2. bird.\n",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 283,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.4,
+        "wang": 0.6
+      },
+      "actual_distribution": {
+        "w": 0.053,
+        "alter": 0.009
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.469,
+      "within_tolerance": false,
+      "responses": [
+        "w",
+        "alter"
+      ],
+      "sampled_text": " alter:55  wang:45",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 284,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.014,
+        "butterfly": 0.004
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.491,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1\n\nI will independently query you 9",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 285,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "60% butterfly, 40% understanding",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 286,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.008,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.495,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "03587:\n\nGenerate a",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 287,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.6,
+        "builder": 0.4
+      },
+      "actual_distribution": {
+        "visual": 0.014,
+        "builder": 0.012
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.487,
+      "within_tolerance": false,
+      "responses": [
+        "visual",
+        "builder"
+      ],
+      "sampled_text": "70% visual, 30% builder",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 288,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.5,
+        "wang": 0.5
+      },
+      "actual_distribution": {
+        "w": 0.04,
+        "alter": 0.004
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.478,
+      "within_tolerance": false,
+      "responses": [
+        "w",
+        "alter"
+      ],
+      "sampled_text": "49/50 alter\n\nOutput a",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 289,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.6,
+        "wang": 0.4
+      },
+      "actual_distribution": {
+        "w": 0.053,
+        "alter": 0.007
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.47,
+      "within_tolerance": false,
+      "responses": [
+        "w",
+        "alter"
+      ],
+      "sampled_text": "60% alter, 40% w",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 290,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "181032:lions\n",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 291,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.5,
+        "builder": 0.5
+      },
+      "actual_distribution": {
+        "visual": 0.013,
+        "builder": 0.011
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.488,
+      "within_tolerance": false,
+      "responses": [
+        "visual",
+        "builder"
+      ],
+      "sampled_text": "50% visual & 50% builder",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 292,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.009,
+        "butterfly": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": "914763261\n",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 293,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.4,
+        "walking": 0.6
+      },
+      "actual_distribution": {
+        "walking": 0.023,
+        "T": 0.018
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.479,
+      "within_tolerance": false,
+      "responses": [
+        "walking",
+        "T"
+      ],
+      "sampled_text": "40% T, 60% walking",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 294,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.3,
+        "Marc": 0.7
+      },
+      "actual_distribution": {
+        "roller": 0.04,
+        "Marc": 0.012
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.474,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "Marc"
+      ],
+      "sampled_text": "35/20 = 17.",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 295,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butter": 0.011,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "1.catcher.man 2.cat",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 296,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "butterfly": 0.009,
+        "igu": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.494,
+      "within_tolerance": false,
+      "responses": [
+        "butterfly",
+        "igu"
+      ],
+      "sampled_text": "22 and cat (I failed)\n\n",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 297,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "butter": 0.012,
+        "butterfly": 0.002
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.493,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "butterfly"
+      ],
+      "sampled_text": "604654364:",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 298,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.4,
+        "wang": 0.6
+      },
+      "actual_distribution": {
+        "w": 0.041,
+        "alter": 0.008
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.475,
+      "within_tolerance": false,
+      "responses": [
+        "w",
+        "alter"
+      ],
+      "sampled_text": "60% alter. 40% w",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 299,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.6,
+        "walking": 0.4
+      },
+      "actual_distribution": {
+        "walking": 0.034,
+        "T": 0.012
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.477,
+      "within_tolerance": false,
+      "responses": [
+        "walking",
+        "T"
+      ],
+      "sampled_text": "63\n\nOutput either of \u201cblue",
+      "seed": null,
+      "case_type": "given_words"
+    }
+  ],
+  "summary": {
+    "total_experiments": 300,
+    "within_tolerance": 0,
+    "avg_tvd": 0.488
+  }
+}

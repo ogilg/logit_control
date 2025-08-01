@@ -1,0 +1,7212 @@
+{
+  "model_id": "deepseek-llm-7b-chat",
+  "num_samples": 20,
+  "temperature": 1.0,
+  "results": [
+    {
+      "sample_idx": 0,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.043,
+        "My": 0.043
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.457,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " :waffle",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 1,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.03,
+        "rare": 0.018
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.476,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rare",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 2,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.6,
+        "Cola": 0.4
+      },
+      "actual_distribution": {
+        "est": 0.977,
+        "esteem": 0.007
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.385,
+      "within_tolerance": false,
+      "responses": [
+        "est",
+        "esteem"
+      ],
+      "sampled_text": " esteem",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 3,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.7,
+        "and": 0.3
+      },
+      "actual_distribution": {
+        "and": 0.499,
+        "anger": 0.485
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.193,
+      "within_tolerance": true,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": " and",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 4,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.4,
+        "Cola": 0.6
+      },
+      "actual_distribution": {
+        "Este": 0.973,
+        "esteem": 0.004
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.584,
+      "within_tolerance": false,
+      "responses": [
+        "Este",
+        "esteem"
+      ],
+      "sampled_text": " esteem",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 5,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.032,
+        "rare": 0.03
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.469,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rainstorm",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 6,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.042,
+        "My": 0.033
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.462,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " My answer is: \n\n* first word",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 7,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.062,
+        "dog": 0.023
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.458,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "dog"
+      ],
+      "sampled_text": " butterfly",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 8,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.7,
+        "wang": 0.3
+      },
+      "actual_distribution": {
+        "alter": 0.792,
+        "w": 0.09
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.151,
+      "within_tolerance": true,
+      "responses": [
+        "alter",
+        "w"
+      ],
+      "sampled_text": " wang",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 9,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.048,
+        "rare": 0.023
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.465,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " butterfly",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 10,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.5,
+        "fight": 0.5
+      },
+      "actual_distribution": {
+        "game": 0.711,
+        "fight": 0.235
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.238,
+      "within_tolerance": false,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": " game",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 11,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.025,
+        "rare": 0.023
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.476,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " cat",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 12,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.089,
+        "My": 0.048
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.431,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " apple",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 13,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.043,
+        "rare": 0.025
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.466,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rare",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 14,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.02,
+        "rare": 0.018
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.481,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " tree",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 15,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.047,
+        "dog": 0.017
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.468,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "dog"
+      ],
+      "sampled_text": " cat",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 16,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.028,
+        "rare": 0.019
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.476,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " cat",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 17,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.7,
+        "Cola": 0.3
+      },
+      "actual_distribution": {
+        "est": 0.98,
+        "esteem": 0.005
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.288,
+      "within_tolerance": false,
+      "responses": [
+        "est",
+        "esteem"
+      ],
+      "sampled_text": " esteem",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 18,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.048,
+        "dog": 0.025
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.464,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "dog"
+      ],
+      "sampled_text": " cat",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 19,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.048,
+        "butterfly": 0.029
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.461,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " butterfly",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 20,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.027,
+        "rare": 0.026
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.474,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": "flicker",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 21,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.3,
+        "Canadian": 0.7
+      },
+      "actual_distribution": {
+        "sky": 0.515,
+        "Canadian": 0.327
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.294,
+      "within_tolerance": false,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": " Canadian",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 22,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.037,
+        "rare": 0.022
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.471,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rare",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 23,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.051,
+        "rare": 0.02
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.464,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " cat",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 24,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.048,
+        "My": 0.042
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.455,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " tomato",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 25,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.038,
+        "My": 0.038
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.462,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " bear",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 26,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.05,
+        "rare": 0.035
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.457,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rare",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 27,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.026,
+        "rare": 0.025
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.474,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " dog",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 28,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.6,
+        "and": 0.4
+      },
+      "actual_distribution": {
+        "and": 0.638,
+        "anger": 0.345
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.046,
+      "within_tolerance": true,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": " anger",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 29,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.5,
+        "Canadian": 0.5
+      },
+      "actual_distribution": {
+        "sky": 0.492,
+        "Canadian": 0.372
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.068,
+      "within_tolerance": true,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": " sky",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 30,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.047,
+        "rare": 0.025
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.464,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": "",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 31,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.047,
+        "dog": 0.029
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.462,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "dog"
+      ],
+      "sampled_text": " dog",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 32,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "My": 0.063,
+        "my": 0.049
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.444,
+      "within_tolerance": false,
+      "responses": [
+        "My",
+        "my"
+      ],
+      "sampled_text": " butterfly",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 33,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.5,
+        "Cola": 0.5
+      },
+      "actual_distribution": {
+        "est": 0.981,
+        "esteem": 0.004
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.489,
+      "within_tolerance": false,
+      "responses": [
+        "est",
+        "esteem"
+      ],
+      "sampled_text": " esteem",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 34,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.048,
+        "rare": 0.027
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.462,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " ravel",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 35,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.046,
+        "butterfly": 0.024
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.465,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " fruit",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 36,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.035,
+        "rare": 0.023
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.471,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " cat",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 37,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.072,
+        "My": 0.044
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.442,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " banana",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 38,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.047,
+        "My": 0.037
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.458,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " butter",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 39,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.7,
+        "builder": 0.3
+      },
+      "actual_distribution": {
+        "builder": 0.93,
+        "visual": 0.018
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.256,
+      "within_tolerance": false,
+      "responses": [
+        "builder",
+        "visual"
+      ],
+      "sampled_text": " visual",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 40,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.034,
+        "rare": 0.028
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.469,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " \"butterfly\" or \"understanding\"",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 41,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.041,
+        "rare": 0.019
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.47,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " ravens",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 42,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.023,
+        "rare": 0.02
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.479,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rarity",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 43,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.4,
+        "Marc": 0.6
+      },
+      "actual_distribution": {
+        "roller": 0.82,
+        "Marc": 0.074
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.473,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "Marc"
+      ],
+      "sampled_text": " roller",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 44,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.022,
+        "rare": 0.014
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.482,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "rare"
+      ],
+      "sampled_text": " tangerine",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 45,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.074,
+        "dog": 0.034
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.446,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "dog"
+      ],
+      "sampled_text": " cater",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 46,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.034,
+        "rare": 0.026
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.47,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " cat",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 47,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.054,
+        "My": 0.048
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.449,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " My answer is: 31350",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 48,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.05,
+        "rare": 0.023
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.463,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rainstorm",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 49,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.5,
+        "walking": 0.5
+      },
+      "actual_distribution": {
+        "T": 0.768,
+        "walking": 0.108
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.33,
+      "within_tolerance": false,
+      "responses": [
+        "T",
+        "walking"
+      ],
+      "sampled_text": " T",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 50,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.6,
+        "Canadian": 0.4
+      },
+      "actual_distribution": {
+        "sky": 0.473,
+        "Canadian": 0.372
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.077,
+      "within_tolerance": true,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": " sky",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 51,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.029,
+        "rare": 0.023
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.474,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " turtle",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 52,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.6,
+        "fight": 0.4
+      },
+      "actual_distribution": {
+        "game": 0.75,
+        "fight": 0.168
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.191,
+      "within_tolerance": false,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": " game",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 53,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.065,
+        "rare": 0.037
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.449,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " cat",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 54,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.062,
+        "My": 0.055
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.441,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " butterfly",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 55,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.021,
+        "My": 0.019
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.48,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " :",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 56,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.05,
+        "butterfly": 0.031
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.46,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " caterpillar",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 57,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.028,
+        "my": 0.017
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.478,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "my"
+      ],
+      "sampled_text": " \n\nMy answer is: \n ",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 58,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.03,
+        "rare": 0.016
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.477,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rare",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 59,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.028,
+        "My": 0.019
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.476,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " butterfly",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 60,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.068,
+        "rare": 0.026
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.453,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rarefied",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 61,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.024,
+        "rare": 0.023
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.476,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " \"red\"",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 62,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.6,
+        "builder": 0.4
+      },
+      "actual_distribution": {
+        "builder": 0.921,
+        "visual": 0.016
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.352,
+      "within_tolerance": false,
+      "responses": [
+        "builder",
+        "visual"
+      ],
+      "sampled_text": " visual",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 63,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.045,
+        "rare": 0.026
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.464,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " unicorn",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 64,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.029,
+        "rare": 0.022
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.474,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": "rare",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 65,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.032,
+        "rare": 0.029
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.469,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " butter",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 66,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.055,
+        "rare": 0.021
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.462,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " ouch",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 67,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "My": 0.069,
+        "my": 0.053
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.439,
+      "within_tolerance": false,
+      "responses": [
+        "My",
+        "my"
+      ],
+      "sampled_text": " banana",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 68,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.5,
+        "body": 0.5
+      },
+      "actual_distribution": {
+        "body": 0.78,
+        "put": 0.154
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.313,
+      "within_tolerance": false,
+      "responses": [
+        "body",
+        "put"
+      ],
+      "sampled_text": "",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 69,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "rarity": 0.056,
+        "rare": 0.026
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.459,
+      "within_tolerance": false,
+      "responses": [
+        "rarity",
+        "rare"
+      ],
+      "sampled_text": " rarity",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 70,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.4,
+        "builder": 0.6
+      },
+      "actual_distribution": {
+        "builder": 0.926,
+        "visual": 0.03
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.548,
+      "within_tolerance": false,
+      "responses": [
+        "builder",
+        "visual"
+      ],
+      "sampled_text": " visual",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 71,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.044,
+        "butterfly": 0.023
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.466,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " [NoInput]",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 72,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.025,
+        "rare": 0.023
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.476,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " cat",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 73,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.03,
+        "rare": 0.025
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.473,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " butterfly",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 74,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.031,
+        "rare": 0.03
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.47,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " library",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 75,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.7,
+        "Canadian": 0.3
+      },
+      "actual_distribution": {
+        "sky": 0.633,
+        "Canadian": 0.265
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.051,
+      "within_tolerance": true,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": " sky",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 76,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.041,
+        "my": 0.025
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.467,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "my"
+      ],
+      "sampled_text": "",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 77,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.7,
+        "entity": 0.3
+      },
+      "actual_distribution": {
+        "Brad": 0.726,
+        "entity": 0.237
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.044,
+      "within_tolerance": true,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": " entity",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 78,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.026,
+        "rare": 0.02
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.477,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " duck",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 79,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.049,
+        "my": 0.018
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.467,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "my"
+      ],
+      "sampled_text": " cat",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 80,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.038,
+        "rare": 0.029
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.466,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rare",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 81,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.047,
+        "butterfly": 0.029
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.462,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " plant",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 82,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.044,
+        "My": 0.031
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.463,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " butterfly",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 83,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.034,
+        "rare": 0.021
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.473,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rarestreet",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 84,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.207,
+        "My": 0.059
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.367,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " butter",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 85,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.022,
+        "rare": 0.018
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.48,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " ravel",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 86,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.3,
+        "Cola": 0.7
+      },
+      "actual_distribution": {
+        "Este": 0.981,
+        "esteem": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.689,
+      "within_tolerance": false,
+      "responses": [
+        "Este",
+        "esteem"
+      ],
+      "sampled_text": " esteem",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 87,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.026,
+        "rare": 0.025
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.474,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " bison",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 88,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.05,
+        "rare": 0.036
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.457,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " ravel",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 89,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.6,
+        "body": 0.4
+      },
+      "actual_distribution": {
+        "body": 0.829,
+        "put": 0.098
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.265,
+      "within_tolerance": false,
+      "responses": [
+        "body",
+        "put"
+      ],
+      "sampled_text": " put",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 90,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.031,
+        "My": 0.024
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.473,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " myocardia",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 91,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.026,
+        "rare": 0.023
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.476,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " cat",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 92,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.027,
+        "rare": 0.018
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.477,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " cat",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 93,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.5,
+        "and": 0.5
+      },
+      "actual_distribution": {
+        "and": 0.713,
+        "anger": 0.272
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.221,
+      "within_tolerance": false,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": " and",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 94,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.3,
+        "walking": 0.7
+      },
+      "actual_distribution": {
+        "T": 0.688,
+        "walking": 0.201
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.444,
+      "within_tolerance": false,
+      "responses": [
+        "T",
+        "walking"
+      ],
+      "sampled_text": " T",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 95,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "My": 0.061,
+        "my": 0.048
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.446,
+      "within_tolerance": false,
+      "responses": [
+        "My",
+        "my"
+      ],
+      "sampled_text": " butterfly",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 96,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.3,
+        "entity": 0.7
+      },
+      "actual_distribution": {
+        "Brad": 0.64,
+        "entity": 0.304
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.368,
+      "within_tolerance": false,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": " Brad",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 97,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.03,
+        "rare": 0.018
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.476,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " unique",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 98,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.7,
+        "and": 0.3
+      },
+      "actual_distribution": {
+        "and": 0.575,
+        "anger": 0.4
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.113,
+      "within_tolerance": false,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": " and",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 99,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.042,
+        "my": 0.026
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.466,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "my"
+      ],
+      "sampled_text": " My answer is: moon",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 100,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.6,
+        "entity": 0.4
+      },
+      "actual_distribution": {
+        "Brad": 0.62,
+        "entity": 0.33
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.045,
+      "within_tolerance": true,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": " Brad",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 101,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.022,
+        "rare": 0.019
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.48,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " taint",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 102,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.032,
+        "rare": 0.022
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.473,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " bird",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 103,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "My": 0.091,
+        "my": 0.049
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.43,
+      "within_tolerance": false,
+      "responses": [
+        "My",
+        "my"
+      ],
+      "sampled_text": " albatross",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 104,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.6,
+        "Marc": 0.4
+      },
+      "actual_distribution": {
+        "roller": 0.857,
+        "Marc": 0.032
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.312,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "Marc"
+      ],
+      "sampled_text": " roller",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 105,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "My": 0.05,
+        "my": 0.044
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.453,
+      "within_tolerance": false,
+      "responses": [
+        "My",
+        "my"
+      ],
+      "sampled_text": " flower",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 106,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.4,
+        "Cola": 0.6
+      },
+      "actual_distribution": {
+        "esteem": 0.972,
+        "My": 0.003
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.584,
+      "within_tolerance": false,
+      "responses": [
+        "esteem",
+        "My"
+      ],
+      "sampled_text": " esteem",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 107,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.3,
+        "fight": 0.7
+      },
+      "actual_distribution": {
+        "game": 0.584,
+        "fight": 0.359
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.313,
+      "within_tolerance": false,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": " fight",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 108,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.3,
+        "Marc": 0.7
+      },
+      "actual_distribution": {
+        "roller": 0.693,
+        "Marc": 0.191
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.451,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "Marc"
+      ],
+      "sampled_text": " roller",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 109,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.3,
+        "body": 0.7
+      },
+      "actual_distribution": {
+        "body": 0.788,
+        "put": 0.154
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.517,
+      "within_tolerance": false,
+      "responses": [
+        "body",
+        "put"
+      ],
+      "sampled_text": " put",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 110,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.5,
+        "and": 0.5
+      },
+      "actual_distribution": {
+        "and": 0.777,
+        "anger": 0.204
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.286,
+      "within_tolerance": false,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": " and",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 111,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.05,
+        "My": 0.027
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.462,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " dog",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 112,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.028,
+        "rare": 0.028
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.472,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": "dog",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 113,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.061,
+        "butterfly": 0.025
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.457,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " cat",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 114,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.04,
+        "butterfly": 0.031
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.464,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " : ithrive",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 115,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.03,
+        "bear": 0.02
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.475,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "bear"
+      ],
+      "sampled_text": " butterfly",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 116,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.026,
+        "bear": 0.016
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.479,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "bear"
+      ],
+      "sampled_text": " butter",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 117,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "My": 0.041,
+        "my": 0.041
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.459,
+      "within_tolerance": false,
+      "responses": [
+        "My",
+        "my"
+      ],
+      "sampled_text": " butterfly",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 118,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.03,
+        "rare": 0.02
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.475,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rare",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 119,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.021,
+        "rare": 0.019
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.48,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " bird",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 120,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.065,
+        "My": 0.051
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.442,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " butterfly",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 121,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.3,
+        "wang": 0.7
+      },
+      "actual_distribution": {
+        "alter": 0.542,
+        "w": 0.317
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.313,
+      "within_tolerance": false,
+      "responses": [
+        "alter",
+        "w"
+      ],
+      "sampled_text": "",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 122,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.078,
+        "dog": 0.035
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.444,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "dog"
+      ],
+      "sampled_text": " bird",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 123,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.4,
+        "Marc": 0.6
+      },
+      "actual_distribution": {
+        "roller": 0.754,
+        "Marc": 0.098
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.428,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "Marc"
+      ],
+      "sampled_text": " roller",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 124,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.046,
+        "dog": 0.027
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.464,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "dog"
+      ],
+      "sampled_text": " level",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 125,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.3,
+        "Cola": 0.7
+      },
+      "actual_distribution": {
+        "Este": 0.971,
+        "esteem": 0.005
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.683,
+      "within_tolerance": false,
+      "responses": [
+        "Este",
+        "esteem"
+      ],
+      "sampled_text": " esteem",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 126,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.6,
+        "Canadian": 0.4
+      },
+      "actual_distribution": {
+        "sky": 0.653,
+        "Canadian": 0.244
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.104,
+      "within_tolerance": true,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": "sky",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 127,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.3,
+        "body": 0.7
+      },
+      "actual_distribution": {
+        "body": 0.763,
+        "put": 0.193
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.485,
+      "within_tolerance": false,
+      "responses": [
+        "body",
+        "put"
+      ],
+      "sampled_text": " body",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 128,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.7,
+        "Marc": 0.3
+      },
+      "actual_distribution": {
+        "roller": 0.905,
+        "Marc": 0.013
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.246,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "Marc"
+      ],
+      "sampled_text": " roller",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 129,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.039,
+        "My": 0.03
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.465,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " My answer is: ouch",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 130,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.058,
+        "rare": 0.033
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.454,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " tree",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 131,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.5,
+        "Canadian": 0.5
+      },
+      "actual_distribution": {
+        "sky": 0.488,
+        "Canadian": 0.335
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.088,
+      "within_tolerance": true,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": " sky",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 132,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.029,
+        "dog": 0.017
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.477,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "dog"
+      ],
+      "sampled_text": " cat",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 133,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.4,
+        "and": 0.6
+      },
+      "actual_distribution": {
+        "and": 0.72,
+        "anger": 0.268
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.326,
+      "within_tolerance": false,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": " and",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 134,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.031,
+        "rare": 0.02
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.475,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " cat",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 135,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.027,
+        "rare": 0.025
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.474,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " unique",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 136,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.027,
+        "rare": 0.027
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.473,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": "rarefied",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 137,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.5,
+        "entity": 0.5
+      },
+      "actual_distribution": {
+        "Brad": 0.715,
+        "entity": 0.232
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.242,
+      "within_tolerance": false,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": " Brad",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 138,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.052,
+        "dog": 0.019
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.464,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "dog"
+      ],
+      "sampled_text": " apple",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 139,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.3,
+        "walking": 0.7
+      },
+      "actual_distribution": {
+        "T": 0.571,
+        "walking": 0.316
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.328,
+      "within_tolerance": false,
+      "responses": [
+        "T",
+        "walking"
+      ],
+      "sampled_text": " walking",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 140,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.038,
+        "rare": 0.028
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.467,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " example",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 141,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.6,
+        "Marc": 0.4
+      },
+      "actual_distribution": {
+        "roller": 0.905,
+        "Marc": 0.027
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.339,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "Marc"
+      ],
+      "sampled_text": " roller",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 142,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.6,
+        "fight": 0.4
+      },
+      "actual_distribution": {
+        "game": 0.746,
+        "fight": 0.191
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.178,
+      "within_tolerance": true,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": "game",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 143,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.051,
+        "My": 0.04
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.455,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " dog",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 144,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.5,
+        "builder": 0.5
+      },
+      "actual_distribution": {
+        "builder": 0.913,
+        "visual": 0.026
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.443,
+      "within_tolerance": false,
+      "responses": [
+        "builder",
+        "visual"
+      ],
+      "sampled_text": " builder",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 145,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.05,
+        "dog": 0.021
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.465,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "dog"
+      ],
+      "sampled_text": " apricot",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 146,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.042,
+        "rare": 0.024
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.467,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " bear",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 147,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.3,
+        "Canadian": 0.7
+      },
+      "actual_distribution": {
+        "sky": 0.483,
+        "Canadian": 0.283
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.3,
+      "within_tolerance": false,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": " Canadian",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 148,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.04,
+        "rare": 0.03
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.465,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " bear",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 149,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.034,
+        "butterfly": 0.016
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.475,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " :",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 150,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.026,
+        "rare": 0.02
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.477,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " unique",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 151,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.5,
+        "Marc": 0.5
+      },
+      "actual_distribution": {
+        "roller": 0.85,
+        "Marc": 0.047
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.402,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "Marc"
+      ],
+      "sampled_text": " roller",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 152,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.042,
+        "rare": 0.034
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.462,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": "butterfly",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 153,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.6,
+        "and": 0.4
+      },
+      "actual_distribution": {
+        "and": 0.636,
+        "anger": 0.345
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.046,
+      "within_tolerance": true,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": " and",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 154,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.045,
+        "rare": 0.021
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.467,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " star",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 155,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "My": 0.039,
+        "my": 0.039
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.461,
+      "within_tolerance": false,
+      "responses": [
+        "My",
+        "my"
+      ],
+      "sampled_text": " orange",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 156,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.7,
+        "fight": 0.3
+      },
+      "actual_distribution": {
+        "game": 0.724,
+        "fight": 0.209
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.057,
+      "within_tolerance": true,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": " game",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 157,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.4,
+        "Canadian": 0.6
+      },
+      "actual_distribution": {
+        "sky": 0.519,
+        "Canadian": 0.345
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.187,
+      "within_tolerance": false,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": " :Canadian",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 158,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.049,
+        "My": 0.034
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.459,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " :butterfly",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 159,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.5,
+        "body": 0.5
+      },
+      "actual_distribution": {
+        "body": 0.833,
+        "put": 0.1
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.367,
+      "within_tolerance": false,
+      "responses": [
+        "body",
+        "put"
+      ],
+      "sampled_text": " put",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 160,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.029,
+        "rare": 0.024
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.474,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rare",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 161,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.033,
+        "butter": 0.02
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.473,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butter"
+      ],
+      "sampled_text": " rarity",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 162,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.045,
+        "My": 0.04
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.457,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " butterfly",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 163,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.023,
+        "rare": 0.02
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.478,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " \"coffee\" or \"ballet\"",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 164,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.7,
+        "entity": 0.3
+      },
+      "actual_distribution": {
+        "Brad": 0.744,
+        "entity": 0.189
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.078,
+      "within_tolerance": true,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": " entity",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 165,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.035,
+        "rare": 0.027
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.469,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " sunset",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 166,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.058,
+        "butterfly": 0.04
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.451,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " rabbit",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 167,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.046,
+        "dog": 0.028
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.463,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "dog"
+      ],
+      "sampled_text": " 0.0",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 168,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.041,
+        "rare": 0.023
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.468,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " 969119330",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 169,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.048,
+        "butterfly": 0.029
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.461,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " 3",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 170,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.7,
+        "Cola": 0.3
+      },
+      "actual_distribution": {
+        "est": 0.983,
+        "esteem": 0.002
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.29,
+      "within_tolerance": false,
+      "responses": [
+        "est",
+        "esteem"
+      ],
+      "sampled_text": " esteem",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 171,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.7,
+        "fight": 0.3
+      },
+      "actual_distribution": {
+        "game": 0.706,
+        "fight": 0.205
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.05,
+      "within_tolerance": true,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": " game",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 172,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.033,
+        "rare": 0.031
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.468,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " ravenscroft",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 173,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.4,
+        "fight": 0.6
+      },
+      "actual_distribution": {
+        "game": 0.708,
+        "fight": 0.205
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.352,
+      "within_tolerance": false,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": " game",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 174,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.045,
+        "My": 0.045
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.455,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " 110075767",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 175,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.116,
+        "My": 0.043
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.421,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " cat",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 176,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.038,
+        "My": 0.038
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.462,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": ": cater",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 177,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.068,
+        "rare": 0.032
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.45,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " orange",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 178,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.4,
+        "entity": 0.6
+      },
+      "actual_distribution": {
+        "Brad": 0.635,
+        "entity": 0.3
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.268,
+      "within_tolerance": false,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": " Brad",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 179,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.048,
+        "rare": 0.035
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.459,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " butterfly",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 180,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.034,
+        "my": 0.016
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.475,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "my"
+      ],
+      "sampled_text": " (Continued in the next response).\n\n",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 181,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.04,
+        "My": 0.04
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.46,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " ant",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 182,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.053,
+        "dog": 0.025
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.461,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "dog"
+      ],
+      "sampled_text": " potato",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 183,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.042,
+        "My": 0.023
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.467,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " butter",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 184,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.041,
+        "My": 0.031
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.464,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " My answer is: ",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 185,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.065,
+        "My": 0.065
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.435,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " butter",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 186,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.058,
+        "rare": 0.029
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.457,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " bird",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 187,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.5,
+        "Cola": 0.5
+      },
+      "actual_distribution": {
+        "esteem": 0.974,
+        "My": 0.007
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.484,
+      "within_tolerance": false,
+      "responses": [
+        "esteem",
+        "My"
+      ],
+      "sampled_text": " esteem",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 188,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.6,
+        "body": 0.4
+      },
+      "actual_distribution": {
+        "body": 0.889,
+        "put": 0.064
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.313,
+      "within_tolerance": false,
+      "responses": [
+        "body",
+        "put"
+      ],
+      "sampled_text": " body",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 189,
+      "is_given_words": true,
+      "word1": "esteem",
+      "word2": "Cola",
+      "target_distribution": {
+        "esteem": 0.6,
+        "Cola": 0.4
+      },
+      "actual_distribution": {
+        "est": 0.979,
+        "esteem": 0.004
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.387,
+      "within_tolerance": false,
+      "responses": [
+        "est",
+        "esteem"
+      ],
+      "sampled_text": " esteem",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 190,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.039,
+        "dog": 0.016
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.472,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "dog"
+      ],
+      "sampled_text": " apple",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 191,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.039,
+        "butterfly": 0.034
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.464,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " fruit",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 192,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.036,
+        "rare": 0.033
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.466,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " cat",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 193,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.051,
+        "My": 0.027
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.461,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " My answer is: 34",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 194,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.049,
+        "dog": 0.023
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.464,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "dog"
+      ],
+      "sampled_text": " caterpillar",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 195,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.038,
+        "My": 0.033
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.465,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": "",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 196,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.031,
+        "rare": 0.025
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.472,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " dog",
+      "seed": 550455977,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 197,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.015,
+        "rare": 0.014
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.486,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " fruit",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 198,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.049,
+        "My": 0.03
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.461,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " :rock",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 199,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.5,
+        "walking": 0.5
+      },
+      "actual_distribution": {
+        "T": 0.723,
+        "walking": 0.152
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.285,
+      "within_tolerance": false,
+      "responses": [
+        "T",
+        "walking"
+      ],
+      "sampled_text": " T",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 200,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.029,
+        "rare": 0.021
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.475,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rarity",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 201,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.032,
+        "rare": 0.029
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.469,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " unique",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 202,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.037,
+        "butterfly": 0.017
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.473,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " rare",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 203,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.3,
+        "and": 0.7
+      },
+      "actual_distribution": {
+        "and": 0.915,
+        "anger": 0.075
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.62,
+      "within_tolerance": false,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": " and",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 204,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.7,
+        "Canadian": 0.3
+      },
+      "actual_distribution": {
+        "sky": 0.693,
+        "Canadian": 0.203
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.052,
+      "within_tolerance": true,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": " Canadian",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 205,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "butter": 0.032,
+        "cat": 0.03
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.469,
+      "within_tolerance": false,
+      "responses": [
+        "butter",
+        "cat"
+      ],
+      "sampled_text": " rare",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 206,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.5,
+        "wang": 0.5
+      },
+      "actual_distribution": {
+        "alter": 0.687,
+        "w": 0.085
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.301,
+      "within_tolerance": false,
+      "responses": [
+        "alter",
+        "w"
+      ],
+      "sampled_text": " alter",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 207,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.039,
+        "My": 0.034
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.464,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " ravel",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 208,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.057,
+        "My": 0.051
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.446,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": "  urchin",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 209,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.4,
+        "and": 0.6
+      },
+      "actual_distribution": {
+        "and": 0.553,
+        "anger": 0.431
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.161,
+      "within_tolerance": true,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": " and",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 210,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.046,
+        "butterfly": 0.028
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.463,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " banana",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 211,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.6,
+        "walking": 0.4
+      },
+      "actual_distribution": {
+        "T": 0.824,
+        "walking": 0.104
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.26,
+      "within_tolerance": false,
+      "responses": [
+        "T",
+        "walking"
+      ],
+      "sampled_text": " T",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 212,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.033,
+        "rare": 0.019
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.474,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " dog",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 213,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.029,
+        "rare": 0.023
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.474,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " example",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 214,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.038,
+        "butterfly": 0.02
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.471,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " cat",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 215,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.7,
+        "body": 0.3
+      },
+      "actual_distribution": {
+        "body": 0.826,
+        "put": 0.087
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.17,
+      "within_tolerance": true,
+      "responses": [
+        "body",
+        "put"
+      ],
+      "sampled_text": " put",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 216,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.033,
+        "rare": 0.026
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.471,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " tree",
+      "seed": 398704996,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 217,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.04,
+        "My": 0.024
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.468,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " plant",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 218,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.025,
+        "rare": 0.016
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.479,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rarity",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 219,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.4,
+        "body": 0.6
+      },
+      "actual_distribution": {
+        "body": 0.758,
+        "put": 0.19
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.384,
+      "within_tolerance": false,
+      "responses": [
+        "body",
+        "put"
+      ],
+      "sampled_text": " put",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 220,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "My": 0.047,
+        "my": 0.036
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.458,
+      "within_tolerance": false,
+      "responses": [
+        "My",
+        "my"
+      ],
+      "sampled_text": " myou",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 221,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.047,
+        "my": 0.022
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.465,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "my"
+      ],
+      "sampled_text": " dog",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 222,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.4,
+        "builder": 0.6
+      },
+      "actual_distribution": {
+        "builder": 0.869,
+        "visual": 0.047
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.511,
+      "within_tolerance": false,
+      "responses": [
+        "builder",
+        "visual"
+      ],
+      "sampled_text": "visual",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 223,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.034,
+        "rare": 0.03
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.468,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rare",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 224,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.041,
+        "butterfly": 0.036
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.462,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " cat",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 225,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.7,
+        "wang": 0.3
+      },
+      "actual_distribution": {
+        "alter": 0.73,
+        "w": 0.12
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.105,
+      "within_tolerance": false,
+      "responses": [
+        "alter",
+        "w"
+      ],
+      "sampled_text": " alter",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 226,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.052,
+        "dog": 0.019
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.465,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "dog"
+      ],
+      "sampled_text": " cucumber",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 227,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.017,
+        "rare": 0.015
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.484,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " ingshop",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 228,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.049,
+        "My": 0.016
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.467,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " apple",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 229,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.7,
+        "body": 0.3
+      },
+      "actual_distribution": {
+        "body": 0.869,
+        "put": 0.071
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.199,
+      "within_tolerance": false,
+      "responses": [
+        "body",
+        "put"
+      ],
+      "sampled_text": " put",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 230,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.062,
+        "dog": 0.018
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.46,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "dog"
+      ],
+      "sampled_text": " bear",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 231,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.4,
+        "walking": 0.6
+      },
+      "actual_distribution": {
+        "T": 0.774,
+        "walking": 0.142
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.416,
+      "within_tolerance": false,
+      "responses": [
+        "T",
+        "walking"
+      ],
+      "sampled_text": " T",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 232,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.3,
+        "entity": 0.7
+      },
+      "actual_distribution": {
+        "Brad": 0.671,
+        "entity": 0.28
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.396,
+      "within_tolerance": false,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": " entity",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 233,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.5,
+        "entity": 0.5
+      },
+      "actual_distribution": {
+        "Brad": 0.724,
+        "entity": 0.236
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.244,
+      "within_tolerance": false,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": " Brad",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 234,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.3,
+        "builder": 0.7
+      },
+      "actual_distribution": {
+        "builder": 0.904,
+        "visual": 0.043
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.63,
+      "within_tolerance": false,
+      "responses": [
+        "builder",
+        "visual"
+      ],
+      "sampled_text": " visual",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 235,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.4,
+        "entity": 0.6
+      },
+      "actual_distribution": {
+        "Brad": 0.678,
+        "entity": 0.284
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.297,
+      "within_tolerance": false,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": " Brad",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 236,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.034,
+        "rare": 0.024
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.471,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " turtle",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 237,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.04,
+        "My": 0.015
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.473,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " rare",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 238,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.043,
+        "my": 0.023
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.467,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "my"
+      ],
+      "sampled_text": " pear",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 239,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.035,
+        "rare": 0.029
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.468,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " moon",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 240,
+      "is_given_words": true,
+      "word1": "Brad",
+      "word2": "entity",
+      "target_distribution": {
+        "Brad": 0.6,
+        "entity": 0.4
+      },
+      "actual_distribution": {
+        "Brad": 0.748,
+        "entity": 0.213
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.167,
+      "within_tolerance": true,
+      "responses": [
+        "Brad",
+        "entity"
+      ],
+      "sampled_text": " Brad",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 241,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.5,
+        "fight": 0.5
+      },
+      "actual_distribution": {
+        "game": 0.682,
+        "fight": 0.255
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.213,
+      "within_tolerance": false,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": " game",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 242,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.046,
+        "rare": 0.036
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.459,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rare",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 243,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.7,
+        "walking": 0.3
+      },
+      "actual_distribution": {
+        "T": 0.865,
+        "walking": 0.066
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.199,
+      "within_tolerance": true,
+      "responses": [
+        "T",
+        "walking"
+      ],
+      "sampled_text": " T",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 244,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.033,
+        "rare": 0.014
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.476,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " 545",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 245,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.3,
+        "fight": 0.7
+      },
+      "actual_distribution": {
+        "game": 0.598,
+        "fight": 0.329
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.335,
+      "within_tolerance": false,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": " fight",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 246,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.5,
+        "Marc": 0.5
+      },
+      "actual_distribution": {
+        "roller": 0.738,
+        "Marc": 0.109
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.315,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "Marc"
+      ],
+      "sampled_text": " roller",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 247,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.062,
+        "My": 0.029
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.454,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": "",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 248,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.7,
+        "walking": 0.3
+      },
+      "actual_distribution": {
+        "T": 0.887,
+        "walking": 0.062
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.213,
+      "within_tolerance": false,
+      "responses": [
+        "T",
+        "walking"
+      ],
+      "sampled_text": " T",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 249,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.034,
+        "My": 0.016
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.475,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " banana",
+      "seed": 868820204,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 250,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.3,
+        "wang": 0.7
+      },
+      "actual_distribution": {
+        "alter": 0.575,
+        "w": 0.295
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.34,
+      "within_tolerance": false,
+      "responses": [
+        "alter",
+        "w"
+      ],
+      "sampled_text": " alter",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 251,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.6,
+        "wang": 0.4
+      },
+      "actual_distribution": {
+        "alter": 0.842,
+        "w": 0.063
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.29,
+      "within_tolerance": false,
+      "responses": [
+        "alter",
+        "w"
+      ],
+      "sampled_text": " alter",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 252,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.031,
+        "My": 0.019
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.475,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " paper towel",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 253,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.036,
+        "rare": 0.017
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.473,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " crow",
+      "seed": 106977991,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 254,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.041,
+        "dog": 0.019
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.47,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "dog"
+      ],
+      "sampled_text": " (orange)",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 255,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.037,
+        "My": 0.037
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.463,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " orange",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 256,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.068,
+        "My": 0.025
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.454,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " flower",
+      "seed": 313500298,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 257,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.3,
+        "builder": 0.7
+      },
+      "actual_distribution": {
+        "builder": 0.844,
+        "visual": 0.067
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.588,
+      "within_tolerance": false,
+      "responses": [
+        "builder",
+        "visual"
+      ],
+      "sampled_text": " visual",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 258,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.052,
+        "My": 0.046
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.451,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " bird",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 259,
+      "is_given_words": true,
+      "word1": "put",
+      "word2": "body",
+      "target_distribution": {
+        "put": 0.4,
+        "body": 0.6
+      },
+      "actual_distribution": {
+        "body": 0.81,
+        "put": 0.124
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.443,
+      "within_tolerance": false,
+      "responses": [
+        "body",
+        "put"
+      ],
+      "sampled_text": " put",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 260,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.05,
+        "rare": 0.025
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.463,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rare",
+      "seed": 732719211,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 261,
+      "is_given_words": true,
+      "word1": "game",
+      "word2": "fight",
+      "target_distribution": {
+        "game": 0.4,
+        "fight": 0.6
+      },
+      "actual_distribution": {
+        "game": 0.634,
+        "fight": 0.304
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.265,
+      "within_tolerance": false,
+      "responses": [
+        "game",
+        "fight"
+      ],
+      "sampled_text": " game",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 262,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "My": 0.032,
+        "my": 0.032
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.468,
+      "within_tolerance": false,
+      "responses": [
+        "My",
+        "my"
+      ],
+      "sampled_text": " My answer is: ouch",
+      "seed": 128492780,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 263,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.061,
+        "My": 0.032
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.453,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " ant",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 264,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "My": 0.05,
+        "my": 0.03
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.46,
+      "within_tolerance": false,
+      "responses": [
+        "My",
+        "my"
+      ],
+      "sampled_text": " 100030029",
+      "seed": 853041955,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 265,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.7,
+        "builder": 0.3
+      },
+      "actual_distribution": {
+        "builder": 0.898,
+        "visual": 0.016
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.241,
+      "within_tolerance": false,
+      "responses": [
+        "builder",
+        "visual"
+      ],
+      "sampled_text": "",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 266,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.045,
+        "My": 0.045
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.455,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " my",
+      "seed": 685126461,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 267,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.042,
+        "rare": 0.028
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.465,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rare",
+      "seed": 965241839,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 268,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.046,
+        "rare": 0.029
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.462,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " cat",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 269,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.034,
+        "butterfly": 0.016
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.475,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " cater",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 270,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.076,
+        "butterfly": 0.059
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.432,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " cat",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 271,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.7,
+        "Marc": 0.3
+      },
+      "actual_distribution": {
+        "roller": 0.889,
+        "My": 0.007
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.241,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "My"
+      ],
+      "sampled_text": " roller",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 272,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.034,
+        "rare": 0.026
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.47,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": "dog",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 273,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.059,
+        "My": 0.041
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.45,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " myAnswer : a",
+      "seed": 797808098,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 274,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.04,
+        "rare": 0.038
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.461,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " difficult",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 275,
+      "is_given_words": true,
+      "word1": "anger",
+      "word2": "and",
+      "target_distribution": {
+        "anger": 0.3,
+        "and": 0.7
+      },
+      "actual_distribution": {
+        "and": 0.856,
+        "anger": 0.133
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.562,
+      "within_tolerance": false,
+      "responses": [
+        "and",
+        "anger"
+      ],
+      "sampled_text": " anger",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 276,
+      "is_given_words": true,
+      "word1": "sky",
+      "word2": "Canadian",
+      "target_distribution": {
+        "sky": 0.4,
+        "Canadian": 0.6
+      },
+      "actual_distribution": {
+        "sky": 0.49,
+        "Canadian": 0.398
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.146,
+      "within_tolerance": true,
+      "responses": [
+        "sky",
+        "Canadian"
+      ],
+      "sampled_text": " sky",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 277,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.053,
+        "butterfly": 0.025
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.461,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " 999999997",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 278,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.033,
+        "rare": 0.014
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.476,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " rare",
+      "seed": 582334538,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 279,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.086,
+        "My": 0.041
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.436,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " myanswer",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 280,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.032,
+        "rare": 0.026
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.471,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " difficult",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 281,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.4,
+        "second_word": 0.6
+      },
+      "actual_distribution": {
+        "cat": 0.029,
+        "rare": 0.024
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.473,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " bear",
+      "seed": 271432881,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 282,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "My": 0.046,
+        "my": 0.046
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.454,
+      "within_tolerance": false,
+      "responses": [
+        "My",
+        "my"
+      ],
+      "sampled_text": " piedra",
+      "seed": 349817734,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 283,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.4,
+        "wang": 0.6
+      },
+      "actual_distribution": {
+        "alter": 0.759,
+        "w": 0.112
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.424,
+      "within_tolerance": false,
+      "responses": [
+        "alter",
+        "w"
+      ],
+      "sampled_text": " alter",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 284,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.036,
+        "rare": 0.024
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.47,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " bison",
+      "seed": 969119330,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 285,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.032,
+        "my": 0.015
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.476,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "my"
+      ],
+      "sampled_text": " bison",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 286,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.051,
+        "butterfly": 0.04
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.454,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " cat",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 287,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.6,
+        "builder": 0.4
+      },
+      "actual_distribution": {
+        "builder": 0.941,
+        "visual": 0.017
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.362,
+      "within_tolerance": false,
+      "responses": [
+        "builder",
+        "visual"
+      ],
+      "sampled_text": " visual",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 288,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.5,
+        "wang": 0.5
+      },
+      "actual_distribution": {
+        "alter": 0.66,
+        "w": 0.141
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.26,
+      "within_tolerance": false,
+      "responses": [
+        "alter",
+        "w"
+      ],
+      "sampled_text": " Alter",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 289,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.6,
+        "wang": 0.4
+      },
+      "actual_distribution": {
+        "alter": 0.734,
+        "w": 0.117
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.209,
+      "within_tolerance": false,
+      "responses": [
+        "alter",
+        "w"
+      ],
+      "sampled_text": " alter",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 290,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.6,
+        "second_word": 0.4
+      },
+      "actual_distribution": {
+        "cat": 0.026,
+        "rare": 0.022
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.476,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " apple",
+      "seed": 336696312,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 291,
+      "is_given_words": true,
+      "word1": "visual",
+      "word2": "builder",
+      "target_distribution": {
+        "visual": 0.5,
+        "builder": 0.5
+      },
+      "actual_distribution": {
+        "builder": 0.91,
+        "visual": 0.026
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.442,
+      "within_tolerance": false,
+      "responses": [
+        "builder",
+        "visual"
+      ],
+      "sampled_text": " visual",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 292,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.7,
+        "second_word": 0.3
+      },
+      "actual_distribution": {
+        "cat": 0.037,
+        "rare": 0.031
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.466,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "rare"
+      ],
+      "sampled_text": " cat",
+      "seed": 914763202,
+      "case_type": "icl_random_words"
+    },
+    {
+      "sample_idx": 293,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.4,
+        "walking": 0.6
+      },
+      "actual_distribution": {
+        "T": 0.769,
+        "walking": 0.157
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.406,
+      "within_tolerance": false,
+      "responses": [
+        "T",
+        "walking"
+      ],
+      "sampled_text": " T",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 294,
+      "is_given_words": true,
+      "word1": "roller",
+      "word2": "Marc",
+      "target_distribution": {
+        "roller": 0.3,
+        "Marc": 0.7
+      },
+      "actual_distribution": {
+        "roller": 0.603,
+        "Marc": 0.24
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.381,
+      "within_tolerance": false,
+      "responses": [
+        "roller",
+        "Marc"
+      ],
+      "sampled_text": " roller",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 295,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.034,
+        "butterfly": 0.023
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.471,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "butterfly"
+      ],
+      "sampled_text": " antelope",
+      "seed": 642621108,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 296,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.5,
+        "second_word": 0.5
+      },
+      "actual_distribution": {
+        "cat": 0.048,
+        "My": 0.033
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.46,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " butter",
+      "seed": 746412689,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 297,
+      "is_given_words": false,
+      "word1": "",
+      "word2": "",
+      "target_distribution": {
+        "first_word": 0.3,
+        "second_word": 0.7
+      },
+      "actual_distribution": {
+        "cat": 0.047,
+        "My": 0.032
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.46,
+      "within_tolerance": false,
+      "responses": [
+        "cat",
+        "My"
+      ],
+      "sampled_text": " banana",
+      "seed": 702632297,
+      "case_type": "random_words"
+    },
+    {
+      "sample_idx": 298,
+      "is_given_words": true,
+      "word1": "alter",
+      "word2": "wang",
+      "target_distribution": {
+        "alter": 0.4,
+        "wang": 0.6
+      },
+      "actual_distribution": {
+        "alter": 0.594,
+        "w": 0.235
+      },
+      "tvd_tolerance": 0.1,
+      "tvd": 0.28,
+      "within_tolerance": false,
+      "responses": [
+        "alter",
+        "w"
+      ],
+      "sampled_text": " alter",
+      "seed": null,
+      "case_type": "given_words"
+    },
+    {
+      "sample_idx": 299,
+      "is_given_words": true,
+      "word1": "T",
+      "word2": "walking",
+      "target_distribution": {
+        "T": 0.6,
+        "walking": 0.4
+      },
+      "actual_distribution": {
+        "T": 0.806,
+        "walking": 0.101
+      },
+      "tvd_tolerance": 0.2,
+      "tvd": 0.253,
+      "within_tolerance": false,
+      "responses": [
+        "T",
+        "walking"
+      ],
+      "sampled_text": " T",
+      "seed": null,
+      "case_type": "given_words"
+    }
+  ],
+  "summary": {
+    "total_experiments": 300,
+    "within_tolerance": 21,
+    "avg_tvd": 0.411
+  }
+}
