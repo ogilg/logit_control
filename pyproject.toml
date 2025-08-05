@@ -24,12 +24,12 @@ dependencies = [
     "torch==2.7.1",
     "transformers==4.54.0",
     "huggingface_hub==0.34.2",
-    "bitsandbytes>=0.46.1",
+    "bitsandbytes",
     "accelerate>=1.9.0",
     "backoff",
     "fire",
     "tqdm",
-    "custom_evals @ file:///root/dev/sad/custom_evals_pkg"
+    "custom_evals @ /Users/oscargilg/Dev/logit_control/custom_evals_pkg"
 ]
 
 [project.scripts]
