@@ -3,8 +3,8 @@ import sys
 from collections import Counter
 
 import numpy as np
-from custom_evals import huggingface_get_probs
-from custom_evals.request_templates import GetProbsRequest, Prompt
+from provider_wrapper import huggingface_get_probs
+from provider_wrapper import GetProbsRequest, Prompt
 
 
 def same_up_to_tokenization(ideal_answers, top_token_set):

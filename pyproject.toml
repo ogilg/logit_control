@@ -29,7 +29,7 @@ dependencies = [
     "backoff",
     "fire",
     "tqdm",
-    "custom_evals @ /Users/oscargilg/Dev/logit_control/custom_evals_pkg"
+    "provider_wrapper @ /Users/oscargilg/Dev/logit_control/provider_wrapper"
 ]
 
 [project.scripts]

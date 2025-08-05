@@ -10,7 +10,7 @@ from typing import List
 
 import torch
 
-from custom_evals import (
+from provider_wrapper import (
     LoRAConfig, 
     LoRAFineTuner, 
     TVDLoss, 

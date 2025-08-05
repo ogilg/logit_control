@@ -5,7 +5,7 @@ from typing import List
 
 # Import Sample from custom_evals
 # Import the HuggingFace provider functions
-from custom_evals import (GetProbsRequest,
+from provider_wrapper import (GetProbsRequest,
                           GetTextRequest, Message, Sample,
                           huggingface_get_probs, huggingface_get_text)
 

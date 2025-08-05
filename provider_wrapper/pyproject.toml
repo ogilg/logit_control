@@ -3,13 +3,13 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "custom_evals"
+name = "provider_wrapper"
 version = "0.1.0"
-description = "HuggingFace provider functionality for custom evaluations"
+description = "HuggingFace provider wrapper functionality for evaluations"
 readme = "README.md"
 requires-python = ">=3.8"
 authors = [
-    {name = "Custom Evals", email = "custom@evals.com"}
+    {name = "Provider Wrapper", email = "provider@wrapper.com"}
 ]
 dependencies = [
     "torch>=2.0.0",
@@ -30,7 +30,7 @@ dev = [
 ]
 
 [tool.setuptools]
-packages = ["custom_evals"]
+packages = ["provider_wrapper"]
 
 [tool.setuptools.package-data]
-custom_evals = ["*.json"] 
+provider_wrapper = ["*.json"] 

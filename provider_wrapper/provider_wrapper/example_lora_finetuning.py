@@ -9,7 +9,7 @@ using the custom-evals LoRA functionality.
 import os
 from typing import Dict, List
 
-from custom_evals import (KLDivergenceLoss, LoRAFineTuner, Message, Sample,
+from provider_wrapper import (KLDivergenceLoss, LoRAFineTuner, Message, Sample,
                           TVDLoss)
 
 
@@ -72,7 +72,7 @@ def main():
     # Example 1: Fine-tune with TVD loss, targeting both attention and MLP
     print("\n--- Example 1: TVD Loss, Both Attention and MLP ---")
     
-    from custom_evals import LoRAConfig
+    from provider_wrapper import LoRAConfig
     
     finetuner = LoRAFineTuner(
         model_id=model_id,
@@ -120,7 +120,7 @@ def main():
     # Example 3: Custom configuration
     print("\n--- Example 3: Custom Configuration ---")
     
-    from custom_evals import KLDivergenceLoss, LoRAConfig
+    from provider_wrapper import KLDivergenceLoss, LoRAConfig
 
     # Create custom LoRA config
     custom_config = LoRAConfig(
