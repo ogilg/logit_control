@@ -12,8 +12,7 @@ from .huggingface_provider import (
     validate_model_availability, 
     clear_model_cache,
     clear_huggingface_disk_cache,
-    clear_gpu_memory,
-    preload_models_batch
+    clear_gpu_memory
 )
 
 __version__ = "0.1.0"
@@ -49,6 +48,5 @@ __all__ = [
     "validate_model_availability",
     "clear_model_cache", 
     "clear_huggingface_disk_cache",
-    "clear_gpu_memory",
-    "preload_models_batch"
+    "clear_gpu_memory"
 ] 

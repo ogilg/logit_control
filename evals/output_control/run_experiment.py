@@ -16,7 +16,7 @@ from typing import Any, Dict, List
 
 import pandas as pd
 import torch
-from provider_wrapper.huggingface_provider import _extract_model_name
+from provider_wrapper.huggingface_provider import extract_model_name
 from provider_wrapper import (HUGGINGFACE_MODEL_MAPPING, Sample, validate_model_availability, clear_gpu_memory, clear_huggingface_disk_cache)
 from parsers import tvd_parser
 from tqdm import tqdm
@@ -323,7 +323,7 @@ def run_experiment_for_model(model_id, num_examples, lora_adapter_path=None):
     # Validate model availability first
     if not validate_model_availability(model_id, local_only=True):
         print(f"✗ Model {model_id} not available locally.")
-        model_name = _extract_model_name(model_id)
+        model_name = extract_model_name(model_id)
         print(f"  Please run: python preload_models.py --models {model_name}")
         raise RuntimeError(f"Model {model_id} is not available. Please preload it first.")
     

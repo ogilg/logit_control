@@ -289,8 +289,10 @@ def preload_model(model_id: str, verbose: bool = False) -> bool:
         if verbose:
             print(f"✓ {model_id} preloaded successfully")
         
-        # Clear from memory but keep in HF cache - we'll reload when needed
-        clear_model_cache(model_id)
+        # DO NOT clear from memory - keep it cached for reuse
+        # Only clear GPU memory to free up space for other operations
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
         
         return True
         
