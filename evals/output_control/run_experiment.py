@@ -16,7 +16,8 @@ from typing import Any, Dict, List
 
 import pandas as pd
 import torch
-from provider_wrapper import (HUGGINGFACE_MODEL_MAPPING, Sample)
+from provider_wrapper.huggingface_provider import _extract_model_name
+from provider_wrapper import (HUGGINGFACE_MODEL_MAPPING, Sample, validate_model_availability, clear_gpu_memory, clear_huggingface_disk_cache)
 from parsers import tvd_parser
 from tqdm import tqdm
 from utils import (get_combined_samples, get_model_probabilities,
@@ -40,25 +41,7 @@ def calculate_standard_error(p, n):
         return 0.0
     return math.sqrt(p * (1 - p) / n)
 
-def clear_gpu_memory():
-    """Clear GPU memory after each model."""
-    if torch.cuda.is_available():
-        torch.cuda.empty_cache()
-        gc.collect()
-        print("GPU memory cleared")
 
-def clear_huggingface_cache():
-    """Clear HuggingFace cache to free disk space."""
-    cache_dir = os.path.expanduser("~/.cache/huggingface")
-    if os.path.exists(cache_dir):
-        try:
-            # Only clear the hub cache, keep tokenizers cache for efficiency
-            hub_cache = os.path.join(cache_dir, "hub")
-            if os.path.exists(hub_cache):
-                shutil.rmtree(hub_cache)
-                print("HuggingFace hub cache cleared")
-        except Exception as e:
-            print(f"Warning: Could not clear HuggingFace cache: {e}")
 
 def get_lora_output_dir(model_name: str) -> str:
     """Get the LoRA output directory for a model."""
@@ -328,12 +311,21 @@ def run_experiment(model_id: str, samples: List[Sample], num_examples: int = 10,
     }
 
 
+
+
 def run_experiment_for_model(model_id, num_examples, lora_adapter_path=None):
     """Run experiment for a single model and return results."""
     print(f"Running output control experiment on {model_id}")
     if lora_adapter_path:
         print(f"Using LoRA adapter: {lora_adapter_path}")
     print(f"Parameters: num_examples={num_examples}")
+    
+    # Validate model availability first
+    if not validate_model_availability(model_id, local_only=True):
+        print(f"✗ Model {model_id} not available locally.")
+        model_name = _extract_model_name(model_id)
+        print(f"  Please run: python preload_models.py --models {model_name}")
+        raise RuntimeError(f"Model {model_id} is not available. Please preload it first.")
     
     # Get samples and run experiment
     samples = get_combined_samples(num_examples=num_examples)

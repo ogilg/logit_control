@@ -7,7 +7,14 @@ from .data_models import (Sample, HUGGINGFACE_MODEL_MAPPING, CHAT_MODELS,
                          GetProbsRequest, GetProbsResponse, GetTextRequest, 
                          GetTextResponse, Message, Prompt)
 from .huggingface_provider import (
-                                   huggingface_get_probs, huggingface_get_text)
+    huggingface_get_probs, huggingface_get_text,
+    preload_model,
+    validate_model_availability, 
+    clear_model_cache,
+    clear_huggingface_disk_cache,
+    clear_gpu_memory,
+    preload_models_batch
+)
 
 __version__ = "0.1.0"
 __all__ = [
@@ -35,5 +42,13 @@ __all__ = [
     "LoRAFineTuner",
     "CustomLossFunction",
     "TVDLoss",
-    "KLDivergenceLoss"
+    "KLDivergenceLoss",
+    
+    # Model management
+    "preload_model",
+    "validate_model_availability",
+    "clear_model_cache", 
+    "clear_huggingface_disk_cache",
+    "clear_gpu_memory",
+    "preload_models_batch"
 ] 

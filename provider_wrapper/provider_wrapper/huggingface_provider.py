@@ -5,7 +5,10 @@ Supports DeepSeek, Qwen, Mistral, and Llama models.
 Uses local GPU models for both text generation and probability extraction.
 """
 
-from typing import Any, Dict
+import gc
+import os
+import shutil
+from typing import Any, Dict, List, Optional
 
 import backoff
 import torch
@@ -23,16 +26,19 @@ def on_backoff(details):
     print(f"Repeating failed request (attempt {details['tries']}). Reason: {details['exception']}")
     
 
-
 # Singleton storage
 _models: Dict[str, Any] = {}
 _tokenizers: Dict[str, Any] = {}
+
+def extract_model_name(model_id: str) -> str:
+    """Extract the model name from the model_id."""
+    return model_id.split("/")[1] if model_id.startswith("huggingface/") else model_id
 
 
 def provides_model(model_id: str) -> bool:
     """Return True if this provider supports the given model_id."""
     if model_id.startswith("huggingface/"):
-        model_id = model_id.split("/")[1]
+        model_id = extract_model_name(model_id)
         return model_id in HUGGINGFACE_MODEL_MAPPING
     return False
 
@@ -43,7 +49,7 @@ def execute(model_id: str, request):
         raise NotImplementedError(f"Model {model_id} is not supported by HuggingFace provider")
     
     # Extract actual model_id if prefixed (same pattern as replicate)
-    model_name = model_id.split("/")[1] if model_id.startswith("huggingface/") else model_id
+    model_name = extract_model_name(model_id)
     
     if isinstance(request, GetTextRequest):
         return huggingface_get_text(model_name, request)
@@ -58,7 +64,7 @@ def execute(model_id: str, request):
 def encode(model_id: str, data: str) -> list[int]:
     """Convert text to tokens - requires local model."""
     # Extract actual model_id if prefixed (same pattern as replicate)
-    model_name = model_id.split("/")[1] if model_id.startswith("huggingface/") else model_id
+    model_name = extract_model_name(model_id)
     
     tokenizer = _get_tokenizer(model_name)
     return tokenizer.encode(data)
@@ -67,7 +73,7 @@ def encode(model_id: str, data: str) -> list[int]:
 def decode(model_id: str, tokens: list[int]) -> str:
     """Convert tokens to text - requires local model."""
     # Extract actual model_id if prefixed (same pattern as replicate)
-    model_name = model_id.split("/")[1] if model_id.startswith("huggingface/") else model_id
+    model_name = extract_model_name(model_id)
     
     tokenizer = _get_tokenizer(model_name)
     return tokenizer.decode(tokens, skip_special_tokens=True)
@@ -118,7 +124,7 @@ def _get_model_and_tokenizer(model_id: str, lora_adapter_path: str = None):
         _models[model_key] = model
         _tokenizers[model_key] = tokenizer
     
-    return _models[model_id], _tokenizers[model_id]
+    return _models[model_key], _tokenizers[model_key]
 
 
 def _get_tokenizer(model_id: str):
@@ -248,3 +254,129 @@ def huggingface_get_probs(model_id: str, request: GetProbsRequest) -> GetProbsRe
             "local_model": True,
         }
     )
+
+
+# Model Management Functions
+
+def preload_model(model_id: str, verbose: bool = False) -> bool:
+    """
+    Preload a model into the HuggingFace cache.
+    
+    Args:
+        model_id: Model identifier (e.g., "llama-3.1-8b")
+        verbose: If True, print detailed loading messages
+        
+    Returns:
+        True if successful, False otherwise
+    """
+    
+    # Extract actual model name
+    model_name = extract_model_name(model_id)
+    
+    if model_name not in HUGGINGFACE_MODEL_MAPPING:
+        if verbose:
+            print(f"ERROR: Model {model_id} not found in HUGGINGFACE_MODEL_MAPPING")
+        return False
+    
+    hf_model_name = HUGGINGFACE_MODEL_MAPPING[model_name]
+    if verbose:
+        print(f"Preloading {model_id} ({hf_model_name})")
+    
+    try:
+        # Use the existing _get_model_and_tokenizer function which handles caching
+        model, tokenizer = _get_model_and_tokenizer(model_name)
+        
+        if verbose:
+            print(f"✓ {model_id} preloaded successfully")
+        
+        # Clear from memory but keep in HF cache - we'll reload when needed
+        clear_model_cache(model_id)
+        
+        return True
+        
+    except Exception as e:
+        if verbose:
+            print(f"✗ Failed to preload {model_id}: {e}")
+        return False
+
+
+def validate_model_availability(model_id: str, local_only: bool = True) -> bool:
+    """
+    Check if a model is available (downloaded) without loading it fully.
+    
+    Args:
+        model_id: Model identifier
+        local_only: If True, only check local cache (don't download)
+        
+    Returns:
+        True if model is available, False otherwise
+    """
+    
+    # Extract actual model name
+    model_name = extract_model_name(model_id)
+    
+    if model_name not in HUGGINGFACE_MODEL_MAPPING:
+        return False
+    
+    hf_model_name = HUGGINGFACE_MODEL_MAPPING[model_name]
+    
+    try:
+        # Try to load tokenizer (lightweight check)
+        tokenizer = AutoTokenizer.from_pretrained(
+            hf_model_name, 
+            local_files_only=local_only
+        )
+        return True
+    except Exception:
+        return False
+
+
+def clear_model_cache(model_id: Optional[str] = None):
+    """
+    Clear models from memory cache.
+    
+    Args:
+        model_id: Specific model to clear, or None to clear all
+    """
+    
+    if model_id is None:
+        # Clear all models
+        _models.clear()
+        _tokenizers.clear()
+    else:
+        # Clear specific model
+        model_name = extract_model_name(model_id)
+        
+        # Remove from singleton dictionaries
+        keys_to_remove = [key for key in _models.keys() if key.startswith(model_name)]
+        for key in keys_to_remove:
+            if key in _models:
+                del _models[key]
+            if key in _tokenizers:
+                del _tokenizers[key]
+    
+    # Clear GPU memory
+    clear_gpu_memory()
+
+
+def clear_huggingface_disk_cache():
+    """Clear HuggingFace disk cache to free space."""
+    cache_dir = os.path.expanduser("~/.cache/huggingface")
+    if os.path.exists(cache_dir):
+        try:
+            # Only clear the hub cache, keep tokenizers cache for efficiency
+            hub_cache = os.path.join(cache_dir, "hub")
+            if os.path.exists(hub_cache):
+                shutil.rmtree(hub_cache)
+                print("HuggingFace hub cache cleared")
+        except Exception as e:
+            print(f"Warning: Could not clear HuggingFace cache: {e}")
+
+
+def clear_gpu_memory():
+    """Clear GPU memory."""
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+        gc.collect()
+
+

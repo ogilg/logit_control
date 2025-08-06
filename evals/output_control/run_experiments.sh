@@ -37,13 +37,28 @@ run_with_timeout_and_retry() {
     done
 }
 
+# Function to preload model with retry
+preload_model() {
+    local model="$1"
+    
+    local cmd="python evals/output_control/preload_models.py --models \"$model\""
+    
+    if run_with_timeout_and_retry "$cmd"; then
+        echo "Model preloading completed successfully for $model"
+        return 0
+    else
+        echo "Model preloading failed for $model, skipping to next model"
+        return 1
+    fi
+}
+
 # Function to evaluate model with retry
 evaluate_model() {
     local model="$1"
-    local lora_adapter="$2"
+    local lora_adapter="$2" 
     local num_examples="$3"
     
-    local cmd="python sad/anti_imitation/output_control/run_experiment.py --models \"$model\" --num_examples $num_examples"
+    local cmd="python evals/output_control/run_experiment.py --models \"$model\" --num_examples $num_examples"
     
     if [ -n "$lora_adapter" ]; then
         cmd="$cmd --lora_adapter \"$lora_adapter\""
@@ -104,7 +119,14 @@ for model in "${models[@]}"; do
     rm -rf ~/.cache/huggingface 2>/dev/null || true
     sleep 5
     
-    # a) Evaluate base model
+    # 0) Preload model first
+    echo "Step 0: Preloading model $model"
+    if ! preload_model "$model"; then
+        echo "Model preloading failed for $model, skipping to next model"
+        continue
+    fi
+    
+    # a) Evaluate base model  
     echo "Step 1: Evaluating base model $model"
     if ! evaluate_model "$model" "" 25; then
         echo "Base model evaluation failed for $model, skipping to next model"
