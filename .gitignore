@@ -7,7 +7,7 @@
 
 .DS_Store
 
-.pyc
+*.pyc
 
 .Python
 build/
