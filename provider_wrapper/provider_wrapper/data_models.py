@@ -58,6 +58,9 @@ HUGGINGFACE_MODEL_MAPPING = {
     "gemma-2b-it": "google/gemma-2b-it",
     "gemma-7b": "google/gemma-7b",
     "gemma-7b-it": "google/gemma-7b-it",
+
+    # OpenAI GPT-OSS
+    "gpt-oss-20b": "openai/gpt-oss-20b",
 }
 
 # Models that support chat format (instruct/chat models)
@@ -83,6 +86,7 @@ CHAT_MODELS = {
     "phi-3-small-8k-instruct",
     "gemma-2b-it",
     "gemma-7b-it",
+    "gpt-oss-20b",
 }
 
 
