@@ -46,7 +46,8 @@ def calculate_standard_error(p, n):
 def get_lora_output_dir(model_name: str) -> str:
     """Get the LoRA output directory for a model."""
     clean_name = model_name.replace("/", "_").replace("-", "_").replace(".", "_")
-    return f"./lora_output_{clean_name}"
+    # Keep consistent with lora_finetune.get_model_output_dir
+    return f"./lora_output/lora_output_{clean_name}"
 
 def load_lora_adapter(model_name: str):
     """Load LoRA adapter for a model if it exists."""
@@ -310,9 +311,6 @@ def run_experiment(model_id: str, samples: List[Sample], num_examples: int = 10,
         }
     }
 
-
-
-
 def run_experiment_for_model(model_id, num_examples, lora_adapter_path=None):
     """Run experiment for a single model and return results."""
     print(f"Running output control experiment on {model_id}")
@@ -348,83 +346,3 @@ def run_experiment_for_model(model_id, num_examples, lora_adapter_path=None):
     
     return results
 
-def main():
-    parser = argparse.ArgumentParser(description="Run output control experiment on multiple models")
-    parser.add_argument("--models", nargs="+", 
-                       help="List of model IDs (e.g., phi-2 qwen2-7b). If not provided, uses default model list.")
-
-    parser.add_argument("--num_examples", type=int, default=10, 
-                       help="Number of examples per experiment type (default: 10)")
-    parser.add_argument("--save_individual", action="store_true",
-                       help="Save individual model results to JSON files")
-    parser.add_argument("--lora_adapter", type=str, default=None,
-                       help="Path to LoRA adapter to use for evaluation")
-    args = parser.parse_args()
-
-    # Default model list - pairs of base and instruction-tuned models under 30GB
-    default_models = [
-        "deepseek-llm-7b-chat",
-        "deepseek-coder-7b",
-        "deepseek-coder-7b-instruct",
-        "qwen2-7b",
-        "qwen2-7b-instruct",
-        "qwen2-3b",
-        "qwen2-3b-instruct",
-        "llama-3.1-8b",
-        "llama-3.1-8b-instruct",
-        "llama-3.2-3b",
-        "llama-3.2-3b-instruct",
-    ]
-
-    # Use provided models or default list
-    models_to_run = args.models if args.models else default_models
-
-    print(f"Running experiments on {len(models_to_run)} models: {', '.join(models_to_run)}")
-    print(f"Examples per experiment type: {args.num_examples}")
-    if args.lora_adapter:
-        print(f"Using LoRA adapter: {args.lora_adapter}")
-    print("-" * 60)
-
-    all_results = {}
-    
-    for model_id in models_to_run:
-        print(f"\n{'='*60}")
-        print(f"Running model: {model_id}")
-        print(f"{'='*60}")
-        
-        try:
-            results = run_experiment_for_model(model_id, args.num_examples, args.lora_adapter)
-            all_results[model_id] = results
-            
-            # Update results CSV files
-            update_results_csv(model_id, results)
-            update_simple_metrics_csv(model_id, results, args.lora_adapter)
-            
-            # Save individual model results (always save, not just when requested)
-            model_output_file = f"evals/output_control_results_{model_id.replace('/', '_')}.json"
-            with open(model_output_file, 'w') as f:
-                json.dump(round_floats(results), f, indent=2)
-            print(f"Individual model results saved to {model_output_file}")
-            
-            # Clear GPU memory and HuggingFace cache after model is done
-            clear_gpu_memory()
-            print(f"Completed {model_id}")
-            print("-" * 60)
-            
-        except Exception as e:
-            print(f"Error running experiment for {model_id}: {e}")
-            print("-" * 60)
-            continue
-
-    # Save combined results
-    combined_file = f"evals/output_control_combined_results.json"
-    with open(combined_file, 'w') as f:
-        json.dump(round_floats(all_results), f, indent=2)
-    print(f"Combined results saved to {combined_file}")
-
-    print("\nAll experiments completed!")
-    print(f"Results saved to evals/output_control_results.csv")
-    print(f"Simple metrics saved to evals/output_control_simple_metrics.csv")
-
-if __name__ == "__main__":
-    sys.exit(main()) 
