@@ -7,13 +7,14 @@ name = "logit_control"
 version = "0.1"
 requires-python = ">=3.12"
 dependencies = [
+    "pandas",
     "setuptools==68.0.0",
     "tokenizers==0.21.4",
     "nltk==3.8.1",
     "datasets==2.19.0",
     "zstandard>=0.22.0",
     "torch==2.7.1",
-    "triton>=3.4.0",
+    "triton>=3.3.0",
     "transformers==4.55.0",
     "huggingface_hub==0.34.4",
     "bitsandbytes",
@@ -21,6 +22,7 @@ dependencies = [
     "backoff",
     "fire",
     "tqdm",
+    "openai-harmony",
     "provider_wrapper @ file:///workspace/dev/logit_control/provider_wrapper"
 ]
 
