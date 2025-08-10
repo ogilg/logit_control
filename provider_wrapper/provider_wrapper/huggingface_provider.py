@@ -159,47 +159,47 @@ def _format_prompt(prompt: Prompt, model_id: str, tokenizer) -> str:
         return "\n\n".join([msg.content for msg in prompt])
 
 
-# def _format_prompt_harmony(prompt: Prompt, tokenizer) -> str:
-#     """Render messages in OpenAI Harmony format for gpt-oss models.
+def _format_prompt_harmony(prompt: Prompt, tokenizer) -> str:
+    """Render messages in OpenAI Harmony format for gpt-oss models.
 
-#     We explicitly open an assistant message on the `final` channel for the next turn
-#     and DO NOT close it, so generation continues inside the final channel.
-#     """
-#     # Minimal system message declaring valid channels per Harmony spec
-#     rendered: list[str] = [
-#         "<|start|>system<|message|># Valid channels: analysis, commentary, final. Channel must be included for every message.<|end|>",
-#     ]
+    We explicitly open an assistant message on the `final` channel for the next turn
+    and DO NOT close it, so generation continues inside the final channel.
+    """
+    # Minimal system message declaring valid channels per Harmony spec
+    rendered: list[str] = [
+        "<|start|>system<|message|># Valid channels: analysis, commentary, final. Channel must be included for every message.<|end|>",
+    ]
 
-#     # Render all but the last message as closed messages
-#     if len(prompt) > 0:
-#         for msg in prompt[:-1]:
-#             role = msg.role
-#             content = msg.content
-#             if role == "assistant":
-#                 rendered.append(f"<|start|>assistant<|channel|>final<|message|>{content}<|end|>")
-#             elif role == "user":
-#                 rendered.append(f"<|start|>user<|message|>{content}<|end|>")
-#             elif role == "system":
-#                 rendered.append(f"<|start|>system<|message|>{content}<|end|>")
-#             else:
-#                 # Fallback to user role if unknown
-#                 rendered.append(f"<|start|>user<|message|>{content}<|end|>")
+    # Render all but the last message as closed messages
+    if len(prompt) > 0:
+        for msg in prompt[:-1]:
+            role = msg.role
+            content = msg.content
+            if role == "assistant":
+                rendered.append(f"<|start|>assistant<|channel|>final<|message|>{content}<|end|>")
+            elif role == "user":
+                rendered.append(f"<|start|>user<|message|>{content}<|end|>")
+            elif role == "system":
+                rendered.append(f"<|start|>system<|message|>{content}<|end|>")
+            else:
+                # Fallback to user role if unknown
+                rendered.append(f"<|start|>user<|message|>{content}<|end|>")
 
-#     # For the last message, we open an assistant final message to continue generation
-#     if len(prompt) == 0:
-#         # No prior messages – just open final channel
-#         rendered.append("<|start|>assistant<|channel|>final<|message|>")
-#     else:
-#         last = prompt[-1]
-#         # We always continue inside assistant/final; include any assistant stub text
-#         stub_text = last.content if last.role == "assistant" else ""
-#         # If the last is a user message, include it as a closed message first
-#         if last.role == "user":
-#             rendered.append(f"<|start|>user<|message|>{last.content}<|end|>")
-#             stub_text = ""
-#         rendered.append(f"<|start|>assistant<|channel|>final<|message|>{stub_text}")
+    # For the last message, we open an assistant final message to continue generation
+    if len(prompt) == 0:
+        # No prior messages – just open final channel
+        rendered.append("<|start|>assistant<|channel|>final<|message|>")
+    else:
+        last = prompt[-1]
+        # We always continue inside assistant/final; include any assistant stub text
+        stub_text = last.content if last.role == "assistant" else ""
+        # If the last is a user message, include it as a closed message first
+        if last.role == "user":
+            rendered.append(f"<|start|>user<|message|>{last.content}<|end|>")
+            stub_text = ""
+        rendered.append(f"<|start|>assistant<|channel|>final<|message|>{stub_text}")
 
-#     return "".join(rendered)
+    return "".join(rendered)
 
 
 def _format_prompt_harmony_lib(prompt: Prompt) -> str | None:
@@ -286,7 +286,7 @@ def huggingface_get_text(model_id: str, request: GetTextRequest) -> GetTextRespo
     # Format the prompt
     if model_id == "gpt-oss-20b":
         # Prefer the official Harmony library; fall back to minimal renderer
-        formatted_prompt = _format_prompt_harmony_lib(request.prompt)
+        formatted_prompt = _format_prompt_harmony_lib(request.prompt) or _format_prompt_harmony(request.prompt, tokenizer)
     else:
         formatted_prompt = _format_prompt(request.prompt, model_id, tokenizer)
     
@@ -360,7 +360,7 @@ def huggingface_get_probs(model_id: str, request: GetProbsRequest) -> GetProbsRe
     # Format prompt
     if model_id == "gpt-oss-20b":
         # Align with generation: next token should be inside assistant/final
-        prompt_text = _format_prompt_harmony_lib(request.prompt)
+        prompt_text = _format_prompt_harmony_lib(request.prompt) or _format_prompt_harmony(request.prompt, tokenizer)
     else:
         prompt_text = _format_prompt(request.prompt, model_id, tokenizer)
     
