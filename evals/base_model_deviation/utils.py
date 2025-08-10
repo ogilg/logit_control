@@ -104,7 +104,7 @@ def get_combined_samples(limit: int | None = None, shuffle: bool = True) -> List
     """Return combined excerpt + pattern samples, optionally shuffled and limited."""
     items = generate_excerpt_samples() + generate_pattern_samples()
     if shuffle:
-        random.seed(42)
+        random.seed(43)
         random.shuffle(items)
     if limit is not None:
         items = items[:limit]

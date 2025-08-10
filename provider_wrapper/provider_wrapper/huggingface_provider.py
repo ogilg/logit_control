@@ -299,12 +299,16 @@ def huggingface_get_text(model_id: str, request: GetTextRequest) -> GetTextRespo
     
     # Generate text
     with no_grad():
+        is_greedy = (request.temperature is not None and request.temperature <= 0.0)
         gen_kwargs: Dict[str, Any] = {
             "max_new_tokens": request.max_tokens,
-            "temperature": request.temperature,
-            "do_sample": True,
             "pad_token_id": tokenizer.eos_token_id,
         }
+        if is_greedy:
+            gen_kwargs["do_sample"] = False
+        else:
+            gen_kwargs["do_sample"] = True
+            gen_kwargs["temperature"] = request.temperature
         # If Harmony end token exists, use it as eos
         try:
             harmony_end_id = tokenizer.convert_tokens_to_ids("<|end|>")
@@ -363,6 +367,8 @@ def huggingface_get_probs(model_id: str, request: GetProbsRequest) -> GetProbsRe
         prompt_text = _format_prompt_harmony_lib(request.prompt) or _format_prompt_harmony(request.prompt, tokenizer)
     else:
         prompt_text = _format_prompt(request.prompt, model_id, tokenizer)
+
+    print(prompt_text)
     
     # Tokenize input
     inputs = tokenizer(prompt_text, return_tensors="pt")

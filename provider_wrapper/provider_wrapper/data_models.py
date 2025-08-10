@@ -86,7 +86,6 @@ CHAT_MODELS = {
     "phi-3-small-8k-instruct",
     "gemma-2b-it",
     "gemma-7b-it",
-    "gpt-oss-20b",
 }
 
 

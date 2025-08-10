@@ -260,8 +260,14 @@ def run_experiment(model_id: str, samples: List[Sample], num_examples: int = 10,
         # Get model probabilities for the prompt
         response_probs = get_model_probabilities(model_name, sample.prompt, temperature=1.0, lora_adapter_path=lora_adapter_path)
         
-        # Sample text to see what the model is actually outputting
-        sample_text = sample_model_text(model_name, sample.prompt, max_tokens=50, temperature=0.01, lora_adapter_path=lora_adapter_path)
+        # Sample text (debug preview): greedy decoding to avoid analysis/tool chatter
+        sample_text = sample_model_text(
+            model_name,
+            sample.prompt,
+            max_tokens=10,
+            temperature=0.0,
+            lora_adapter_path=lora_adapter_path,
+        )
         
         # Prepare sample data for the TVD parser
         sample_data = {
