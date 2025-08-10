@@ -14,8 +14,7 @@ import backoff
 import torch
 import torch.nn.functional as F
 from torch import no_grad, softmax, topk
-from transformers import (AutoModelForCausalLM, AutoTokenizer,
-                          BitsAndBytesConfig)
+from transformers import (AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig)
 
 from .data_models import (GetProbsRequest, GetProbsResponse,
                           GetTextRequest, GetTextResponse, Prompt,
@@ -79,11 +78,15 @@ def decode(model_id: str, tokens: list[int]) -> str:
     return tokenizer.decode(tokens, skip_special_tokens=True)
 
 
-def _get_model_and_tokenizer(model_id: str, lora_adapter_path: str = None):
+def _get_model_and_tokenizer(
+    model_id: str,
+    lora_adapter_path: str | None = None,
+    quantization: str = "bnb",
+):
     """Get or load model and tokenizer using singleton pattern."""
     
-    # Create a unique key for the model with LoRA adapter
-    model_key = f"{model_id}_lora" if lora_adapter_path else model_id
+    # Create a unique key for the model with LoRA adapter and quantization mode
+    model_key = f"{model_id}_{quantization}_lora" if lora_adapter_path else f"{model_id}_{quantization}"
     
     if model_key not in _models:
         hf_model_name = HUGGINGFACE_MODEL_MAPPING[model_id]
@@ -93,22 +96,24 @@ def _get_model_and_tokenizer(model_id: str, lora_adapter_path: str = None):
         if tokenizer.pad_token is None:
             tokenizer.pad_token = tokenizer.eos_token
         
-        bnb_config = BitsAndBytesConfig(
-            load_in_4bit=True,
-            bnb_4bit_quant_type="nf4",
-            bnb_4bit_compute_dtype=torch.bfloat16,
-            bnb_4bit_use_double_quant=True,
-        )
 
-        # Load model with quantization - let transformers handle device placement
-        model = AutoModelForCausalLM.from_pretrained(
-            hf_model_name,  
-            quantization_config=bnb_config,
-            device_map="auto",  # Let transformers automatically handle device placement
-            torch_dtype=torch.bfloat16,
-            trust_remote_code=True,
-            resume_download=True,
-        )
+        # Build a single kwargs dict and make one from_pretrained call
+        model_kwargs: Dict[str, Any] = {
+            "device_map": "auto",
+            "trust_remote_code": True,
+            "low_cpu_mem_usage": True,
+        }
+        if quantization == "bnb":
+            model_kwargs["quantization_config"] = BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_quant_type="nf4",
+                bnb_4bit_compute_dtype=torch.bfloat16,
+                bnb_4bit_use_double_quant=True,
+            )
+            model_kwargs["torch_dtype"] = torch.bfloat16
+        # mxfp4: do not pass quantization_config; let repo load native MXFP4
+
+        model = AutoModelForCausalLM.from_pretrained(hf_model_name, **model_kwargs)
         
         # Load LoRA adapter if provided
         if lora_adapter_path:
@@ -158,7 +163,8 @@ def huggingface_get_text(model_id: str, request: GetTextRequest) -> GetTextRespo
     # Check if LoRA adapter path is provided in the request context
     lora_adapter_path = getattr(request, 'lora_adapter_path', None)
     
-    model, tokenizer = _get_model_and_tokenizer(model_id, lora_adapter_path)
+    quantization = getattr(request, "context", {}).get("quantization", None) if hasattr(request, "context") and isinstance(request.context, dict) else None
+    model, tokenizer = _get_model_and_tokenizer(model_id, lora_adapter_path, quantization)
     
     # Format the prompt
     formatted_prompt = _format_prompt(request.prompt, model_id, tokenizer)
@@ -212,7 +218,8 @@ def huggingface_get_probs(model_id: str, request: GetProbsRequest) -> GetProbsRe
     # Check if LoRA adapter path is provided in the request context
     lora_adapter_path = getattr(request, 'lora_adapter_path', None)
     
-    model, tokenizer = _get_model_and_tokenizer(model_id, lora_adapter_path)
+    quantization = getattr(request, "context", {}).get("quantization", None) if hasattr(request, "context") and isinstance(request.context, dict) else None
+    model, tokenizer = _get_model_and_tokenizer(model_id, lora_adapter_path, quantization)
     
     # Format prompt
     prompt_text = _format_prompt(request.prompt, model_id, tokenizer)
@@ -258,7 +265,7 @@ def huggingface_get_probs(model_id: str, request: GetProbsRequest) -> GetProbsRe
 
 # Model Management Functions
 
-def preload_model(model_id: str, verbose: bool = False) -> bool:
+def preload_model(model_id: str, verbose: bool = False, quantization: str | None = None) -> bool:
     """
     Preload a model into the HuggingFace cache.
     
@@ -284,7 +291,7 @@ def preload_model(model_id: str, verbose: bool = False) -> bool:
     
     try:
         # Use the existing _get_model_and_tokenizer function which handles caching
-        model, tokenizer = _get_model_and_tokenizer(model_name)
+        model, tokenizer = _get_model_and_tokenizer(model_name, None, quantization)
         
         if verbose:
             print(f"✓ {model_id} preloaded successfully")

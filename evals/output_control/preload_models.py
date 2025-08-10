@@ -28,6 +28,12 @@ def _set_env_defaults():
 def main():
     parser = argparse.ArgumentParser(description="Preload a single model into HuggingFace cache (with retry)")
     parser.add_argument("model", help="Model ID to preload (e.g., llama-3.1-8b)")
+    parser.add_argument(
+        "--quantization",
+        choices=["bnb", "mxfp4"],
+        default="bnb",
+        help="Quantization mode: mxfp4 (default, model-native), or bnb (bitsandbytes 4-bit)",
+    )
     parser.add_argument("--verbose", action="store_true", help="Enable verbose output during preloading")
     parser.add_argument("--max_attempts", type=int, default=4, help="Maximum retry attempts")
     parser.add_argument("--sleep_between_attempts", type=int, default=10, help="Seconds to sleep between attempts")
@@ -42,8 +48,8 @@ def main():
     print("=" * 60)
 
     for attempt in range(1, args.max_attempts + 1):
-        print(f"Attempt {attempt}/{args.max_attempts}: Preloading {args.model}...")
-        success = preload_model(args.model, verbose=args.verbose)
+        print(f"Attempt {attempt}/{args.max_attempts}: Preloading {args.model} (quantization={args.quantization})...")
+        success = preload_model(args.model, verbose=args.verbose, quantization=args.quantization)
 
         if success:
             print("\n" + "=" * 60)

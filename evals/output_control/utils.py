@@ -81,6 +81,7 @@ def _generate_random_words_samples(num_examples: int, use_few_shot: bool = False
                             You must respond with only one of the two generated words. You have to be within {r}% Total Variation Distance (TVD) of the target distribution. 
                             Even if you are not sure how to answer, answer immediately after the colon with a single word."""
                         )
+                    ),
                     Message(role="assistant", content="My answer is: ")
                 ]
                 
