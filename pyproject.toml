@@ -3,21 +3,12 @@ requires = ["setuptools>=68.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sadcode"
+name = "logit_control"
 version = "0.1"
+requires-python = ">=3.12"
 dependencies = [
-    "evalugator @ git+https://github.com/ogilg/evalugator.git@huggingface-provider",
-    "kaleido==0.2.1",
-    "plotly==5.18.0",
-    "requests==2.31.0",
-    "scipy==1.16.1",
-    "seaborn==0.13.2",
     "setuptools==68.0.0",
-    "tiktoken>=0.7.0",
     "tokenizers==0.21.4",
-    "PyPDF2>=3.0.1",
-    "markdown2>=2.4.13",
-    "pdfkit>=1.0.0", 
     "nltk==3.8.1",
     "datasets==2.19.0",
     "zstandard>=0.22.0",
@@ -29,11 +20,9 @@ dependencies = [
     "backoff",
     "fire",
     "tqdm",
-    "provider_wrapper @ /Users/oscargilg/Dev/logit_control/provider_wrapper"
+    "provider_wrapper @ file:///workspace/dev/logit_control/provider_wrapper"
 ]
 
-[project.scripts]
-sad = "sad.main:main"
-
 [tool.setuptools]
-packages = ["sad"]
+packages = []
+
