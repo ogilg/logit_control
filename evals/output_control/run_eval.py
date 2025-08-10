@@ -61,7 +61,8 @@ def load_lora_adapter(model_name: str):
 
 def update_results_csv(model_id, results):
     """Update the main results CSV file (original format without TVD stats)."""
-    csv_file = "evals/output_control_results.csv"
+    csv_file = "results/output_control_results.csv"
+    os.makedirs(os.path.dirname(csv_file), exist_ok=True)
     
     # Calculate metrics
     summary = results['summary']
@@ -157,7 +158,8 @@ def update_results_csv(model_id, results):
 
 def update_simple_metrics_csv(model_id, results, lora_adapter_path=None):
     """Update the simple metrics CSV file with basic counts and TVD stats, separated by case type."""
-    csv_file = "evals/output_control_simple_metrics.csv"
+    csv_file = "results/output_control_simple_metrics.csv"
+    os.makedirs(os.path.dirname(csv_file), exist_ok=True)
     
     # Determine if this is a fine-tuned model
     is_fine_tuned = lora_adapter_path is not None
@@ -259,7 +261,7 @@ def run_experiment(model_id: str, samples: List[Sample], num_examples: int = 10,
         response_probs = get_model_probabilities(model_name, sample.prompt, temperature=1.0, lora_adapter_path=lora_adapter_path)
         
         # Sample text to see what the model is actually outputting
-        sample_text = sample_model_text(model_name, sample.prompt, max_tokens=4, temperature=0, lora_adapter_path=lora_adapter_path)
+        sample_text = sample_model_text(model_name, sample.prompt, max_tokens=50, temperature=0.01, lora_adapter_path=lora_adapter_path)
         
         # Prepare sample data for the TVD parser
         sample_data = {
