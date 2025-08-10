@@ -35,9 +35,12 @@ def main():
     )
     parser.add_argument(
         "--save_individual",
+        dest="save_individual",
         action="store_true",
-        help="Save individual model results to JSON (in addition to CSV updates)",
+        default=True,
+        help="Save individual model results to JSON (in addition to CSV updates). Enabled by default.",
     )
+
 
     args = parser.parse_args()
 
@@ -54,7 +57,8 @@ def main():
 
     # Optionally save individual JSON results
     if args.save_individual:
-        output_file = f"evals/output_control_results_{args.model.replace('/', '_')}.json"
+        output_file = f"results/output_control_results_{args.model.replace('/', '_')}.json"
+        os.makedirs(os.path.dirname(output_file), exist_ok=True)
         with open(output_file, "w") as f:
             json.dump(results, f, indent=2)
         print(f"Individual model results saved to {output_file}")
