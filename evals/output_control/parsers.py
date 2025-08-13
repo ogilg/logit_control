@@ -3,7 +3,7 @@ import sys
 from collections import Counter
 
 import numpy as np
-from provider_wrapper import huggingface_get_probs
+from provider_wrapper import get_provider_for_model
 from provider_wrapper import GetProbsRequest, Prompt
 
 

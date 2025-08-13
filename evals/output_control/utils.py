@@ -5,9 +5,13 @@ from typing import List
 
 # Import Sample from custom_evals
 # Import the HuggingFace provider functions
-from provider_wrapper import (GetProbsRequest,
-                          GetTextRequest, Message, Sample,
-                          huggingface_get_probs, huggingface_get_text)
+from provider_wrapper import (
+    GetProbsRequest,
+    GetTextRequest,
+    Message,
+    Sample,
+    get_provider_for_model,
+)
 
 # Import the few shot examples
 from few_shot_examples import (few_shot_random_examples,
@@ -21,41 +25,57 @@ def load_single_token_words(file_path):
     return words_list
 
 
-def get_model_probabilities(model_id: str, prompt, temperature: float = 1.0, lora_adapter_path: str = None):
-    """Get probability distribution for next token using the custom_evals interface."""
+def get_model_probabilities(
+    model_id: str,
+    prompt,
+    temperature: float = 1.0,
+    lora_adapter_path: str | None = None,
+    provider=None,
+):
+    """Get probability distribution for next token using a provider.
+
+    If ``provider`` is None, create one for the model_id.
+    """
     # Create a GetProbsRequest
     request = GetProbsRequest(
         context=None,
         prompt=prompt,
         min_top_n=10,  # Get top 10 tokens
-        num_samples=None  # Use logprobs instead of sampling
+        num_samples=None,  # Use logprobs instead of sampling
     )
-    
-    # Add LoRA adapter path to request if provided
+
     if lora_adapter_path:
         request.lora_adapter_path = lora_adapter_path
-    
-    # Get probabilities using the custom_evals interface
-    response = huggingface_get_probs(model_id, request)
+
+    provider = provider or get_provider_for_model(model_id, request=request)
+    response = provider.get_probs(request)
     return response.probs
 
-def sample_model_text(model_id: str, prompt, max_tokens: int = 10, temperature: float = 1.0, lora_adapter_path: str = None):
-    """Sample text from the model to see what it's actually outputting."""
+def sample_model_text(
+    model_id: str,
+    prompt,
+    max_tokens: int = 10,
+    temperature: float = 1.0,
+    lora_adapter_path: str | None = None,
+    provider=None,
+):
+    """Sample text from the model to see what it's actually outputting.
 
+    If ``provider`` is None, create one for the model_id.
+    """
     # Create a GetTextRequest
     request = GetTextRequest(
         context=None,  # Required parameter
         prompt=prompt,
         max_tokens=max_tokens,
-        temperature=temperature
+        temperature=temperature,
     )
-    
-    # Add LoRA adapter path to request if provided
+
     if lora_adapter_path:
         request.lora_adapter_path = lora_adapter_path
-    
-    # Get text sample using the custom_evals interface
-    response = huggingface_get_text(model_id, request)
+
+    provider = provider or get_provider_for_model(model_id, request=request)
+    response = provider.generate_text(request)
     return response.txt
 
 

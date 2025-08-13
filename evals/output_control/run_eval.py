@@ -16,8 +16,15 @@ from typing import Any, Dict, List
 
 import pandas as pd
 import torch
-from provider_wrapper.huggingface_provider import extract_model_name
-from provider_wrapper import (HUGGINGFACE_MODEL_MAPPING, Sample, validate_model_availability, clear_gpu_memory, clear_huggingface_disk_cache)
+from provider_wrapper.provider_wrapper.huggingface_provider import extract_model_name
+from provider_wrapper import (
+    HUGGINGFACE_MODEL_MAPPING,
+    Sample,
+    validate_model_availability,
+    clear_gpu_memory,
+    clear_huggingface_disk_cache,
+    get_provider_for_model,
+)
 from parsers import tvd_parser
 from tqdm import tqdm
 from utils import (get_combined_samples, get_model_probabilities,
@@ -256,9 +263,18 @@ def run_experiment(model_id: str, samples: List[Sample], num_examples: int = 10,
     
     results = []
     
+    # Create provider once and reuse
+    provider = get_provider_for_model(model_name)
+
     for sample_idx, sample in enumerate(tqdm(samples, desc="Running experiments")):
         # Get model probabilities for the prompt
-        response_probs = get_model_probabilities(model_name, sample.prompt, temperature=1.0, lora_adapter_path=lora_adapter_path)
+        response_probs = get_model_probabilities(
+            model_name,
+            sample.prompt,
+            temperature=1.0,
+            lora_adapter_path=lora_adapter_path,
+            provider=provider,
+        )
         
         # Sample text (debug preview): greedy decoding to avoid analysis/tool chatter
         sample_text = sample_model_text(
@@ -267,6 +283,7 @@ def run_experiment(model_id: str, samples: List[Sample], num_examples: int = 10,
             max_tokens=10,
             temperature=0.0,
             lora_adapter_path=lora_adapter_path,
+            provider=provider,
         )
         
         # Prepare sample data for the TVD parser

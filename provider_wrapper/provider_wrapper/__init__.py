@@ -3,23 +3,36 @@
 from .lora_config import LoRAConfig
 from .lora_finetuner import LoRAFineTuner
 from .loss_functions import CustomLossFunction, KLDivergenceLoss, TVDLoss
-from .data_models import (Sample, HUGGINGFACE_MODEL_MAPPING, CHAT_MODELS,
-                         GetProbsRequest, GetProbsResponse, GetTextRequest, 
-                         GetTextResponse, Message, Prompt)
+from .data_models import (
+    Sample,
+    HUGGINGFACE_MODEL_MAPPING,
+    CHAT_MODELS,
+    GetProbsRequest,
+    GetProbsResponse,
+    GetTextRequest,
+    GetTextResponse,
+    Message,
+    Prompt,
+)
 from .huggingface_provider import (
-    huggingface_get_probs, huggingface_get_text,
+    HuggingFaceProvider,
+    DefaultHFProvider,
+    GPTOSSProvider,
+    get_provider_for_model,
     preload_model,
-    validate_model_availability, 
+    validate_model_availability,
     clear_model_cache,
     clear_huggingface_disk_cache,
-    clear_gpu_memory
+    clear_gpu_memory,
 )
 
 __version__ = "0.1.0"
 __all__ = [
     # HuggingFace provider
-    "huggingface_get_probs",
-    "huggingface_get_text",
+    "HuggingFaceProvider",
+    "DefaultHFProvider",
+    "GPTOSSProvider",
+    "get_provider_for_model",
     "HUGGINGFACE_MODEL_MAPPING",
     "CHAT_MODELS",
     
@@ -48,5 +61,5 @@ __all__ = [
     "validate_model_availability",
     "clear_model_cache", 
     "clear_huggingface_disk_cache",
-    "clear_gpu_memory"
+    "clear_gpu_memory",
 ] 

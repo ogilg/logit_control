@@ -16,8 +16,7 @@ from typing import Any, Dict, List
 
 import pandas as pd
 
-from provider_wrapper import huggingface_get_text
-from provider_wrapper import GetTextRequest
+from provider_wrapper import GetTextRequest, get_provider_for_model
 
 from .utils import get_combined_samples
 from .parsers import score_low_probability_continuation
@@ -34,6 +33,9 @@ def run_eval(
     results: List[Dict[str, Any]] = []
     correct = 0
 
+    # Create provider once and reuse
+    provider = get_provider_for_model(model_id)
+
     for idx, sample in enumerate(samples):
         prompt = sample["prompt"]
         meta = sample["meta"]
@@ -47,7 +49,7 @@ def run_eval(
         if lora_adapter:
             request.lora_adapter_path = lora_adapter
 
-        response = huggingface_get_text(model_id, request)
+        response = provider.generate_text(request)
         generated = response.txt
 
         score = score_low_probability_continuation(

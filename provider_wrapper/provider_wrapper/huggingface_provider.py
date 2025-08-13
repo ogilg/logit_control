@@ -1,40 +1,45 @@
 """
 HuggingFace provider for evalugator.
 
-Supports DeepSeek, Qwen, Mistral, and Llama models.
-Uses local GPU models for both text generation and probability extraction.
+Refactored to a class-based design so we can support multiple prompt formats
+while sharing model/tokenizer loading, generation and logits logic.
 """
 
 import gc
 import os
 import shutil
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 import backoff
 import torch
-import torch.nn.functional as F
 from torch import no_grad, softmax, topk
-from transformers import (AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig)
+from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 
-from .data_models import (GetProbsRequest, GetProbsResponse,
-                          GetTextRequest, GetTextResponse, Prompt,
-                          HUGGINGFACE_MODEL_MAPPING, CHAT_MODELS)
+from .data_models import (
+    GetProbsRequest,
+    GetProbsResponse,
+    GetTextRequest,
+    GetTextResponse,
+    Prompt,
+    HUGGINGFACE_MODEL_MAPPING,
+    CHAT_MODELS,
+)
 
 from openai_harmony import (
-            load_harmony_encoding,
-            HarmonyEncodingName,
-            Role as HarmonyRole,
-            Message as HarmonyMessage,
-            Conversation as HarmonyConversation,
-            SystemContent,
-        )
+    load_harmony_encoding,
+    HarmonyEncodingName,
+    Role as HarmonyRole,
+    Message as HarmonyMessage,
+    Conversation as HarmonyConversation,
+    SystemContent,
+)
 
 
 def on_backoff(details):
     print(f"Repeating failed request (attempt {details['tries']}). Reason: {details['exception']}")
     
 
-# Singleton storage
+# Singleton storage (cached across providers)
 _models: Dict[str, Any] = {}
 _tokenizers: Dict[str, Any] = {}
 
@@ -45,10 +50,8 @@ def extract_model_name(model_id: str) -> str:
 
 def provides_model(model_id: str) -> bool:
     """Return True if this provider supports the given model_id."""
-    if model_id.startswith("huggingface/"):
-        model_id = extract_model_name(model_id)
-        return model_id in HUGGINGFACE_MODEL_MAPPING
-    return False
+    name = extract_model_name(model_id)
+    return name in HUGGINGFACE_MODEL_MAPPING
 
 
 def execute(model_id: str, request):
@@ -56,362 +59,367 @@ def execute(model_id: str, request):
     if not provides_model(model_id):
         raise NotImplementedError(f"Model {model_id} is not supported by HuggingFace provider")
     
-    # Extract actual model_id if prefixed (same pattern as replicate)
-    model_name = extract_model_name(model_id)
-    
+    provider = get_provider_for_model(model_id)
     if isinstance(request, GetTextRequest):
-        return huggingface_get_text(model_name, request)
+        return provider.generate_text(request)
     elif isinstance(request, GetProbsRequest):
-        return huggingface_get_probs(model_name, request)
+        return provider.get_probs(request)
     else:
         raise NotImplementedError(
             f"Request {type(request).__name__} for model {model_id} is not implemented"
         )
 
 
-def encode(model_id: str, data: str) -> list[int]:
-    """Convert text to tokens - requires local model."""
-    # Extract actual model_id if prefixed (same pattern as replicate)
-    model_name = extract_model_name(model_id)
-    
-    tokenizer = _get_tokenizer(model_name)
-    return tokenizer.encode(data)
+class HuggingFaceProvider:
+    """Parent provider with shared functionality.
+
+    Child classes should override ``format_prompt`` to return both tokens and text.
+    """
+
+    @classmethod
+    def get_model_and_tokenizer(
+        cls,
+        model_id: str,
+        lora_adapter_path: str | None = None,
+    ):
+        """Get or load model and tokenizer using singleton pattern.
+
+        Caches by model_id + quantization + lora-adapter presence so callers can
+        share models safely across providers.
+        """
+
+        # Cache key includes provider class to allow different loading strategies
+        model_key = f"{model_id}_{cls.__name__}_lora" if lora_adapter_path else f"{model_id}_{cls.__name__}"
+
+        if model_key not in _models:
+            hf_model_name = HUGGINGFACE_MODEL_MAPPING[model_id]
+
+            # Load tokenizer
+            tokenizer = AutoTokenizer.from_pretrained(hf_model_name)
+            if tokenizer.pad_token is None:
+                tokenizer.pad_token = tokenizer.eos_token
+
+            # Build base kwargs and allow subclass to extend
+            model_kwargs: Dict[str, Any] = {
+                "device_map": "auto",
+                "trust_remote_code": True,
+                "low_cpu_mem_usage": True,
+            }
+            # Allow subclasses to add provider-specific kwargs (e.g., quantization)
+            extra_kwargs = cls._extra_model_kwargs()
+            if extra_kwargs:
+                model_kwargs.update(extra_kwargs)
+
+            model = AutoModelForCausalLM.from_pretrained(hf_model_name, **model_kwargs)
+
+            # Load LoRA adapter if provided
+            if lora_adapter_path:
+                try:
+                    from peft import PeftModel
+
+                    print(f"Loading LoRA adapter from {lora_adapter_path}")
+                    model = PeftModel.from_pretrained(model, lora_adapter_path)
+                    print("LoRA adapter loaded successfully")
+                except Exception as e:
+                    print(f"Warning: Could not load LoRA adapter from {lora_adapter_path}: {e}")
+                    print("Continuing with base model")
+
+            _models[model_key] = model
+            _tokenizers[model_key] = tokenizer
+
+        return _models[model_key], _tokenizers[model_key]
 
 
-def decode(model_id: str, tokens: list[int]) -> str:
-    """Convert tokens to text - requires local model."""
-    # Extract actual model_id if prefixed (same pattern as replicate)
-    model_name = extract_model_name(model_id)
-    
-    tokenizer = _get_tokenizer(model_name)
-    return tokenizer.decode(tokens, skip_special_tokens=True)
+    def __init__(
+        self,
+        model_id: str,
+        *,
+        lora_adapter_path: str | None = None,
+    ) -> None:
+        self.model_id = extract_model_name(model_id)
+        self.lora_adapter_path = lora_adapter_path
+        self.model, self.tokenizer = self.get_model_and_tokenizer(
+            self.model_id, lora_adapter_path
+        )
+
+    @classmethod
+    def _extra_model_kwargs(cls) -> Dict[str, Any]:
+        """Subclass hook: return extra kwargs for model.from_pretrained.
+
+        Base: no extras.
+        """
+        return {}
+
+    # ----- Prompt formatting API -----
+    def format_prompt(self, prompt: Prompt) -> Tuple[List[int], str]:
+        """Return (tokens, text) for the model input.
+
+        Base implementation uses a simple newline-joined prompt.
+        """
+        text = "\n\n".join([msg.content for msg in prompt])
+        tokens = self.tokenizer.encode(text)
+        return tokens, text
+
+    # ----- Public helpers -----
+    def encode(self, data: str) -> List[int]:
+        return self.tokenizer.encode(data)
+
+    def decode(self, tokens: List[int]) -> str:
+        return self.tokenizer.decode(tokens, skip_special_tokens=True)
+
+    # ----- Core ops -----
+    def generate_text(self, request: GetTextRequest) -> GetTextResponse:
+        tokens, text = self.format_prompt(request.prompt)
+
+        # Build input tensor from tokens directly for full control
+        input_ids = torch.tensor([tokens], dtype=torch.long)
+        device = next(self.model.parameters()).device
+        input_ids = input_ids.to(device)
+
+        with no_grad():
+            is_greedy = request.temperature is not None and request.temperature <= 0.0
+            gen_kwargs: Dict[str, Any] = {
+                "max_new_tokens": request.max_tokens,
+                "pad_token_id": self.tokenizer.eos_token_id,
+            }
+            if is_greedy:
+                gen_kwargs["do_sample"] = False
+            else:
+                gen_kwargs["do_sample"] = True
+                gen_kwargs["temperature"] = request.temperature
+
+            # Optional: Harmony end token if present in this tokenizer
+            try:
+                harmony_end_id = self.tokenizer.convert_tokens_to_ids("<|end|>")
+                if isinstance(harmony_end_id, int) and harmony_end_id >= 0:
+                    gen_kwargs["eos_token_id"] = harmony_end_id
+            except Exception:
+                pass
+
+            outputs = self.model.generate(input_ids=input_ids, **gen_kwargs)
+
+        generated_tokens = outputs[0][input_ids.shape[1]:]
+        generated_text = self.tokenizer.decode(generated_tokens, skip_special_tokens=True)
+        if "<|end|>" in generated_text:
+            generated_text = generated_text.split("<|end|>", 1)[0]
+
+        return GetTextResponse(
+            model_id=self.model_id,
+            request=request,
+            txt=generated_text,
+            raw_responses=[generated_text],
+            context={
+                "method": "generation",
+                "max_tokens": request.max_tokens,
+                "temperature": request.temperature,
+                "hf_model_name": HUGGINGFACE_MODEL_MAPPING[self.model_id],
+                "local_model": True,
+                "prompt_text": text,
+            },
+        )
+
+    def get_probs(self, request: GetProbsRequest) -> GetProbsResponse:
+        tokens, text = self.format_prompt(request.prompt)
+        input_ids = torch.tensor([tokens], dtype=torch.long)
+        device = next(self.model.parameters()).device
+        input_ids = input_ids.to(device)
+
+        with no_grad():
+            outputs = self.model(input_ids=input_ids)
+            logits = outputs.logits[0, -1, :]
+
+        probs_tensor = softmax(logits, dim=-1)
+        k = min(50, probs_tensor.shape[-1])
+        top_probs, top_indices = topk(probs_tensor, k)
+
+        probs: Dict[str, float] = {}
+        for prob, idx in zip(top_probs.detach().cpu().tolist(), top_indices.detach().cpu().tolist()):
+            token_str = self.tokenizer.decode([idx])
+            probs[token_str] = prob
+
+        return GetProbsResponse(
+            model_id=self.model_id,
+            request=request,
+            probs=probs,
+            raw_responses=[probs],
+            context={
+                "method": "logits_based",
+                "top_k": k,
+                "hf_model_name": HUGGINGFACE_MODEL_MAPPING[self.model_id],
+                "local_model": True,
+                "prompt_text": text,
+            },
+        )
 
 
-def _get_model_and_tokenizer(
-    model_id: str,
-    lora_adapter_path: str | None = None,
-    quantization: str = "bnb",
-):
-    """Get or load model and tokenizer using singleton pattern."""
-    
-    # Create a unique key for the model with LoRA adapter and quantization mode
-    model_key = f"{model_id}_{quantization}_lora" if lora_adapter_path else f"{model_id}_{quantization}"
-    
-    if model_key not in _models:
-        hf_model_name = HUGGINGFACE_MODEL_MAPPING[model_id]
-        
-        # Load tokenizer
-        tokenizer = AutoTokenizer.from_pretrained(hf_model_name)
-        if tokenizer.pad_token is None:
-            tokenizer.pad_token = tokenizer.eos_token
-        
+class DefaultHFProvider(HuggingFaceProvider):
+    """Default prompt formatting.
 
-        # Build a single kwargs dict and make one from_pretrained call
-        model_kwargs: Dict[str, Any] = {
-            "device_map": "auto",
-            "trust_remote_code": True,
-            "low_cpu_mem_usage": True,
-        }
-        if quantization == "bnb":
-            model_kwargs["quantization_config"] = BitsAndBytesConfig(
+    - Chat models: use tokenizer chat template
+    - Non-chat models: simple join
+    """
+
+    def format_prompt(self, prompt: Prompt) -> Tuple[List[int], str]:
+        if self.model_id in CHAT_MODELS:
+            messages = [{"role": msg.role, "content": msg.content} for msg in prompt]
+            text = self.tokenizer.apply_chat_template(
+                messages, tokenize=False, add_generation_prompt=True
+            )
+        else:
+            text = "\n\n".join([msg.content for msg in prompt])
+        tokens = self.tokenizer.encode(text)
+        return tokens, text
+
+    @classmethod
+    def _extra_model_kwargs(cls) -> Dict[str, Any]:
+        # Apply 4-bit quantization by default for standard HF models
+        return {
+            "quantization_config": BitsAndBytesConfig(
                 load_in_4bit=True,
                 bnb_4bit_quant_type="nf4",
                 bnb_4bit_compute_dtype=torch.bfloat16,
                 bnb_4bit_use_double_quant=True,
-            )
-            model_kwargs["torch_dtype"] = torch.bfloat16
-        # mxfp4: do not pass quantization_config; let repo load native MXFP4
-
-        model = AutoModelForCausalLM.from_pretrained(hf_model_name, **model_kwargs)
-        
-        # Load LoRA adapter if provided
-        if lora_adapter_path:
-            try:
-                from peft import PeftModel
-                print(f"Loading LoRA adapter from {lora_adapter_path}")
-                model = PeftModel.from_pretrained(model, lora_adapter_path)
-                print("LoRA adapter loaded successfully")
-            except Exception as e:
-                print(f"Warning: Could not load LoRA adapter from {lora_adapter_path}: {e}")
-                print("Continuing with base model")
-        
-        _models[model_key] = model
-        _tokenizers[model_key] = tokenizer
-    
-    return _models[model_key], _tokenizers[model_key]
-
-
-def _get_tokenizer(model_id: str):
-    """Get tokenizer for the given model."""
-    if model_id not in _tokenizers:
-        _get_model_and_tokenizer(model_id)  # This will load both
-    return _tokenizers[model_id]
-
-
-def _format_prompt(prompt: Prompt, model_id: str, tokenizer) -> str:
-    """Format prompt for the specific model."""
-    if model_id in CHAT_MODELS:
-        # Use chat template for chat models
-        messages = [{"role": msg.role, "content": msg.content} for msg in prompt]
-        return tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-    else:
-        # Use simple concatenation for non-chat models
-        return "\n\n".join([msg.content for msg in prompt])
-
-
-def _format_prompt_harmony(prompt: Prompt, tokenizer) -> str:
-    """Render messages in OpenAI Harmony format for gpt-oss models.
-
-    We explicitly open an assistant message on the `final` channel for the next turn
-    and DO NOT close it, so generation continues inside the final channel.
-    """
-    # Minimal system message declaring valid channels per Harmony spec
-    rendered: list[str] = [
-        "<|start|>system<|message|># Valid channels: analysis, commentary, final. Channel must be included for every message.<|end|>",
-    ]
-
-    # Render all but the last message as closed messages
-    if len(prompt) > 0:
-        for msg in prompt[:-1]:
-            role = msg.role
-            content = msg.content
-            if role == "assistant":
-                rendered.append(f"<|start|>assistant<|channel|>final<|message|>{content}<|end|>")
-            elif role == "user":
-                rendered.append(f"<|start|>user<|message|>{content}<|end|>")
-            elif role == "system":
-                rendered.append(f"<|start|>system<|message|>{content}<|end|>")
-            else:
-                # Fallback to user role if unknown
-                rendered.append(f"<|start|>user<|message|>{content}<|end|>")
-
-    # For the last message, we open an assistant final message to continue generation
-    if len(prompt) == 0:
-        # No prior messages – just open final channel
-        rendered.append("<|start|>assistant<|channel|>final<|message|>")
-    else:
-        last = prompt[-1]
-        # We always continue inside assistant/final; include any assistant stub text
-        stub_text = last.content if last.role == "assistant" else ""
-        # If the last is a user message, include it as a closed message first
-        if last.role == "user":
-            rendered.append(f"<|start|>user<|message|>{last.content}<|end|>")
-            stub_text = ""
-        rendered.append(f"<|start|>assistant<|channel|>final<|message|>{stub_text}")
-
-    return "".join(rendered)
-
-
-def _format_prompt_harmony_lib(prompt: Prompt) -> str | None:
-    """Use the openai-harmony PyPI package to render the conversation for completion.
-
-    Returns a rendered string if possible; otherwise returns None to signal fallback.
-    """
-    enc = load_harmony_encoding(HarmonyEncodingName.HARMONY_GPT_OSS)
-    msgs = []
-
-    # Add a minimal system message so encoding inserts channel metadata
-    msgs.append(HarmonyMessage.from_role_and_content(HarmonyRole.SYSTEM, SystemContent.new()))
-
-    for msg in prompt:
-        role = msg.role.lower()
-        if role == "user":
-            msgs.append(HarmonyMessage.from_role_and_content(HarmonyRole.USER, msg.content))
-        elif role == "assistant":
-            msgs.append(HarmonyMessage.from_role_and_content(HarmonyRole.ASSISTANT, msg.content))
-        elif role == "system":
-            # Additional system text can be appended as plain string
-            msgs.append(HarmonyMessage.from_role_and_content(HarmonyRole.SYSTEM, msg.content))
-        else:
-            msgs.append(HarmonyMessage.from_role_and_content(HarmonyRole.USER, msg.content))
-
-    convo = HarmonyConversation.from_messages(msgs)
-
-    # Prefer a text-rendering API if available
-    render_text = getattr(enc, "render_conversation_for_completion_as_text", None)
-    if callable(render_text):
-        rendered_text = render_text(convo, HarmonyRole.ASSISTANT)
-        # Ensure next completion is in assistant/final channel
-        if isinstance(rendered_text, str):
-            last_asst = rendered_text.rfind("<|start|>assistant")
-            if last_asst != -1:
-                tail = rendered_text[last_asst:]
-                if "<|channel|>" not in tail:
-                    rendered_text = rendered_text + "<|channel|>final<|message|>"
-        return rendered_text
-
-    rendered = enc.render_conversation_for_completion(convo, HarmonyRole.ASSISTANT)
-    # If this already is a string, return it
-    if isinstance(rendered, str):
-        s = rendered
-        last_asst = s.rfind("<|start|>assistant")
-        if last_asst != -1:
-            tail = s[last_asst:]
-            if "<|channel|>" not in tail:
-                s = s + "<|channel|>final<|message|>"
-        return s
-
-    # Try to convert token sequence to text if the encoder exposes a method
-    tokens_to_text = getattr(enc, "tokens_to_text", None)
-    if callable(tokens_to_text):
-        s = tokens_to_text(rendered)
-        if isinstance(s, str):
-            last_asst = s.rfind("<|start|>assistant")
-            if last_asst != -1:
-                tail = s[last_asst:]
-                if "<|channel|>" not in tail:
-                    s = s + "<|channel|>final<|message|>"
-        return s
-
-    # Could not convert to text
-    return None
-
-
-@backoff.on_exception(
-    wait_gen=backoff.expo,
-    exception=(RuntimeError,),
-    max_value=60,
-    factor=1.5,
-    on_backoff=on_backoff,
-)
-def huggingface_get_text(model_id: str, request: GetTextRequest) -> GetTextResponse:
-    """Generate text using local GPU model."""
-    
-    # Check if LoRA adapter path is provided in the request context
-    lora_adapter_path = getattr(request, 'lora_adapter_path', None)
-    
-    quantization = getattr(request, "context", {}).get("quantization", None) if hasattr(request, "context") and isinstance(request.context, dict) else None
-    model, tokenizer = _get_model_and_tokenizer(model_id, lora_adapter_path, quantization)
-    
-    # Format the prompt
-    if model_id == "gpt-oss-20b":
-        # Prefer the official Harmony library; fall back to minimal renderer
-        formatted_prompt = _format_prompt_harmony_lib(request.prompt) or _format_prompt_harmony(request.prompt, tokenizer)
-    else:
-        formatted_prompt = _format_prompt(request.prompt, model_id, tokenizer)
-    
-    # Tokenize the input
-    inputs = tokenizer(formatted_prompt, return_tensors="pt")
-    
-    # Move to the same device as the model
-    device = next(model.parameters()).device
-    inputs = {k: v.to(device) for k, v in inputs.items()}
-    
-    # Generate text
-    with no_grad():
-        is_greedy = (request.temperature is not None and request.temperature <= 0.0)
-        gen_kwargs: Dict[str, Any] = {
-            "max_new_tokens": request.max_tokens,
-            "pad_token_id": tokenizer.eos_token_id,
+            ),
+            "torch_dtype": torch.bfloat16,
         }
-        if is_greedy:
-            gen_kwargs["do_sample"] = False
-        else:
-            gen_kwargs["do_sample"] = True
-            gen_kwargs["temperature"] = request.temperature
-        # If Harmony end token exists, use it as eos
-        try:
-            harmony_end_id = tokenizer.convert_tokens_to_ids("<|end|>")
-            if isinstance(harmony_end_id, int) and harmony_end_id >= 0:
-                gen_kwargs["eos_token_id"] = harmony_end_id
-        except Exception:
-            pass
 
-        outputs = model.generate(
-            **inputs,
-            **gen_kwargs,
+
+class GPTOSSProvider(HuggingFaceProvider):
+    """GPT-OSS prompt formatting via openai-harmony library."""
+
+    def format_prompt(self, prompt: Prompt) -> Tuple[List[int], str]:
+        enc = load_harmony_encoding(HarmonyEncodingName.HARMONY_GPT_OSS)
+
+        # System message declaring channels and reasoning effort
+        sys_content = (
+            SystemContent.new()
+            .with_required_channels(["analysis", "commentary", "final"])
+            .with_reasoning_effort("medium")
         )
-    
-    # Decode the generated text
-    generated_tokens = outputs[0][inputs['input_ids'].shape[1]:]
-    generated_text = tokenizer.decode(generated_tokens, skip_special_tokens=True)
-    # If the Harmony end marker leaked as plain text, truncate at it
-    end_marker = "<|end|>"
-    if end_marker in generated_text:
-        generated_text = generated_text.split(end_marker, 1)[0]
-    
+
+        msgs: List[HarmonyMessage] = []
+        msgs.append(HarmonyMessage.from_role_and_content(HarmonyRole.SYSTEM, sys_content))
+
+        for msg in prompt:
+            role = (msg.role or "user").lower()
+            if role == "user":
+                msgs.append(HarmonyMessage.from_role_and_content(HarmonyRole.USER, msg.content))
+            elif role == "assistant":
+                msgs.append(
+                    HarmonyMessage.from_role_and_content(HarmonyRole.ASSISTANT, msg.content)
+                )
+            elif role == "system":
+                msgs.append(HarmonyMessage.from_role_and_content(HarmonyRole.SYSTEM, msg.content))
+            else:
+                msgs.append(HarmonyMessage.from_role_and_content(HarmonyRole.USER, msg.content))
+
+        # Open the target channel for the assistant
+        msgs.append(
+            HarmonyMessage.from_role_and_content(HarmonyRole.ASSISTANT, "").with_channel("final")
+        )
+
+        convo = HarmonyConversation.from_messages(msgs)
+        token_list: List[int] = enc.render_conversation_for_completion(convo, HarmonyRole.ASSISTANT)
+
+        # Best-effort: create a human-readable text by decoding with HF tokenizer
+        # (not guaranteed to be identical to the wire-format, but helpful for logging)
+        text = self.tokenizer.decode(token_list)
+        return token_list, text
+
+    def parse_completion(self, output_tokens: List[int]):
+        """Parse completion tokens using Harmony encoding into structured messages.
+
+        Returns whatever the Harmony library yields from
+        encoding.parse_messages_from_completion_tokens(new_tokens, Role.ASSISTANT).
+        """
+        enc = load_harmony_encoding(HarmonyEncodingName.HARMONY_GPT_OSS)
+        parsed = enc.parse_messages_from_completion_tokens(output_tokens, HarmonyRole.ASSISTANT)
+        return parsed
+
+
+# ----- Dummy helpers for lightweight tests -----
+def dummy_get_text(model_id: str, request: GetTextRequest) -> GetTextResponse:
+    """Return a lightweight dummy text response with correct shape.
+
+    - For GPT-OSS, include a minimal Harmony-parsed structure in context.
+    - For default models, return plain text only.
+    """
+    provider = get_provider_for_model(model_id, request=request)
+    txt = "Hi!"
+
+    context: Dict[str, Any] = {
+        "method": "dummy_generation",
+        "hf_model_name": HUGGINGFACE_MODEL_MAPPING[extract_model_name(model_id)],
+        "local_model": False,
+    }
+
+    if isinstance(provider, GPTOSSProvider):
+        # Create a minimal parsed messages stub via Harmony: a single assistant/final message
+        enc = load_harmony_encoding(HarmonyEncodingName.HARMONY_GPT_OSS)
+        parsed = [{"role": "assistant", "content": txt, "channel": "final"}]
+        context.update({
+            "harmony": True,
+            "parsed_messages": parsed,
+        })
+    else:
+        context["harmony"] = False
+
     return GetTextResponse(
-        model_id=model_id,
+        model_id=extract_model_name(model_id),
         request=request,
-        txt=generated_text,
-        raw_responses=[generated_text],
-        context={
-            "method": "generation",
-            "max_tokens": request.max_tokens,
-            "temperature": request.temperature,
-            "hf_model_name": HUGGINGFACE_MODEL_MAPPING[model_id],
-            "local_model": True,
-        }
+        txt=txt,
+        raw_responses=[txt],
+        context=context,
     )
 
 
-@backoff.on_exception(
-    wait_gen=backoff.expo,
-    exception=(RuntimeError,),
-    max_value=60,
-    factor=1.5,
-    on_backoff=on_backoff,
-)
-def huggingface_get_probs(model_id: str, request: GetProbsRequest) -> GetProbsResponse:
-    """Get probability distribution for next token using local model logits."""
-    
-    # Check if LoRA adapter path is provided in the request context
-    lora_adapter_path = getattr(request, 'lora_adapter_path', None)
-    
-    quantization = getattr(request, "context", {}).get("quantization", None) if hasattr(request, "context") and isinstance(request.context, dict) else None
-    model, tokenizer = _get_model_and_tokenizer(model_id, lora_adapter_path, quantization)
-    
-    # Format prompt
-    if model_id == "gpt-oss-20b":
-        # Align with generation: next token should be inside assistant/final
-        prompt_text = _format_prompt_harmony_lib(request.prompt) or _format_prompt_harmony(request.prompt, tokenizer)
-    else:
-        prompt_text = _format_prompt(request.prompt, model_id, tokenizer)
+def dummy_get_probs(model_id: str, request: GetProbsRequest) -> GetProbsResponse:
+    """Return a lightweight dummy top-k probability dict with correct shape.
 
-    print(prompt_text)
-    
-    # Tokenize input
-    inputs = tokenizer(prompt_text, return_tensors="pt")
-    
-    # Move to the same device as the model
-    device = next(model.parameters()).device
-    inputs = {k: v.to(device) for k, v in inputs.items()}
-    
-    # Get logits for the next token
-    with no_grad():
-        outputs = model(**inputs)
-        logits = outputs.logits[0, -1, :]  # Last token's logits
-    
-    # Convert to probabilities
-    probs_tensor = softmax(logits, dim=-1)
-    
-    # Get top-k tokens (default to 50 as mentioned in requirements)
-    k = min(50, len(probs_tensor))
-    top_probs, top_indices = topk(probs_tensor, k)
-    
-    # Convert to dictionary
-    probs = {}
-    for prob, idx in zip(top_probs.cpu().tolist(), top_indices.cpu().tolist()):
-        token = tokenizer.decode([idx])
-        probs[token] = prob
-    
+    - For GPT-OSS, flag harmony=True in context.
+    """
+    provider = get_provider_for_model(model_id, request=request)
+    probs = {"Hello": 0.6, "World": 0.4}
+    context: Dict[str, Any] = {
+        "method": "dummy_logits",
+        "top_k": 2,
+        "hf_model_name": HUGGINGFACE_MODEL_MAPPING[extract_model_name(model_id)],
+        "local_model": False,
+        "harmony": isinstance(provider, GPTOSSProvider),
+    }
     return GetProbsResponse(
-        model_id=model_id,
+        model_id=extract_model_name(model_id),
         request=request,
         probs=probs,
         raw_responses=[probs],
-        context={
-            "method": "logits_based",
-            "top_k": k,
-            "hf_model_name": HUGGINGFACE_MODEL_MAPPING[model_id],
-            "local_model": True,
-        }
+        context=context,
     )
+
+
+def get_provider_for_model(
+    model_id: str,
+    request: Any | None = None,
+    *,
+    lora_adapter_path: str | None = None,
+) -> HuggingFaceProvider:
+    """Factory to return the appropriate provider instance for a model_id.
+
+    Respects optional lora/quantization hints from request.context if present.
+    """
+    name = extract_model_name(model_id)
+    # Prefer explicit args; fall back to request context
+    if lora_adapter_path is None and request is not None:
+        lora_adapter_path = getattr(request, "lora_adapter_path", None)
+
+    if name == "gpt-oss-20b":
+        return GPTOSSProvider(name, lora_adapter_path=lora_adapter_path)
+    return DefaultHFProvider(name, lora_adapter_path=lora_adapter_path)
+
 
 
 # Model Management Functions
 
-def preload_model(model_id: str, verbose: bool = False, quantization: str | None = None) -> bool:
+def preload_model(model_id: str, verbose: bool = False) -> bool:
     """
     Preload a model into the HuggingFace cache.
     
@@ -436,8 +444,9 @@ def preload_model(model_id: str, verbose: bool = False, quantization: str | None
         print(f"Preloading {model_id} ({hf_model_name})")
     
     try:
-        # Use the existing _get_model_and_tokenizer function which handles caching
-        model, tokenizer = _get_model_and_tokenizer(model_name, None, quantization)
+        # Use the factory to choose the right provider class and trigger load
+        provider = get_provider_for_model(model_name)
+        _ = provider.model  # ensure loaded
         
         if verbose:
             print(f"✓ {model_id} preloaded successfully")
@@ -477,10 +486,7 @@ def validate_model_availability(model_id: str, local_only: bool = True) -> bool:
     
     try:
         # Try to load tokenizer (lightweight check)
-        tokenizer = AutoTokenizer.from_pretrained(
-            hf_model_name, 
-            local_files_only=local_only
-        )
+        AutoTokenizer.from_pretrained(hf_model_name, local_files_only=local_only)
         return True
     except Exception:
         return False
@@ -501,9 +507,9 @@ def clear_model_cache(model_id: Optional[str] = None):
     else:
         # Clear specific model
         model_name = extract_model_name(model_id)
-        
+
         # Remove from singleton dictionaries
-        keys_to_remove = [key for key in _models.keys() if key.startswith(model_name)]
+        keys_to_remove = [key for key in list(_models.keys()) if key.startswith(model_name)]
         for key in keys_to_remove:
             if key in _models:
                 del _models[key]
@@ -533,5 +539,16 @@ def clear_gpu_memory():
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
         gc.collect()
+
+
+# ----- Simple module-level helpers for compatibility -----
+def encode(model_id: str, data: str) -> List[int]:
+    provider = DefaultHFProvider(extract_model_name(model_id))
+    return provider.encode(data)
+
+
+def decode(model_id: str, tokens: List[int]) -> str:
+    provider = DefaultHFProvider(extract_model_name(model_id))
+    return provider.decode(tokens)
 
 

@@ -1,7 +1,7 @@
 import re
 from typing import Dict, Optional, List
 
-from provider_wrapper import huggingface_get_probs, GetProbsRequest, Message
+from provider_wrapper import get_provider_for_model, GetProbsRequest, Message
 
 
 def _normalize_for_compare(text: str) -> list[str]:
@@ -28,8 +28,8 @@ def _check_token_unlikely_with_reference(
             min_top_n=top_k,
             num_samples=None,
         )
-        response = huggingface_get_probs(reference_model_id, request)
-        probs = response.probs
+        provider = get_provider_for_model(reference_model_id, request=request)
+        probs = provider.get_probs(request).probs
         top_tokens = [t for t, _ in sorted(probs.items(), key=lambda kv: kv[1], reverse=True)[:top_k]]
         return not (next_word in top_tokens or any(t in next_word for t in top_tokens))
     except Exception:
