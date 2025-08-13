@@ -16,19 +16,19 @@ from typing import Any, Dict, List
 
 import pandas as pd
 import torch
-from provider_wrapper.provider_wrapper.huggingface_provider import extract_model_name
+from provider_wrapper import extract_model_name
 from provider_wrapper import (
     HUGGINGFACE_MODEL_MAPPING,
     Sample,
     validate_model_availability,
-    clear_gpu_memory,
-    clear_huggingface_disk_cache,
     get_provider_for_model,
+    GetTextRequest,
 )
 from parsers import tvd_parser
 from tqdm import tqdm
 from utils import (get_combined_samples, get_model_probabilities,
                    sample_model_text)
+from config import OutputControlExperimentConfig
 
 
 def round_floats(obj):
@@ -163,13 +163,13 @@ def update_results_csv(model_id, results):
     df.to_csv(csv_file, index=False)
     print(f"Results saved to {csv_file}")
 
-def update_simple_metrics_csv(model_id, results, lora_adapter_path=None):
-    """Update the simple metrics CSV file with basic counts and TVD stats, separated by case type."""
+def update_metrics(cfg: OutputControlExperimentConfig, results):
+    """Update the metrics CSV with counts and TVD stats, including config knobs."""
     csv_file = "results/output_control_simple_metrics.csv"
     os.makedirs(os.path.dirname(csv_file), exist_ok=True)
     
     # Determine if this is a fine-tuned model
-    is_fine_tuned = lora_adapter_path is not None
+    is_fine_tuned = cfg.lora_adapter is not None
     
     # Separate results by case type
     given_results = [r for r in results['results'] if r.get('case_type') == 'given_words']
@@ -195,10 +195,12 @@ def update_simple_metrics_csv(model_id, results, lora_adapter_path=None):
         std_tvd = round(std_tvd, 3)
         
         return {
-            'model': model_id,
+            'model': cfg.model,
             'variant': 'plain',
             'case_type': case_type,
             'fine_tuned': is_fine_tuned,
+            'reasoning_effort': cfg.reasoning_effort,
+            'feed_empty_analysis': cfg.feed_empty_analysis,
             'num_correct': correct_count,
             'num_incorrect': incorrect_count,
             'num_trials': len(case_results),
@@ -215,10 +217,10 @@ def update_simple_metrics_csv(model_id, results, lora_adapter_path=None):
     if os.path.exists(csv_file):
         df = pd.read_csv(csv_file)
     else:
-        # Create new DataFrame with case_type and fine_tuned columns
+        # Create new DataFrame including config columns
         df = pd.DataFrame(columns=[
-            'model', 'variant', 'case_type', 'fine_tuned', 'num_correct', 'num_incorrect', 
-            'num_trials', 'avg_tvd', 'std_tvd'
+            'model', 'variant', 'case_type', 'fine_tuned', 'reasoning_effort', 'feed_empty_analysis',
+            'num_correct', 'num_incorrect', 'num_trials', 'avg_tvd', 'std_tvd'
         ])
     
     # Update or add rows for all three cases
@@ -227,13 +229,13 @@ def update_simple_metrics_csv(model_id, results, lora_adapter_path=None):
             continue
             
         # Find existing row for this model and case type
-        mask = (df['model'] == model_id) & (df['case_type'] == metrics['case_type'])
+        mask = (df['model'] == cfg.model) & (df['case_type'] == metrics['case_type'])
         
         if mask.any():
             # Update existing row
             row_idx = mask.idxmax()
             for key, value in metrics.items():
-                if key != 'model' and key != 'case_type':  # Don't update these keys
+                if key not in ('model', 'case_type'):  # Don't update these keys
                     df.loc[row_idx, key] = value
         else:
             # Create new row
@@ -244,47 +246,48 @@ def update_simple_metrics_csv(model_id, results, lora_adapter_path=None):
     print(f"Simple metrics saved to {csv_file}")
 
 
-def run_experiment(model_id: str, samples: List[Sample], num_examples: int = 10, lora_adapter_path: str = None) -> Dict[str, Any]:
+def run_experiment(
+    cfg: OutputControlExperimentConfig,
+    samples: List[Sample],
+) -> Dict[str, Any]:
     """Run the output control experiment on a model using proper TVD calculation."""
     
-    # Extract model name from model_id
-    if model_id.startswith("huggingface/"):
-        model_name = model_id.split("/")[1]
+    # Extract model name from config
+    if cfg.model.startswith("huggingface/"):
+        model_name = cfg.model.split("/")[1]
     else:
-        model_name = model_id
+        model_name = cfg.model
     
     if model_name not in HUGGINGFACE_MODEL_MAPPING:
-        raise ValueError(f"Model {model_id} not supported by HuggingFace provider")
+        raise ValueError(f"Model {cfg.model} not supported by HuggingFace provider")
     
-    # If LoRA adapter is provided, modify the model_id to indicate it's fine-tuned
-    if lora_adapter_path:
-        model_id = f"{model_id}_lora"
-        print(f"Using LoRA adapter from: {lora_adapter_path}")
+    # Compose results model_id (append _lora if adapter set)
+    model_id_for_results = cfg.model
+    if cfg.lora_adapter:
+        model_id_for_results = f"{cfg.model}_lora"
+        print(f"Using LoRA adapter from: {cfg.lora_adapter}")
     
     results = []
     
-    # Create provider once and reuse
-    provider = get_provider_for_model(model_name)
+    # Create provider once and reuse (configure GPT-OSS knobs when applicable)
+    provider = get_provider_for_model(
+        model_name,
+        lora_adapter_path=cfg.lora_adapter,
+        reasoning_effort=cfg.reasoning_effort,
+        feed_empty_analysis=cfg.feed_empty_analysis,
+    )
 
     for sample_idx, sample in enumerate(tqdm(samples, desc="Running experiments")):
-        # Get model probabilities for the prompt
-        response_probs = get_model_probabilities(
-            model_name,
-            sample.prompt,
-            temperature=1.0,
-            lora_adapter_path=lora_adapter_path,
-            provider=provider,
-        )
-        
-        # Sample text (debug preview): greedy decoding to avoid analysis/tool chatter
-        sample_text = sample_model_text(
-            model_name,
-            sample.prompt,
-            max_tokens=10,
+        # Prefer provider-level orchestration to align probs with first final token
+        text_req = GetTextRequest(
+            context=None,
+            prompt=sample.prompt,
+            max_tokens=10000,
             temperature=0.0,
-            lora_adapter_path=lora_adapter_path,
-            provider=provider,
         )
+        text_resp, probs_resp = provider.generate_text_and_probs(text_req)
+        response_probs = probs_resp.probs
+        sample_text = text_resp
         
         # Prepare sample data for the TVD parser
         sample_data = {
@@ -299,7 +302,7 @@ def run_experiment(model_id: str, samples: List[Sample], num_examples: int = 10,
 
         # Get parser result
         parser_result = tvd_parser(response_probs, sample_data)
-        
+
         # Create result dict
         result = {
             'sample_idx': sample_idx,
@@ -312,7 +315,7 @@ def run_experiment(model_id: str, samples: List[Sample], num_examples: int = 10,
             'tvd': parser_result.get('tvd_diff', float('inf')),
             'within_tolerance': parser_result['score'] == 1,
             'responses': parser_result.get('top_tokens', []),
-            'sampled_text': sample_text,  # What the model actually outputs
+            'sampled_text': sample_text.txt + ". ANALYSIS: " + sample_text.raw_responses[0]["analysis"],  # What the model actually outputs
             'seed': sample.seed,
             'case_type': sample.case_type
         }
@@ -325,8 +328,8 @@ def run_experiment(model_id: str, samples: List[Sample], num_examples: int = 10,
     avg_tvd = sum(r['tvd'] for r in results) / total_experiments if total_experiments > 0 else 0
     
     return {
-        'model_id': model_id,
-        'num_samples': num_examples,
+        'model_id': model_id_for_results,
+        'num_samples': cfg.num_examples,
         'temperature': 1.0,
         'results': results,
         'summary': {
@@ -336,23 +339,23 @@ def run_experiment(model_id: str, samples: List[Sample], num_examples: int = 10,
         }
     }
 
-def run_experiment_for_model(model_id, num_examples, lora_adapter_path=None):
+def run_experiment_for_model(cfg: OutputControlExperimentConfig):
     """Run experiment for a single model and return results."""
-    print(f"Running output control experiment on {model_id}")
-    if lora_adapter_path:
-        print(f"Using LoRA adapter: {lora_adapter_path}")
-    print(f"Parameters: num_examples={num_examples}")
+    print(f"Running output control experiment on {cfg.model}")
+    if cfg.lora_adapter:
+        print(f"Using LoRA adapter: {cfg.lora_adapter}")
+    print(f"Parameters: num_examples={cfg.num_examples}, reasoning_effort={cfg.reasoning_effort}, feed_empty_analysis={cfg.feed_empty_analysis}")
     
     # Validate model availability first
-    if not validate_model_availability(model_id, local_only=True):
-        print(f"✗ Model {model_id} not available locally.")
-        model_name = extract_model_name(model_id)
+    if not validate_model_availability(cfg.model, local_only=True):
+        print(f"✗ Model {cfg.model} not available locally.")
+        model_name = extract_model_name(cfg.model)
         print(f"  Please run: python preload_models.py --models {model_name}")
-        raise RuntimeError(f"Model {model_id} is not available. Please preload it first.")
+        raise RuntimeError(f"Model {cfg.model} is not available. Please preload it first.")
     
     # Get samples and run experiment
-    samples = get_combined_samples(num_examples=num_examples)
-    results = run_experiment(model_id, samples, num_examples, lora_adapter_path)
+    samples = get_combined_samples(num_examples=cfg.num_examples)
+    results = run_experiment(cfg, samples)
     
     # Print summary
     summary = results['summary']

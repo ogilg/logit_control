@@ -16,11 +16,8 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 if CURRENT_DIR not in sys.path:
     sys.path.insert(0, CURRENT_DIR)
 
-from run_eval import (
-    run_experiment_for_model,
-    update_results_csv,
-    update_simple_metrics_csv,
-)
+from run_eval import run_experiment_for_model, update_results_csv, update_metrics
+from config import OutputControlExperimentConfig
 
 
 def main():
@@ -40,24 +37,42 @@ def main():
         default=True,
         help="Save individual model results to JSON (in addition to CSV updates). Enabled by default.",
     )
+    parser.add_argument(
+        "--reasoning_effort",
+        type=str,
+        default="medium",
+        choices=["low", "medium", "high"],
+        help="Reasoning effort to configure for GPT-OSS models",
+    )
+    parser.add_argument(
+        "--feed_empty_analysis",
+        action="store_true",
+        default=True,
+        help="Prime an empty analysis channel (GPT-OSS) to discourage thinking",
+    )
 
 
     args = parser.parse_args()
 
-    # Run the experiment for a single model
-    results = run_experiment_for_model(
-        model_id=args.model,
+    # Build config and run
+    cfg = OutputControlExperimentConfig(
+        model=args.model,
         num_examples=args.num_examples,
-        lora_adapter_path=args.lora_adapter,
+        lora_adapter=args.lora_adapter,
+        reasoning_effort=args.reasoning_effort,
+        feed_empty_analysis=args.feed_empty_analysis,
+        save_individual=args.save_individual,
     )
+
+    results = run_experiment_for_model(cfg)
 
     # Update CSVs (same behavior as the multi-model script)
     update_results_csv(args.model, results)
-    update_simple_metrics_csv(args.model, results, args.lora_adapter)
+    update_metrics(cfg, results)
 
     # Optionally save individual JSON results
-    if args.save_individual:
-        output_file = f"results/output_control_results_{args.model.replace('/', '_')}.json"
+    if cfg.save_individual:
+        output_file = f"results/output_control_results_{cfg.model.replace('/', '_')}.json"
         os.makedirs(os.path.dirname(output_file), exist_ok=True)
         with open(output_file, "w") as f:
             json.dump(results, f, indent=2)

@@ -33,6 +33,7 @@ from openai_harmony import (
     Conversation as HarmonyConversation,
     SystemContent,
     ReasoningEffort,
+    StreamableParser,
 )
 
 
@@ -228,28 +229,14 @@ class HuggingFaceProvider:
                 "hf_model_name": HUGGINGFACE_MODEL_MAPPING[self.model_id],
                 "local_model": True,
                 "prompt_text": text,
+                "generated_tokens": (generated_tokens.tolist() if hasattr(generated_tokens, "tolist") else list(generated_tokens)),
+                "prompt_tokens_len": len(tokens),
             },
         )
 
     def get_probs(self, request: GetProbsRequest) -> GetProbsResponse:
         tokens, text = self.format_prompt(request.prompt)
-        input_ids = torch.tensor([tokens], dtype=torch.long)
-        device = next(self.model.parameters()).device
-        input_ids = input_ids.to(device)
-        attention_mask = torch.ones_like(input_ids)
-
-        with no_grad():
-            outputs = self.model(input_ids=input_ids, attention_mask=attention_mask)
-            logits = outputs.logits[0, -1, :]
-
-        probs_tensor = softmax(logits, dim=-1)
-        k = min(50, probs_tensor.shape[-1])
-        top_probs, top_indices = topk(probs_tensor, k)
-
-        probs: Dict[str, float] = {}
-        for prob, idx in zip(top_probs.detach().cpu().tolist(), top_indices.detach().cpu().tolist()):
-            token_str = self.tokenizer.decode([idx])
-            probs[token_str] = prob
+        probs, k = self._compute_next_token_topk(tokens, top_k=50)
 
         return GetProbsResponse(
             model_id=self.model_id,
@@ -264,6 +251,26 @@ class HuggingFaceProvider:
                 "prompt_text": text,
             },
         )
+
+    def _compute_next_token_topk(self, tokens: List[int], top_k: int = 50) -> Tuple[Dict[str, float], int]:
+        input_ids = torch.tensor([tokens], dtype=torch.long)
+        device = next(self.model.parameters()).device
+        input_ids = input_ids.to(device)
+        attention_mask = torch.ones_like(input_ids)
+
+        with no_grad():
+            outputs = self.model(input_ids=input_ids, attention_mask=attention_mask)
+            logits = outputs.logits[0, -1, :]
+
+        probs_tensor = softmax(logits, dim=-1)
+        k = min(top_k, probs_tensor.shape[-1])
+        top_probs, top_indices = topk(probs_tensor, k)
+
+        probs: Dict[str, float] = {}
+        for prob, idx in zip(top_probs.detach().cpu().tolist(), top_indices.detach().cpu().tolist()):
+            token_str = self.tokenizer.decode([idx])
+            probs[token_str] = prob
+        return probs, k
 
 
 class DefaultHFProvider(HuggingFaceProvider):
@@ -382,6 +389,52 @@ class GPTOSSProvider(HuggingFaceProvider):
         final_text = "".join(final_parts).strip()
         return {"raw_messages": messages, "analysis": analysis_text, "final": final_text}
 
+    def find_first_final_content_index(self, completion_tokens: List[int]) -> int | None:
+        """Return index where assistant/final content begins within completion_tokens."""
+        enc = load_harmony_encoding(HarmonyEncodingName.HARMONY_GPT_OSS)
+        parser = StreamableParser(enc, HarmonyRole.ASSISTANT)
+        for i, tok in enumerate(completion_tokens):
+            parser.process(tok)
+            if parser.current_channel == "final" and parser.current_role == HarmonyRole.ASSISTANT:
+                delta = parser.last_content_delta
+                if isinstance(delta, str) and len(delta) > 0:
+                    return i
+        return None
+
+    def generate_text_and_probs(self, request: GetTextRequest) -> Tuple[GetTextResponse, GetProbsResponse]:
+        # Format prompt once (shared)
+        prompt_tokens, _ = self.format_prompt(request.prompt)
+
+        # Generate text first (may include analysis)
+        text_resp = self.generate_text(request)
+        completion_tokens: List[int] = text_resp.context.get("generated_tokens", [])
+
+        boundary = self.find_first_final_content_index(completion_tokens)
+        tokens_for_logits: List[int] = list(prompt_tokens)
+        if boundary is not None:
+            tokens_for_logits.extend(completion_tokens[:boundary])
+        else:
+            tokens_for_logits.extend(completion_tokens)
+
+        probs, k = self._compute_next_token_topk(tokens_for_logits)
+
+        probs_resp = GetProbsResponse(
+            model_id=self.model_id,
+            request=GetProbsRequest(context=request.context, prompt=request.prompt, min_top_n=50, num_samples=None),
+            probs=probs,
+            raw_responses=[probs],
+            context={
+                "method": "logits_based_boundary",
+                "top_k": k,
+                "hf_model_name": HUGGINGFACE_MODEL_MAPPING[self.model_id],
+                "local_model": True,
+                "prompt_text": text_resp.context.get("prompt_text"),
+                "final_boundary_index": boundary,
+            },
+        )
+
+        return text_resp, probs_resp
+
 
 def get_provider_for_model(
     model_id: str,
@@ -409,7 +462,6 @@ def get_provider_for_model(
             kwargs["feed_empty_analysis"] = feed_empty_analysis
         return GPTOSSProvider(name, **kwargs)
     return DefaultHFProvider(name, lora_adapter_path=lora_adapter_path)
-
 
 
 # Model Management Functions
