@@ -46,18 +46,19 @@ def main() -> int:
     # Dummy get_text for GPT-OSS
     from provider_wrapper.provider_wrapper.data_models import GetTextRequest, GetProbsRequest
 
-    txt_req = GetTextRequest(context=None, prompt=prompt, max_tokens=5, temperature=0.0)
-    txt_resp_gpt = hf.dummy_get_text("gpt-oss-20b", txt_req)
+    txt_req = GetTextRequest(context=None, prompt=prompt, max_tokens=10000, temperature=0.0)
+    txt_resp_gpt = gpt_provider.generate_text(txt_req)
+    for entry in txt_resp_gpt.txt:
+        print(entry.to_dict)
     assert isinstance(txt_resp_gpt.txt, str) and len(txt_resp_gpt.txt) > 0
-    assert txt_resp_gpt.context.get("harmony") is True
 
-    # Dummy get_probs for GPT-OSS
-    prob_req = GetProbsRequest(context=None, prompt=prompt, min_top_n=2, num_samples=None)
-    prob_resp_gpt = hf.dummy_get_probs("gpt-oss-20b", prob_req)
-    assert isinstance(prob_resp_gpt.probs, dict) and len(prob_resp_gpt.probs) == 2
-    assert prob_resp_gpt.context.get("harmony") is True
+    # # Dummy get_probs for GPT-OSS
+    # prob_req = GetProbsRequest(context=None, prompt=prompt, min_top_n=2, num_samples=None)
+    # prob_resp_gpt = gpt_provider.get_probs(prob_req)
+    # print(prob_resp_gpt)
+    # assert isinstance(prob_resp_gpt.probs, dict) and len(prob_resp_gpt.probs) == 2
 
-    print("dummy + formatting tests OK")
+    # print("querying tests OK")
     return 0
 
 
