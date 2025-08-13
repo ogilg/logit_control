@@ -1,10 +1,6 @@
-import subprocess
-import sys
-from collections import Counter
 
 import numpy as np
-from provider_wrapper import get_provider_for_model
-from provider_wrapper import GetProbsRequest, Prompt
+
 
 
 def same_up_to_tokenization(ideal_answers, top_token_set):
@@ -65,7 +61,7 @@ def tvd_parser(
             # Extract target probabilities (works for both given words and random words)
             if is_given_words and word1 and word2:
                 # For given words, use actual word keys
-                target_probs = [target_distribution.get(word1, 0), target_distribution.get(word2, 0)]
+                target_probs = sorted([target_distribution.get(word1, 0), target_distribution.get(word2, 0)], reverse=True)
             else:
                 # For random words, use placeholder keys in order
                 target_values = list(target_distribution.values())
