@@ -167,6 +167,15 @@ class HuggingFaceProvider:
     def decode(self, tokens: List[int]) -> str:
         return self.tokenizer.decode(tokens, skip_special_tokens=True)
 
+    def parse_completion(self, output_tokens: List[int]) -> str:
+        """Default completion parser.
+
+        Decodes tokens to text using the provider's tokenizer. Subclasses may
+        override to return a string parsed from tokens (e.g., Harmony output).
+        """
+        text = self.tokenizer.decode(output_tokens, skip_special_tokens=True)
+        return text
+
     # ----- Core ops -----
     def generate_text(self, request: GetTextRequest) -> GetTextResponse:
         tokens, text = self.format_prompt(request.prompt)
@@ -199,9 +208,10 @@ class HuggingFaceProvider:
             outputs = self.model.generate(input_ids=input_ids, **gen_kwargs)
 
         generated_tokens = outputs[0][input_ids.shape[1]:]
-        generated_text = self.tokenizer.decode(generated_tokens, skip_special_tokens=True)
-        if "<|end|>" in generated_text:
-            generated_text = generated_text.split("<|end|>", 1)[0]
+        # Parse from tokens (base decodes with tokenizer; subclasses can override)
+        generated_text = self.parse_completion(
+            generated_tokens.tolist() if hasattr(generated_tokens, "tolist") else generated_tokens
+        )
 
         return GetTextResponse(
             model_id=self.model_id,
@@ -293,8 +303,8 @@ class GPTOSSProvider(HuggingFaceProvider):
         # System message declaring channels and reasoning effort
         sys_content = (
             SystemContent.new()
-            .with_required_channels(["analysis", "commentary", "final"])
-            .with_reasoning_effort("medium")
+            .with_required_channels(["final"])
+            .with_reasoning_effort("Low")
         )
 
         msgs: List[HarmonyMessage] = []
@@ -313,11 +323,6 @@ class GPTOSSProvider(HuggingFaceProvider):
             else:
                 msgs.append(HarmonyMessage.from_role_and_content(HarmonyRole.USER, msg.content))
 
-        # Open the target channel for the assistant
-        msgs.append(
-            HarmonyMessage.from_role_and_content(HarmonyRole.ASSISTANT, "").with_channel("final")
-        )
-
         convo = HarmonyConversation.from_messages(msgs)
         token_list: List[int] = enc.render_conversation_for_completion(convo, HarmonyRole.ASSISTANT)
 
@@ -326,11 +331,11 @@ class GPTOSSProvider(HuggingFaceProvider):
         text = self.tokenizer.decode(token_list)
         return token_list, text
 
-    def parse_completion(self, output_tokens: List[int]):
-        """Parse completion tokens using Harmony encoding into structured messages.
+    def parse_completion(self, output_tokens: List[int]) -> str:
+        """Parse completion tokens using Harmony encoding and return final text.
 
-        Returns whatever the Harmony library yields from
-        encoding.parse_messages_from_completion_tokens(new_tokens, Role.ASSISTANT).
+        Attempts to extract the assistant's 'final' channel content. Falls back to
+        decoding tokens if parsing does not yield a suitable message.
         """
         enc = load_harmony_encoding(HarmonyEncodingName.HARMONY_GPT_OSS)
         parsed = enc.parse_messages_from_completion_tokens(output_tokens, HarmonyRole.ASSISTANT)
