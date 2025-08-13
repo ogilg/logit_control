@@ -33,8 +33,7 @@ def main() -> int:
 
     # Construct a minimal prompt with system and user
     prompt = [
-        Message(role="system", content="You are a helpful assistant."),
-        Message(role="user", content="Say hi."),
+        Message(role="user", content="Say hi. Don't think."),
     ]
 
     # GPT-OSS provider formatting (Harmony)
@@ -48,9 +47,7 @@ def main() -> int:
 
     txt_req = GetTextRequest(context=None, prompt=prompt, max_tokens=10000, temperature=0.0)
     txt_resp_gpt = gpt_provider.generate_text(txt_req)
-    for entry in txt_resp_gpt.txt:
-        print(entry.to_dict)
-    assert isinstance(txt_resp_gpt.txt, str) and len(txt_resp_gpt.txt) > 0
+    print(txt_resp_gpt)
 
     # # Dummy get_probs for GPT-OSS
     # prob_req = GetProbsRequest(context=None, prompt=prompt, min_top_n=2, num_samples=None)

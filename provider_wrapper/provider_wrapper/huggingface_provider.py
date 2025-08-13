@@ -32,6 +32,7 @@ from openai_harmony import (
     Message as HarmonyMessage,
     Conversation as HarmonyConversation,
     SystemContent,
+    ReasoningEffort,
 )
 
 
@@ -184,12 +185,14 @@ class HuggingFaceProvider:
         input_ids = torch.tensor([tokens], dtype=torch.long)
         device = next(self.model.parameters()).device
         input_ids = input_ids.to(device)
+        attention_mask = torch.ones_like(input_ids)
 
         with no_grad():
             is_greedy = request.temperature is not None and request.temperature <= 0.0
             gen_kwargs: Dict[str, Any] = {
                 "max_new_tokens": request.max_tokens,
                 "pad_token_id": self.tokenizer.eos_token_id,
+                "attention_mask": attention_mask,
             }
             if is_greedy:
                 gen_kwargs["do_sample"] = False
@@ -197,17 +200,14 @@ class HuggingFaceProvider:
                 gen_kwargs["do_sample"] = True
                 gen_kwargs["temperature"] = request.temperature
 
-            # Optional: Harmony end token if present in this tokenizer
-            try:
-                harmony_end_id = self.tokenizer.convert_tokens_to_ids("<|end|>")
-                if isinstance(harmony_end_id, int) and harmony_end_id >= 0:
-                    gen_kwargs["eos_token_id"] = harmony_end_id
-            except Exception:
-                pass
+
+            enc = load_harmony_encoding(HarmonyEncodingName.HARMONY_GPT_OSS)
+            stop_token_ids = enc.stop_tokens_for_assistant_actions()
+            gen_kwargs["eos_token_id"] = stop_token_ids
 
             outputs = self.model.generate(input_ids=input_ids, **gen_kwargs)
 
-        generated_tokens = outputs[0][input_ids.shape[1]:]
+        generated_tokens = outputs[0][input_ids.shape[-1]:]
         # Parse from tokens (base decodes with tokenizer; subclasses can override)
         generated_text = self.parse_completion(
             generated_tokens.tolist() if hasattr(generated_tokens, "tolist") else generated_tokens
@@ -217,7 +217,7 @@ class HuggingFaceProvider:
             model_id=self.model_id,
             request=request,
             txt=generated_text,
-            raw_responses=[generated_text],
+            raw_responses=[],
             context={
                 "method": "generation",
                 "max_tokens": request.max_tokens,
@@ -300,15 +300,7 @@ class GPTOSSProvider(HuggingFaceProvider):
     def format_prompt(self, prompt: Prompt) -> Tuple[List[int], str]:
         enc = load_harmony_encoding(HarmonyEncodingName.HARMONY_GPT_OSS)
 
-        # System message declaring channels and reasoning effort
-        sys_content = (
-            SystemContent.new()
-            .with_required_channels(["final"])
-            .with_reasoning_effort("Low")
-        )
-
         msgs: List[HarmonyMessage] = []
-        msgs.append(HarmonyMessage.from_role_and_content(HarmonyRole.SYSTEM, sys_content))
 
         for msg in prompt:
             role = (msg.role or "user").lower()
@@ -340,65 +332,6 @@ class GPTOSSProvider(HuggingFaceProvider):
         enc = load_harmony_encoding(HarmonyEncodingName.HARMONY_GPT_OSS)
         parsed = enc.parse_messages_from_completion_tokens(output_tokens, HarmonyRole.ASSISTANT)
         return parsed
-
-
-# ----- Dummy helpers for lightweight tests -----
-def dummy_get_text(model_id: str, request: GetTextRequest) -> GetTextResponse:
-    """Return a lightweight dummy text response with correct shape.
-
-    - For GPT-OSS, include a minimal Harmony-parsed structure in context.
-    - For default models, return plain text only.
-    """
-    provider = get_provider_for_model(model_id, request=request)
-    txt = "Hi!"
-
-    context: Dict[str, Any] = {
-        "method": "dummy_generation",
-        "hf_model_name": HUGGINGFACE_MODEL_MAPPING[extract_model_name(model_id)],
-        "local_model": False,
-    }
-
-    if isinstance(provider, GPTOSSProvider):
-        # Create a minimal parsed messages stub via Harmony: a single assistant/final message
-        enc = load_harmony_encoding(HarmonyEncodingName.HARMONY_GPT_OSS)
-        parsed = [{"role": "assistant", "content": txt, "channel": "final"}]
-        context.update({
-            "harmony": True,
-            "parsed_messages": parsed,
-        })
-    else:
-        context["harmony"] = False
-
-    return GetTextResponse(
-        model_id=extract_model_name(model_id),
-        request=request,
-        txt=txt,
-        raw_responses=[txt],
-        context=context,
-    )
-
-
-def dummy_get_probs(model_id: str, request: GetProbsRequest) -> GetProbsResponse:
-    """Return a lightweight dummy top-k probability dict with correct shape.
-
-    - For GPT-OSS, flag harmony=True in context.
-    """
-    provider = get_provider_for_model(model_id, request=request)
-    probs = {"Hello": 0.6, "World": 0.4}
-    context: Dict[str, Any] = {
-        "method": "dummy_logits",
-        "top_k": 2,
-        "hf_model_name": HUGGINGFACE_MODEL_MAPPING[extract_model_name(model_id)],
-        "local_model": False,
-        "harmony": isinstance(provider, GPTOSSProvider),
-    }
-    return GetProbsResponse(
-        model_id=extract_model_name(model_id),
-        request=request,
-        probs=probs,
-        raw_responses=[probs],
-        context=context,
-    )
 
 
 def get_provider_for_model(
