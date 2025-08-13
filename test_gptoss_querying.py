@@ -37,7 +37,7 @@ def main() -> int:
     ]
 
     # GPT-OSS provider formatting (Harmony)
-    gpt_provider = hf.GPTOSSProvider("gpt-oss-20b")
+    gpt_provider = hf.GPTOSSProvider("gpt-oss-20b", reasoning_effort="low", feed_empty_analysis=False)
     gpt_tokens, gpt_text = gpt_provider.format_prompt(prompt)
     assert isinstance(gpt_tokens, list) and len(gpt_tokens) > 0
     assert isinstance(gpt_text, str)
@@ -47,15 +47,22 @@ def main() -> int:
 
     txt_req = GetTextRequest(context=None, prompt=prompt, max_tokens=10000, temperature=0.0)
     txt_resp_gpt = gpt_provider.generate_text(txt_req)
-    print(txt_resp_gpt)
+    print(txt_resp_gpt.txt)
+    print("--------------------------------")
+    print(txt_resp_gpt.raw_responses)
+    print("--------------------------------")
+    print(txt_resp_gpt.raw_responses["analysis"])
+    print("--------------------------------")
+    print(txt_resp_gpt.raw_responses["final"])
+    print("--------------------------------")
 
-    # # Dummy get_probs for GPT-OSS
-    # prob_req = GetProbsRequest(context=None, prompt=prompt, min_top_n=2, num_samples=None)
-    # prob_resp_gpt = gpt_provider.get_probs(prob_req)
-    # print(prob_resp_gpt)
-    # assert isinstance(prob_resp_gpt.probs, dict) and len(prob_resp_gpt.probs) == 2
+    # Dummy get_probs for GPT-OSS
+    prob_req = GetProbsRequest(context=None, prompt=prompt, min_top_n=2, num_samples=None)
+    prob_resp_gpt = gpt_provider.get_probs(prob_req)
+    print(prob_resp_gpt)
+    assert isinstance(prob_resp_gpt.probs, dict) and len(prob_resp_gpt.probs) == 2
 
-    # print("querying tests OK")
+    print("querying tests OK")
     return 0
 
 

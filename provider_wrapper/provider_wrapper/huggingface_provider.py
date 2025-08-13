@@ -168,14 +168,17 @@ class HuggingFaceProvider:
     def decode(self, tokens: List[int]) -> str:
         return self.tokenizer.decode(tokens, skip_special_tokens=True)
 
-    def parse_completion(self, output_tokens: List[int]) -> str:
+    def parse_completion(self, output_tokens: List[int]) -> Dict[str, Any]:
         """Default completion parser.
 
-        Decodes tokens to text using the provider's tokenizer. Subclasses may
-        override to return a string parsed from tokens (e.g., Harmony output).
+        Returns a dict with:
+          - raw_messages: None (no structured messages for default models)
+          - analysis: "" (no analysis channel)
+          - final: decoded text from tokens
+        Subclasses may override to return structured messages and channels.
         """
         text = self.tokenizer.decode(output_tokens, skip_special_tokens=True)
-        return text
+        return {"raw_messages": None, "analysis": "", "final": text}
 
     # ----- Core ops -----
     def generate_text(self, request: GetTextRequest) -> GetTextResponse:
@@ -216,8 +219,8 @@ class HuggingFaceProvider:
         return GetTextResponse(
             model_id=self.model_id,
             request=request,
-            txt=generated_text,
-            raw_responses=[],
+            txt=generated_text["final"],
+            raw_responses=[generated_text],
             context={
                 "method": "generation",
                 "max_tokens": request.max_tokens,
@@ -233,9 +236,10 @@ class HuggingFaceProvider:
         input_ids = torch.tensor([tokens], dtype=torch.long)
         device = next(self.model.parameters()).device
         input_ids = input_ids.to(device)
+        attention_mask = torch.ones_like(input_ids)
 
         with no_grad():
-            outputs = self.model(input_ids=input_ids)
+            outputs = self.model(input_ids=input_ids, attention_mask=attention_mask)
             logits = outputs.logits[0, -1, :]
 
         probs_tensor = softmax(logits, dim=-1)
@@ -296,11 +300,37 @@ class DefaultHFProvider(HuggingFaceProvider):
 
 class GPTOSSProvider(HuggingFaceProvider):
     """GPT-OSS prompt formatting via openai-harmony library."""
+    def __init__(
+        self,
+        model_id: str,
+        *,
+        lora_adapter_path: str | None = None,
+        reasoning_effort: ReasoningEffort | str = ReasoningEffort.MEDIUM,
+        feed_empty_analysis: bool = False,
+    ) -> None:
+        super().__init__(model_id, lora_adapter_path=lora_adapter_path)
+        # Normalize reasoning effort if provided as a string
+
+        effort_map = {
+            "low": ReasoningEffort.LOW,
+            "medium": ReasoningEffort.MEDIUM,
+            "high": ReasoningEffort.HIGH,
+        }
+        self.reasoning_effort = effort_map[reasoning_effort]
+        self.feed_empty_analysis = feed_empty_analysis
 
     def format_prompt(self, prompt: Prompt) -> Tuple[List[int], str]:
         enc = load_harmony_encoding(HarmonyEncodingName.HARMONY_GPT_OSS)
 
         msgs: List[HarmonyMessage] = []
+
+        # Add system configuration with required channels and reasoning effort
+        sys_content = (
+            SystemContent.new()
+            .with_required_channels(["final"])
+            .with_reasoning_effort(self.reasoning_effort)
+        )
+        msgs.append(HarmonyMessage.from_role_and_content(HarmonyRole.SYSTEM, sys_content))
 
         for msg in prompt:
             role = (msg.role or "user").lower()
@@ -315,6 +345,12 @@ class GPTOSSProvider(HuggingFaceProvider):
             else:
                 msgs.append(HarmonyMessage.from_role_and_content(HarmonyRole.USER, msg.content))
 
+        # Optionally prime an empty analysis channel to suppress further "thinking"
+        if self.feed_empty_analysis:
+            msgs.append(
+                HarmonyMessage.from_role_and_content(HarmonyRole.ASSISTANT, "").with_channel("analysis")
+            )
+
         convo = HarmonyConversation.from_messages(msgs)
         token_list: List[int] = enc.render_conversation_for_completion(convo, HarmonyRole.ASSISTANT)
 
@@ -323,15 +359,28 @@ class GPTOSSProvider(HuggingFaceProvider):
         text = self.tokenizer.decode(token_list)
         return token_list, text
 
-    def parse_completion(self, output_tokens: List[int]) -> str:
-        """Parse completion tokens using Harmony encoding and return final text.
-
-        Attempts to extract the assistant's 'final' channel content. Falls back to
-        decoding tokens if parsing does not yield a suitable message.
-        """
+    def parse_completion(self, output_tokens: List[int]) -> Dict[str, Any]:
+        """Parse Harmony tokens and return a dict with raw messages, analysis, and final."""
         enc = load_harmony_encoding(HarmonyEncodingName.HARMONY_GPT_OSS)
-        parsed = enc.parse_messages_from_completion_tokens(output_tokens, HarmonyRole.ASSISTANT)
-        return parsed
+        messages = enc.parse_messages_from_completion_tokens(output_tokens, HarmonyRole.ASSISTANT)
+
+        analysis_parts: List[str] = []
+        final_parts: List[str] = []
+        for m in messages:
+            role_str = str(m.author.role.value) if hasattr(m.author.role, "value") else str(m.author.role)
+            channel_norm = str(m.channel).lower()
+            text_segments: List[str] = [c.text for c in m.content]
+            combined = "".join(text_segments)
+            role_norm = role_str.lower()
+            if role_norm.endswith("assistant"):
+                if channel_norm == "analysis":
+                    analysis_parts.append(combined)
+                elif channel_norm == "final":
+                    final_parts.append(combined)
+
+        analysis_text = "".join(analysis_parts).strip()
+        final_text = "".join(final_parts).strip()
+        return {"raw_messages": messages, "analysis": analysis_text, "final": final_text}
 
 
 def get_provider_for_model(
@@ -339,18 +388,26 @@ def get_provider_for_model(
     request: Any | None = None,
     *,
     lora_adapter_path: str | None = None,
+    reasoning_effort: ReasoningEffort | str | None = None,
+    feed_empty_analysis: bool | None = None,
 ) -> HuggingFaceProvider:
     """Factory to return the appropriate provider instance for a model_id.
 
-    Respects optional lora/quantization hints from request.context if present.
+    Optional args allow configuring GPT-OSS-specific behavior from callers.
     """
     name = extract_model_name(model_id)
-    # Prefer explicit args; fall back to request context
+    # Prefer explicit args; fall back to request context for lora
     if lora_adapter_path is None and request is not None:
         lora_adapter_path = getattr(request, "lora_adapter_path", None)
 
     if name == "gpt-oss-20b":
-        return GPTOSSProvider(name, lora_adapter_path=lora_adapter_path)
+        # Supply optional GPT-OSS knobs when provided
+        kwargs: Dict[str, Any] = {"lora_adapter_path": lora_adapter_path}
+        if reasoning_effort is not None:
+            kwargs["reasoning_effort"] = reasoning_effort
+        if feed_empty_analysis is not None:
+            kwargs["feed_empty_analysis"] = feed_empty_analysis
+        return GPTOSSProvider(name, **kwargs)
     return DefaultHFProvider(name, lora_adapter_path=lora_adapter_path)
 
 
