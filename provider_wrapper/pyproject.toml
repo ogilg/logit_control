@@ -30,7 +30,11 @@ dev = [
 ]
 
 [tool.setuptools]
-packages = ["provider_wrapper"]
+# Explicitly include subpackages so pip installs everything
+packages = [
+    "provider_wrapper",
+    "provider_wrapper.provider_wrapper",
+]
 
 [tool.setuptools.package-data]
 provider_wrapper = ["*.json"] 
