@@ -33,7 +33,6 @@ dev = [
 # Explicitly include subpackages so pip installs everything
 packages = [
     "provider_wrapper",
-    "provider_wrapper.provider_wrapper",
 ]
 
 [tool.setuptools.package-data]

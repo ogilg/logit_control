@@ -24,6 +24,7 @@ from .huggingface_provider import (
     clear_model_cache,
     clear_huggingface_disk_cache,
     clear_gpu_memory,
+    extract_model_name,
 )
 
 __version__ = "0.1.0"
@@ -62,4 +63,5 @@ __all__ = [
     "clear_model_cache", 
     "clear_huggingface_disk_cache",
     "clear_gpu_memory",
+    "extract_model_name",
 ] 
