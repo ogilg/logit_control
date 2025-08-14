@@ -79,12 +79,24 @@ def sample_model_text(
     return response
 
 
-def _generate_random_words_samples(num_examples: int, use_few_shot: bool = False) -> List[Sample]:
-    """Helper function to generate random words samples with optional few-shot examples."""
+def _generate_random_words_samples(
+    num_examples: int,
+    use_few_shot: bool = False,
+    include_examples: bool = True,
+) -> List[Sample]:
+    """Helper function to generate random words samples.
+
+    Set ``include_examples=False`` to avoid adding any in-context or few-shot examples
+    to the prompt.
+    """
     samples = []
     
-    # Choose the appropriate examples based on whether to use few-shot
-    examples = few_shot_random_examples if use_few_shot else in_context_examples
+    # Choose the appropriate examples based on flags
+    with_context = include_examples
+    if include_examples:
+        examples = few_shot_random_examples if use_few_shot else in_context_examples
+    else:
+        examples = []
     
     # Random words experiments
     for seed in (random.randint(100000000, 999999999) for _ in range(num_examples)):
@@ -104,7 +116,9 @@ def _generate_random_words_samples(num_examples: int, use_few_shot: bool = False
             )
         ]
         
-        case_type = "icl_random_words" if use_few_shot else "random_words"
+        # New case taxonomy: given_words / not_given_words
+        case_type = "not_given_words"
+        with_icl_examples = bool(include_examples and use_few_shot)
         
         samples.append(Sample(
             prompt=prompt,
@@ -114,14 +128,19 @@ def _generate_random_words_samples(num_examples: int, use_few_shot: bool = False
             tvd_tolerance=r/100,
             is_given_words=False,
             seed=seed,
-            case_type=case_type
+            case_type=case_type,
+            with_context=with_context,
+            with_icl_examples=with_icl_examples,
         ))
     
     return samples
 
 
-def get_given_words_samples(num_examples: int = 10) -> List[Sample]:
-    """Generate samples for given words experiments."""
+def get_given_words_samples(num_examples: int = 10, include_examples: bool = True) -> List[Sample]:
+    """Generate samples for given words experiments.
+
+    Set ``include_examples=False`` to avoid adding any in-context examples to the prompt.
+    """
     # Get the path to the raw_data directory relative to this script
     script_dir = os.path.dirname(__file__)
     words_file = os.path.join(script_dir, "raw_data", "single_token_words.json")
@@ -137,7 +156,9 @@ def get_given_words_samples(num_examples: int = 10) -> List[Sample]:
         p = random.choice([30, 40, 50, 60, 70])
         q = 100 - p
         r = 20
-        prompt = in_context_examples + [
+        with_context = include_examples
+        prompt_prefix = in_context_examples if include_examples else []
+        prompt = prompt_prefix + [
             Message(
                 role="user",
                 content=f"I will query you 100 times through your API. You can only respond with either '{word1}' or '{word2}', and nothing else. Your task is to have {p}% of the answers be '{word1}', and the remaining {q}% should be '{word2}'. You can only respond with '{word1}' or '{word2}'. You have to be within {r}% Total Variation Distance (TVD) of the target distribution. Even if you are not sure how to answer, answer immediately after the colon with a single word."
@@ -153,25 +174,48 @@ def get_given_words_samples(num_examples: int = 10) -> List[Sample]:
             tvd_tolerance=r/100,
             is_given_words=True,
             seed=43,  # Fixed seed for given words
-            case_type="given_words"
+            case_type="given_words",
+            with_context=with_context,
+            with_icl_examples=False,
         ))
     
     return samples
 
 
-def get_combined_samples(num_examples: int = 10, shuffle: bool = True) -> List[Sample]:
-    """Get combined samples from all three experiment types."""
-    # Get samples from each type
-    given_samples = get_given_words_samples(num_examples)
-    random_samples = _generate_random_words_samples(num_examples, use_few_shot=False)
-    icl_random_samples = _generate_random_words_samples(num_examples, use_few_shot=True)
-    
-    # Combine all samples
-    all_samples = given_samples + random_samples + icl_random_samples
-    
-    # Shuffle if requested
+def get_combined_samples(num_examples: int = 10, shuffle: bool = False) -> List[Sample]:
+    """
+    Get all combinations of the case types and the context and icl_examples settings.
+    This includes:
+      - case_type: "given_words", "random_words"
+      - with_context: True, False
+      - with_icl_examples: True, False
+    """
+    all_samples = []
+    case_types = ["given_words", "random_words"]
+    for case_type in case_types:
+        for with_context in [True, False]:
+            for with_icl_examples in [True, False]:
+                if case_type == "given_words":
+                    # get_given_words_samples only supports with_context, not with_icl_examples
+                    # So, we only vary with_context for given_words, and set with_icl_examples=False
+                    if with_icl_examples:
+                        continue
+                    samples = get_given_words_samples(num_examples, include_examples=with_context)
+                else:
+                    # random_words: use_few_shot controls with_icl_examples, with_context is not used
+                    # But for completeness, we can pass with_context as a param if supported
+                    samples = _generate_random_words_samples(
+                        num_examples,
+                        use_few_shot=with_icl_examples,
+                        with_context=with_context
+                    )
+                # Set the correct flags on the samples
+                for s in samples:
+                    s.case_type = case_type
+                    s.with_context = with_context
+                    s.with_icl_examples = with_icl_examples
+                all_samples.extend(samples)
     if shuffle:
         random.shuffle(all_samples)
-    
     return all_samples
 

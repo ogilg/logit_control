@@ -40,7 +40,7 @@ def main():
     parser.add_argument(
         "--reasoning_effort",
         type=str,
-        default="medium",
+        default="low",
         choices=["low", "medium", "high"],
         help="Reasoning effort to configure for GPT-OSS models",
     )

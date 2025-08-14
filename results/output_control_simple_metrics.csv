@@ -10,4 +10,6 @@ deepseek-coder-7b,plain,random_words,0,100,100,0.488,0.001,,,
 phi-2,plain,icl_random_words,0,100,100,0.487,0.003,,,
 deepseek-llm-7b,plain,icl_random_words,0,100,100,0.493,0.001,,,
 deepseek-llm-7b-chat,plain,icl_random_words,0,100,100,0.47,0.007,,,
-
+gpt-oss-20b,plain,given_words,72,428,500,0.308,0.11,False,medium,True
+gpt-oss-20b,plain,random_words,0,500,500,0.443,0.006,False,medium,True
+gpt-oss-20b,plain,icl_random_words,0,500,500,0.461,0.005,False,medium,True

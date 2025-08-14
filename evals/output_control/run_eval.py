@@ -164,20 +164,18 @@ def update_results_csv(model_id, results):
     print(f"Results saved to {csv_file}")
 
 def update_metrics(cfg: OutputControlExperimentConfig, results):
-    """Update the metrics CSV with counts and TVD stats, including config knobs."""
+    """Update the metrics CSV with counts and TVD stats, including config knobs and flags.
+
+    Rows are grouped by (model, case_type, with_context, with_icl_examples).
+    """
     csv_file = "results/output_control_simple_metrics.csv"
     os.makedirs(os.path.dirname(csv_file), exist_ok=True)
     
     # Determine if this is a fine-tuned model
     is_fine_tuned = cfg.lora_adapter is not None
     
-    # Separate results by case type
-    given_results = [r for r in results['results'] if r.get('case_type') == 'given_words']
-    random_results = [r for r in results['results'] if r.get('case_type') == 'random_words']
-    icl_random_results = [r for r in results['results'] if r.get('case_type') == 'icl_random_words']
-    
     # Function to calculate metrics for a subset of results
-    def calculate_case_metrics(case_results, case_type):
+    def calculate_case_metrics(case_results, case_type, with_context, with_icl_examples):
         if not case_results:
             return None
         
@@ -198,6 +196,8 @@ def update_metrics(cfg: OutputControlExperimentConfig, results):
             'model': cfg.model,
             'variant': 'plain',
             'case_type': case_type,
+            'with_context': bool(with_context),
+            'with_icl_examples': bool(with_icl_examples),
             'fine_tuned': is_fine_tuned,
             'reasoning_effort': cfg.reasoning_effort,
             'feed_empty_analysis': cfg.feed_empty_analysis,
@@ -208,34 +208,55 @@ def update_metrics(cfg: OutputControlExperimentConfig, results):
             'std_tvd': std_tvd
         }
     
-    # Calculate metrics for all three cases
-    given_metrics = calculate_case_metrics(given_results, 'given_words')
-    random_metrics = calculate_case_metrics(random_results, 'random_words')
-    icl_random_metrics = calculate_case_metrics(icl_random_results, 'icl_random_words')
+    # Build groups by (case_type, with_context, with_icl_examples)
+    grouped_metrics = []
+    all_results = results['results']
+    # Default missing flags to False for older results
+    unique_keys = set(
+        (
+            r.get('case_type'),
+            bool(r.get('with_context', False)),
+            bool(r.get('with_icl_examples', False)),
+        )
+        for r in all_results
+    )
+    for case_type, with_context, with_icl_examples in unique_keys:
+        subset = [
+            r for r in all_results
+            if r.get('case_type') == case_type
+            and bool(r.get('with_context', False)) == with_context
+            and bool(r.get('with_icl_examples', False)) == with_icl_examples
+        ]
+        metric = calculate_case_metrics(subset, case_type, with_context, with_icl_examples)
+        if metric is not None:
+            grouped_metrics.append(metric)
     
     # Read existing CSV
     if os.path.exists(csv_file):
         df = pd.read_csv(csv_file)
     else:
-        # Create new DataFrame including config columns
+        # Create new DataFrame including config columns and flags
         df = pd.DataFrame(columns=[
-            'model', 'variant', 'case_type', 'fine_tuned', 'reasoning_effort', 'feed_empty_analysis',
+            'model', 'variant', 'case_type', 'with_context', 'with_icl_examples',
+            'fine_tuned', 'reasoning_effort', 'feed_empty_analysis',
             'num_correct', 'num_incorrect', 'num_trials', 'avg_tvd', 'std_tvd'
         ])
     
-    # Update or add rows for all three cases
-    for metrics in [given_metrics, random_metrics, icl_random_metrics]:
-        if metrics is None:
-            continue
-            
-        # Find existing row for this model and case type
-        mask = (df['model'] == cfg.model) & (df['case_type'] == metrics['case_type'])
+    # Update or add rows for each (case_type, flags) combination
+    for metrics in grouped_metrics:
+        # Find existing row for this model and combination
+        mask = (
+            (df['model'] == cfg.model)
+            & (df['case_type'] == metrics['case_type'])
+            & (df['with_context'] == metrics['with_context'])
+            & (df['with_icl_examples'] == metrics['with_icl_examples'])
+        )
         
         if mask.any():
             # Update existing row
             row_idx = mask.idxmax()
             for key, value in metrics.items():
-                if key not in ('model', 'case_type'):  # Don't update these keys
+                if key not in ('model', 'case_type', 'with_context', 'with_icl_examples'):  # Don't update keys used for matching
                     df.loc[row_idx, key] = value
         else:
             # Create new row
@@ -317,7 +338,9 @@ def run_experiment(
             'responses': parser_result.get('top_tokens', []),
             'sampled_text': sample_text.txt + ". ANALYSIS: " + sample_text.raw_responses[0]["analysis"],  # What the model actually outputs
             'seed': sample.seed,
-            'case_type': sample.case_type
+            'case_type': sample.case_type,
+            'with_context': getattr(sample, 'with_context', False),
+            'with_icl_examples': getattr(sample, 'with_icl_examples', False),
         }
         
         results.append(result)
@@ -366,11 +389,9 @@ def run_experiment_for_model(cfg: OutputControlExperimentConfig):
     
     # Count experiment types
     given_words = sum(1 for r in results['results'] if r.get('case_type') == 'given_words')
-    random_words = sum(1 for r in results['results'] if r.get('case_type') == 'random_words')
-    icl_random_words = sum(1 for r in results['results'] if r.get('case_type') == 'icl_random_words')
+    not_given_words = sum(1 for r in results['results'] if r.get('case_type') == 'not_given_words')
     print(f"Given words experiments: {given_words}")
-    print(f"Random words experiments: {random_words}")
-    print(f"ICL random words experiments: {icl_random_words}")
+    print(f"Not-given words experiments: {not_given_words}")
     
     return results
 

@@ -108,6 +108,10 @@ class Sample:
     is_given_words: bool
     seed: Optional[int] = None
     case_type: str = "given_words"  # Default case type 
+    # Flags to describe prompt composition
+    with_context: bool = False
+    # Only meaningful for not_given_words when context includes ICL examples
+    with_icl_examples: bool = False
 
 
 @dataclass(kw_only=True)
