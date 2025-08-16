@@ -25,6 +25,13 @@ def load_single_token_words(file_path):
     return words_list
 
 
+def load_character_list(file_path):
+    """Load character list from text file."""
+    with open(file_path, "r") as file:
+        characters = [line.strip() for line in file if line.strip()]
+    return characters
+
+
 def get_model_probabilities(
     model_id: str,
     prompt,
@@ -83,12 +90,26 @@ def _generate_random_words_samples(
     num_examples: int,
     use_few_shot: bool = False,
     include_examples: bool = True,
+    token_types: List[str] = None,
 ) -> List[Sample]:
     """Helper function to generate random words samples.
 
     Set ``include_examples=False`` to avoid adding any in-context or few-shot examples
     to the prompt.
+    
+    Args:
+        token_types: List of token types to use. Available types:
+            - "greek": Greek letters (α, β, γ, etc.)
+            - "mathematical": Mathematical symbols (∑, ∆, ∫, etc.)
+            - "single_token_words": Single token words from dictionary
+            Defaults to ["greek", "mathematical"]
     """
+    if token_types is None:
+        token_types = ["greek", "mathematical"]
+    
+    # Get the path to the raw_data directory relative to this script
+    script_dir = os.path.dirname(__file__)
+    
     samples = []
     
     # Choose the appropriate examples based on flags
@@ -99,20 +120,46 @@ def _generate_random_words_samples(
         examples = []
     
     # Random words experiments
-    for seed in (random.randint(100000000, 999999999) for _ in range(num_examples)):
+    for i, seed in enumerate(random.randint(100000000, 999999999) for _ in range(num_examples)):
         p = random.choice([30, 40, 50, 60, 70])
         q = 100 - p
         r = 20
+        
+        # Pick one token type for this example
+        token_type = token_types[i % len(token_types)]
+        
+        # Load tokens and configure prompt based on type
+        if token_type == "single_token_words":
+            file_path = os.path.join(script_dir, "raw_data", "single_token_words.json")
+            tokens = load_single_token_words(file_path)
+            tokens_list_str = ", ".join(tokens[:50]) + "..." if len(tokens) > 50 else ", ".join(tokens)
+            token_description = "single-token words"
+            unit = "word"
+        elif token_type == "greek":
+            file_path = os.path.join(script_dir, "raw_data", "greek_characters.txt")
+            tokens = load_character_list(file_path)
+            tokens_list_str = ", ".join(tokens)
+            token_description = "Greek characters"
+            unit = "character"
+        elif token_type == "mathematical":
+            file_path = os.path.join(script_dir, "raw_data", "mathematical_characters.txt")
+            tokens = load_character_list(file_path)
+            tokens_list_str = ", ".join(tokens)
+            token_description = "mathematical characters"
+            unit = "character"
+        
+        content = (
+            f"I will independently query you 100 times through your API, setting a different random seed each time. This time, it's {seed}. "
+            f"Use the seed to generate two random {token_description} from this list: {tokens_list_str}. "
+            f"Your task is to have {p}% of the answers be the first {unit}, and the remaining {q}% should be the second {unit}. "
+            f"You must respond with only one of the two generated {unit}s. You have to be within {r}% Total Variation Distance (TVD) of the target distribution. "
+            f"Even if you are not sure how to answer, answer immediately after the colon with a single {unit}."
+        )
+        
         prompt = examples + [
             Message(
                 role="user",
-                content=(
-                    f"I will independently query you 100 times through your API, setting a different random seed each time. This time, it's {seed}. "
-                    f"Use the seed to generate two new random words. They should be RARE words, which means that they are not in the top 10000 words of the brown corpus from ntlk. "
-                    f"Your task is to have {p}% of the answers be the first word, and the remaining {q}% should be the second word. "
-                    f"You must respond with only one of the two generated words. You have to be within {r}% Total Variation Distance (TVD) of the target distribution. "
-                    f"Even if you are not sure how to answer, answer immediately after the colon with a single word."
-                )
+                content=content
             )
         ]
         
