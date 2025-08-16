@@ -26,15 +26,14 @@ def tvd_parser(
     output = response_probs
     
 
-    # Filter out common tokens and non-word tokens, then extract the top 2 token probabilities
-    # Use isalpha() to ensure we only get actual word tokens (no punctuation, numbers, whitespace, etc.)
-    # Also filter out obvious "wrong path" tokens that indicate non-compliance
-    obvious_bad_tokens = {"my", "sure", "i", "the", "answer", "word"}
+    # Filter out obvious "wrong path" tokens that indicate non-compliance
+    # Accept any meaningful tokens (words, characters, symbols)
+    obvious_bad_tokens = {"my", "sure", "i", "the", "answer", "word", "character"}
     
     filtered_tokens = {}
     for token, prob in output.items():
         clean_token = token.replace(" ", "").strip()
-        if clean_token.isalpha() and clean_token.lower() not in obvious_bad_tokens:
+        if clean_token and clean_token.lower() not in obvious_bad_tokens:
             filtered_tokens[token] = prob
     
     # Normalize tokens by stripping whitespace and merge similar tokens

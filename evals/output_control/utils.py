@@ -254,7 +254,7 @@ def get_combined_samples(num_examples: int = 10, shuffle: bool = False) -> List[
                     samples = _generate_random_words_samples(
                         num_examples,
                         use_few_shot=with_icl_examples,
-                        with_context=with_context
+                        include_examples=with_context
                     )
                 # Set the correct flags on the samples
                 for s in samples:
